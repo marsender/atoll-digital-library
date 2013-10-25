@@ -1,0 +1,550 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Building a Better Plugin Architecture (C++)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<style type="text/css">
+/* layout */
+
+body {
+   font-family: Helvetica;
+   font-size: 83%;
+   line-height: 125%;
+   margin: 0;
+   padding: 0;
+   min-width: 700px;
+}
+
+body a,
+body a:link,
+body a:visited {
+   text-decoration: none;
+}
+
+body a:hover {
+   text-decoration: underline;
+}
+
+.content {
+   margin: 20px;
+}
+
+/* spacing */
+
+p {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+h1, h2, h3, h4, h4 {
+	padding-bottom: 5px;
+	margin: 10px 0;
+}
+
+h1 {
+	font-size: 160%;
+	text-decoration: none;
+	border-bottom: 1px solid #D8D8D8;
+}
+
+h2 {
+	font-size: 125%;
+}
+
+ul {
+	margin: 5px 0px 15px;
+	padding-left: 20px;
+}
+
+ul li {
+	margin: 0px;
+}
+
+ol {
+	margin: 5px 0px 15px;
+	padding-left: 20px;
+}
+
+ul li {
+	margin: 0px;
+}
+
+/* geshi */
+
+code.geshifilter {
+  display:inline;
+  padding:0;
+  margin:0;
+  border: none;
+}
+
+pre.geshifilter, div.geshifilter {
+  display:block;
+  padding:0.5em;
+  margin:0.5em;
+  border: 1px solid #aaf;
+  background-color: #fbfbfb; /* #fff */ /* ffe */
+}
+
+div.geshifilter ol {
+  margin: 0px;
+}
+
+.de1, .de2 {
+  font-weight:normal;
+  background:transparent;
+  color:#000;
+  padding-left: 5px;
+}
+.kw1 {color: #00007F;font-weight:bold;}
+.kw2 {color: #00007F;font-weight:bold;}
+.kw3 {color: #00007F;font-weight:bold;}
+.kw4 {color: #00007F;font-weight:bold;}
+.co1, .coMULTI {color: #007F00;}
+.co2 {color: #000000;}
+.es0 {color: #007F7F;}
+.br0 {color: #000000;}
+.st0 {color: #007F7F;}
+.nu0 {color: #7F007F;}
+.me0 {color: #000000;}
+	</style>
+</head>
+
+<body>
+  <div id="page">
+
+  <div class="content">
+
+	<h1>Building a Better Plugin Architecture (C++)</h1>
+
+<p>
+	All the credits of this plugin architecture comes to Markus Ewald.
+	See the orginal article on <a href="http://www.nuclex.org/articles/cxx/4-building-a-better-plugin-architecture">Nuclex</a> web site.
+</p>
+
+<p>
+  This article will guide you through the design of a
+  simple yet powerful plugin architecture. It requires
+  some experience in C++, using dynamic library (.dll,
+  .so) as well as understanding of fundamental oop
+  concepts, such as interfaces and factories. But
+  before we start, let's first see what advantages we
+  can gain from plugins and why we should use them:
+</p>
+
+  <ul type="square">
+    <li>
+      <b>Increased clarity and uniformity of
+      code</b> - Because plugins encapsulate 3rd party
+      libraries as well as code written by other team
+      members to clearly defined interfaces, you get a
+      very consistent interface to just about
+      everything. Your code also won't be littered
+      with conversion routines (eg.
+      ErrorCodeToException) or library specific
+      customisations.
+    </li>
+    <li>
+      <b>Improves modularization of projects</b> -
+      Your code is cleanly seperated into distinct
+      modules, keeping your working set of files in a
+      project low. This decoupling process creates
+      components which be reused more easily since
+      they're not webbed with project specific
+      peculiarities.
+    </li>
+    <li>
+      <b>Shorter compile times</b> - The compiler
+      isn't forced to parse the headers of external
+      libraries just to interpret the declarations of
+      classes which internally use these libraries
+      because the implementation happens in private.
+      This can drastically reduce compile times (did
+      you know windows.h includes about 500 kb of
+      code?)
+    </li>
+    <li>
+      <b>Replacing or adding components</b> - If you
+      release patches to the end user, it's often
+      sufficient to update single plugins instead of
+      replacing each and every binary of the
+      installation. A new renderer or some new types
+      of units for an add-on to your game (including
+      mods made by end-users) could easily be added by
+      just providing a set of plugins to your game or
+      engine.
+    </li>
+    <li>
+      <b>Usage of GPL code in closed source
+      projects</b> - As you probably know, you are
+      required to publish your source code if you use
+      GPLed code in it. If you, however, encapsulate
+      this GPL component in a plugin, you're only
+      required to release the plugin's source.
+    </li>
+  </ul>
+
+<p>
+  <i>As a side note, personally, I don't use plugins
+  because they're cool, not because I have to
+  regularly send patches to my end-users, and not even
+  to force myself to write modular code. I'm using
+  them because it simply seems to be the best way for
+  organizing large projects. Dependencies are greatly
+  reduced and you can easily work on the replacement
+  of specific systems instead of stalling your entire
+  project or team until the codebase has been fully
+  reworked.</i>
+</p>
+
+<h2>Introduction</h2>
+<p>
+  <i>Now let me explain what a plugin system is and
+  how it works:</i> In a normal application, if you
+  need code to perform a specific task, your options
+  are: either write it down in the editor yourself
+  or look for an existing library which suits your
+  needs. Now what if your needs have changed ? You
+  either need to rewrite your code or use a different
+  library, two choices both of which may lead to a
+  rewrite of many other parts of your codebase that
+  are depending on this code or external library.
+</p>
+<p>
+  Now we get to know a third option: In a plugin
+  system, any component of your project which you do
+  not wish to nail down to a specific implementation
+  (like a renderer which could be based on opengl or
+  on direct3d), will be extracted from you main
+  codebase and placed in a dynamic library in a
+  special way.
+</p>
+<p>
+  This special way involes the creation of interfaces
+  in the main codebase to decouple it from the dynamic
+  library. The library (plugin) will then provide the
+  actual implementations of the interfaces defined by
+  the main codebase. What sets plugins apart from just
+  normal dynamic libraries is how they are loaded: The
+  application doesn't directly link to these
+  libraries, but, for example, searches some directory
+  and loads all plugins it finds there. The plugins
+  then somehow connect themselfes to the application
+  in a well defined way common to all plugins.
+</p>
+
+<h2>A common mistake</h2>
+<p>
+  Most C++ programmers, when confronted with the task
+  to design a plugin system, start by integrating a
+  function like this one into each dynamic library
+  that is to act as a plugin:
+</p>
+
+<div class="geshifilter cpp" style="font-family: monospace;">PluginClass *createInstance<span class="br0">&#40;</span><span class="kw4">const</span> <span class="kw4">char</span> *<span class="br0">&#41;</span>;</div>
+
+<p>
+  Then they decide on some classes whose
+  implementations should be provided through plugins
+  and voila... The engine queries one loaded plugin
+  after another with the desired object's name until
+  one of the plugins returns it. A classical chain of
+  responsibility for the design pattern guys.
+</p>
+<p>
+  A few programmers more clever will also come up with
+  a design that lets the plugin register itself in the
+  engine, possibly replacing an engine-internal
+  default implementation with a custom implementation:
+</p>
+
+<div class="geshifilter cpp" style="font-family: monospace;"><span class="kw4">void</span> dllStartPlugin<span class="br0">&#40;</span>PluginManager &amp;pm<span class="br0">&#41;</span>;<br />
+<span class="kw4">void</span> dllStopPlugin<span class="br0">&#40;</span>PluginManager &amp;pm<span class="br0">&#41;</span>;</div>
+
+<p>
+  <i>Thought this architecture may work for you,
+  personally, I would classify both ways as major
+  design errors, provoking conflicts and crashes.
+  Why?</i>
+</p>
+
+  <ul type="square">
+    <li>
+      A major problem of the first design is the fact,
+      that a <code>reinterpret_cast&lt;&gt;</code> is
+      required to make use of the object created by
+      the plugin's factory method. Often the
+      artificial derivation of plugin classes from a
+      common base class (here:
+      <code>PluginClass</code>) serves to provide a
+      wrong sense of safety. Actually, it is
+      pointless. The plugin could silently, in
+      response to a request for an
+      <code>InputDevice</code>, deliver an
+      <code>OutputDevice</code>.
+    </li>
+    <li>
+      With this architecture, it has become a
+      surprisingly complex task to support multiple
+      implementations of the same plugin interface. If
+      plugins would register themselfes under
+      different names (eg.
+      <code>Direct3DRenderer</code> and
+      <code>OpenGLRenderer</code>), the engine
+      wouldn't know which implementations are
+      available for selection by the end user. And if
+      this list is then hard-coded into the
+      application, the main purpose of the plugin
+      architecture is entirely eliminated.
+    </li>
+    <li>
+      If such a plugin system is implemented within a
+      framework or library (like a game engine), the
+      chief architect will almost certainly try to
+      also expose the functionality to the
+      application, so that it would also "benefit"
+      from it. Not only would this carry over all the
+      problems of such the plugin system into the
+      application, but also forces any plugin-writer
+      to obtain the engine's headers in addition to
+      the application's ones. That already means 3
+      potential candidates for version conflicts.
+    </li>
+  </ul>
+
+<p>
+  The plugin system I'm going to discuss in this
+  article avoids all these problems, is 100% type-safe
+  and thus gets the compiler back to your side again.
+  It's always a good thing to have the compiler help
+  you instead of battle you, don't you think ? ;)
+</p>
+
+<h2>Individual factories</h2>
+<p>
+  The interface, through which an engine performs its
+  graphics output for example, is quite clearly
+  defined by the engine, and not by the plugin. If you
+  think about it, this is the case for any interface:
+  The engine defines an interface through which it
+  instructs the plugins what to do and the plugins
+  will implement it.
+</p>
+<p>
+  Now what we're going to do is a let the plugins
+  register their implementations of our engine's
+  interfaces at the engine. Of course, it would be
+  stupid if a plugin directly created instances of its
+  implementation classes and registered those to the
+  engine. We would end up with all possible
+  implementations existing at the same time, hogging
+  up memory and CPU. The solution lies in factory
+  classes, classes whose sole purpose is to create
+  instances of other classes when asked to.
+</p>
+<p>
+  Well, if the engine defines the interface through
+  which it will communicate to plugins, it can just as
+  well define the interface for these factory classes:
+</p>
+<div class="geshifilter cpp" style="font-family: monospace;">template&lt;typename Interface&gt;<br />
+<span class="kw2">class</span> Factory <span class="br0">&#123;</span><br />
+&nbsp; <span class="kw2">virtual</span> Interface *create<span class="br0">&#40;</span><span class="br0">&#41;</span> = <span class="nu0">0</span>;<br />
+<span class="br0">&#125;</span>;<br />
+<br />
+<span class="kw2">class</span> Renderer <span class="br0">&#123;</span><br />
+&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> beginScene<span class="br0">&#40;</span><span class="br0">&#41;</span> = <span class="nu0">0</span>;<br />
+&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> endScene<span class="br0">&#40;</span><span class="br0">&#41;</span> = <span class="nu0">0</span>;<br />
+<span class="br0">&#125;</span>;<br />
+<span class="kw4">typedef</span> Factory&lt;Renderer&gt; RendererFactory;</div>
+<p>
+  If you compare this to the example in the previous
+  chapter, you'll notice that the unsafe unsafe cast
+  is gone. It isn't that much work and, using the
+  template approach for our factories, there isn't
+  even any redundant code involved to create standard
+  factories, which you will be using most of the time.
+</p>
+
+<h2>Option 1: PluginManager</h2>
+<p>
+  The next question you could ask is how will the
+  plugins register their factories in our engine and
+  how the engine can actually make use of the
+  registered plugins. You've got free choice here. One
+  possible solution which integrates nicely with
+  existing code is to write some kind of plugin
+  manager. This would give us good control over what
+  components plugins are allowed to extend.
+</p>
+<div class="geshifilter cpp" style="font-family: monospace;"><span class="kw2">class</span> PluginManager <span class="br0">&#123;</span><br />
+&nbsp; <span class="kw4">void</span> registerRenderer<span class="br0">&#40;</span>std::<span class="me2">auto_ptr</span>&lt;RendererFactory&gt; RF<span class="br0">&#41;</span>;<br />
+&nbsp; <span class="kw4">void</span> registerSceneManager<span class="br0">&#40;</span>std::<span class="me2">auto_ptr</span>&lt;SceneManagerFactory&gt; SMF<span class="br0">&#41;</span>;<br />
+<span class="br0">&#125;</span>;</div>
+<p>
+  When the engine needs a renderer, it could look in
+  the <code>PluginManager</code> for renderers that
+  have been registered by plugins. Then it would ask
+  the <code>PluginManager</code> to create the desired
+  renderer. The <code>PluginManager</code> in turn
+  would then use the factory class to create the
+  renderer without even knowing the implementation
+  details.
+</p>
+<p>
+  A plugin would then consist of a dynamic library
+  that exports a function which can be called by the
+  <code>PluginManager</code> to make the plugin
+  register itself:
+</p>
+<div class="geshifilter cpp" style="font-family: monospace;"><span class="kw4">void</span> registerPlugin<span class="br0">&#40;</span>PluginManager &amp;PM<span class="br0">&#41;</span>;</div>
+<p>
+  The <code>PluginManager</code> can simply try to
+  load all .dll/.so files in a specific directory,
+  checking if they're exporting a method named
+  <code>registerPlugin()</code>. Or use an .xml list
+  where the technically aware user can specify what
+  plugins to load.
+</p>
+<p>
+  You can design the <code>PluginManager</code> in a
+  way that it just stores the implementation that was
+  registered lastmost for each class. You could as
+  well create a fancy <code>PluginManager</code>
+  which keeps a list of possible implementations and
+  their descriptions, versions and more for each
+  plugin, then let the user choose whether to use the
+  <code>OpenGLRenderer</code> or to use the
+  <code>Direct3DRenderer</code> (or any other renderer
+  that becomes available when a new renderer plugin is
+  installed...)
+</p>
+
+<h2>Option 2: Fully Integrated</h2>
+<p>
+  An alternative to this <code>PluginManager</code>
+  would be to design your entire code base from the
+  ground up to support plugins. The best way of doing
+  this, in my humble opinion, would to break down the
+  engine into multiple subsystems and form a system
+  core which manages those subsystems. This could look
+  like this:
+</p>
+<div class="geshifilter cpp" style="font-family: monospace;"><span class="kw2">class</span> Kernel <span class="br0">&#123;</span><br />
+&nbsp; StorageServer &amp;getStorageServer<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw4">const</span>;<br />
+&nbsp; GraphicsServer &amp;getGraphicsServer<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw4">const</span>;<br />
+<span class="br0">&#125;</span>;<br />
+<br />
+<span class="kw2">class</span> StorageServer <span class="br0">&#123;</span><br />
+&nbsp; <span class="co1">// Used by plugins to register new archive readers</span><br />
+&nbsp; <span class="kw4">void</span> addArchiveReader<span class="br0">&#40;</span>std::<span class="me2">auto_ptr</span>&lt;ArchiveReader&gt; AL<span class="br0">&#41;</span>;<br />
+&nbsp; <br />
+&nbsp; <span class="co1">// Queries all archive readers registered by plugins</span><br />
+&nbsp; <span class="co1">// until one is found which can open the archive (chor pattern)</span><br />
+&nbsp; std::<span class="me2">auto_ptr</span>&lt;Archive&gt; openArchive<span class="br0">&#40;</span><span class="kw4">const</span> std::<span class="me2">string</span> &amp;sFilename<span class="br0">&#41;</span>;<br />
+<span class="br0">&#125;</span>;<br />
+<br />
+<span class="kw2">class</span> GraphicsServer <span class="br0">&#123;</span><br />
+&nbsp; <span class="co1">// Used by plugins to add GraphicsDrivers</span><br />
+&nbsp; <span class="kw4">void</span> addGraphicsDriver<span class="br0">&#40;</span>std::<span class="me2">auto_ptr</span>&lt;GraphicsDriver&gt; AF<span class="br0">&#41;</span>;<br />
+&nbsp; <br />
+&nbsp; <span class="co1">// Get number of available graphics drivers</span><br />
+&nbsp; <span class="kw4">size_t</span> getDriverCount<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw4">const</span>;<br />
+&nbsp; <br />
+&nbsp; <span class="co1">// Retrieve a graphics driver</span><br />
+&nbsp; GraphicsDriver &amp;getDriver<span class="br0">&#40;</span><span class="kw4">size_t</span> Index<span class="br0">&#41;</span>;<br />
+<span class="br0">&#125;</span>;</div>
+<p>
+  Here you see two examples of subsystems (whose names
+  are postfixed with <code>Server</code>, just because
+  it sounds so nice). The first one internally manages
+  a list of available image loaders. Each time the
+  user wants to load an image, the image loaders are
+  queried one by one until an implementation is found
+  that can load the desired image (or not, in which
+  case an error could be raised).
+</p>
+<p>
+  The other subsystem has a list of
+  <code>GraphicsDrivers</code> that will serve as
+  factories for <code>Renderers</code> in our example.
+  Again, there might be a
+  <code>Direct3DGraphicsDriver</code> and an
+  <code>OpenGLGraphicsDrivers</code> in its list,
+  which will create a <code>Direct3DRenderer</code> or
+  an <code>OpenGLRenderer</code>, respectively. Just
+  as before, the engine can use this list to let the
+  user make a choice between the available drivers.
+  New drivers can be added by simply installing a new
+  plugin.
+</p>
+
+<h2>Versioning</h2>
+<p>
+  Note that both previous options don't <i>require</i>
+  you to place your implementations in plugins. If
+  your engine supplies a default implementation of an
+  <code>ArchiveReader</code> for its own custom pack
+  file format, you can just as well go ahead and put
+  this into the engine itself, registering it
+  automatically when the <code>StorageServer</code>
+  starts up. Still, plugins can be added to also
+  facilitate loading of .zip, .rar and so on.
+</p>
+<p>
+  Now, a single problem introduced with plugins
+  remains: If you're not careful, it can happen that
+  mismatching (eg. outdated) plugin versions are
+  loaded into your engine. A few changes to subsystem
+  classes or to the <code>PluginManager</code> are
+  sufficient to modify the memory layout of a class
+  and make the plugins terribly crash wherever they
+  try to register themselfes. An annoying issue that
+  is not easily seen in a debugger.
+</p>
+<p>
+  Well, luckily, it isn't hard to recognize outdated
+  or wrong plugin versions. The most reliable way
+  happens to be a preprocessor constant which you put
+  in your core system. Any plugin then obtains a
+  function which returns this constant to the engine:
+</p>
+<div class="geshifilter cpp" style="font-family: monospace;"><span class="co1">// Somewhere in your core system</span><br />
+<span class="co2">#define MyEngineVersion 1;</span><br />
+<br />
+<span class="co1">// The plugin</span><br />
+<span class="kw4">extern</span> <span class="kw4">int</span> getExpectedEngineVersion<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br />
+&nbsp; <span class="kw1">return</span> MyEngineVersion;<br />
+<span class="br0">&#125;</span></div>
+<p>
+  What happens now is that this constant is compiled
+  into the plugin, thus, when the constant is changed
+  in the engine, any plugin that is not recompiled
+  will still report the previous value in its
+  <code>getExpectedEngineVersion()</code> method and
+  your engine can reject it. To make the plugin
+  workable again, you have to recompile it. And due to
+  our typesafe approach, the compiler will then point
+  out any incompatibilities of the plugin for you,
+  like new interface methods the plugin doesn't
+  implement yet.
+</p>
+<p>
+  The biggest risk is, of couse, you forgetting to
+  update the version constant. Anyway, you've got an
+  automated version management tool, don't you ?
+</p>
+
+<p>
+  <i>Well, that's it. A typesafe, flexible and
+  easy-to-use plugin architecture which can be added
+  to existing code bases just as well as it can be
+  incorporated into new projects. Have fun!</i>
+</p>
+
+  </div>
+
+  </div> <!-- /page -->
+</body>
+
+</html>
