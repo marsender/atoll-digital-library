@@ -20,8 +20,9 @@ The project code is available through GitHub: https://github.com/marsender/atoll
 #   CppUnit - C++ unit testing framework - http://cppunit.sourceforge.net/
 #   Xerces-C++: XML parser - http://xerces.apache.org/xerces-c/
 #   Xalan-C++: - XSLT processor - http://xml.apache.org/xalan-c/
-#   Berkeley DB - Embeddable database: http://www.oracle.com/us/products/database/berkeley-db/overview/index.html
+#   Berkeley DB - Embeddable database: http://www.oracle.com/us/products/database/berkeley-db/
 #   zlib - Compression Library - http://www.zlib.net/
+#   Doxygen - Generate documentation: http://www.stack.nl/~dimitri/doxygen/
 
 # For debian based linux, the folowing commands will install all the dependencies
 sudo apt-get install cmake
@@ -33,6 +34,7 @@ sudo apt-get install libxalan-c-dev
 sudo apt-get install libdb-dev libdb++-dev
 sudo apt-get install zlib1g-dev
 sudo apt-get install xml-core
+sudo apt-get install doxygen # Optional
 
 
 ## Build the code
