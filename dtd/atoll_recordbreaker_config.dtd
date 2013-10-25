@@ -1,0 +1,25 @@
+<!--
+	atoll_recordbreaker_config.dtd
+	// 09/08/08 Version 1.0 Start implementation
+-->
+
+<!ELEMENT atoll-recordbreaker-config (action|constant)*>
+
+<!ELEMENT action (param)*>
+<!ATTLIST action
+	type (add_config_param) #REQUIRED
+>
+
+<!ELEMENT param EMPTY>
+<!ATTLIST param
+	elem NMTOKEN #IMPLIED
+	attr NMTOKEN #IMPLIED
+	value NMTOKEN #IMPLIED
+	type (open|close|store) "open"
+>
+
+<!ELEMENT constant (#PCDATA)>
+<!ATTLIST constant
+	name NMTOKEN #REQUIRED
+	value NMTOKEN #REQUIRED    
+>

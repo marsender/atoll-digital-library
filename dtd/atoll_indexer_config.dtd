@@ -1,0 +1,26 @@
+<!--
+	atoll_indexer_config.dtd
+	// 09/08/08 Version 1.0 Start implementation
+-->
+
+<!ELEMENT atoll-indexer-config (action|constant)*>
+
+<!ELEMENT action (param)*>
+<!ATTLIST action
+	type (add_config_param) #REQUIRED
+>
+
+<!ELEMENT param EMPTY>
+<!ATTLIST param
+	name ID #REQUIRED
+	elem NMTOKEN #IMPLIED
+	attr NMTOKEN #IMPLIED
+	type (word|field|interv|none) "interv"
+	case (lower|none) "lower"
+>
+
+<!ELEMENT constant (#PCDATA)>
+<!ATTLIST constant
+	name NMTOKEN #REQUIRED
+	value NMTOKEN #REQUIRED    
+>

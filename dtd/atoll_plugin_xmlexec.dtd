@@ -1,0 +1,349 @@
+<!--
+	atoll_plugin_xmlexec.dtd
+	// 09/08/08 Version 1.0 Start implementation
+-->
+
+<!ELEMENT atoll-plugin-xmlexec (ReqAll+|ResAll+)>
+<!ATTLIST atoll-plugin-xmlexec version NMTOKEN #REQUIRED>
+
+<!ELEMENT ReqAll (ReqCol|ReqDb|ReqInfo|ReqInit|ReqUtil|ReqDoc|ReqSearch|ReqIndex|ReqSearchCrit|ReqSearchScreen|ReqUsr)+>
+<!ELEMENT ResAll (ResCol|ResDb|ResInfo|ResInit|ResUtil|ResDoc|ResSearch|ResIndex|ResSearchCrit|ResSearchScreen|ResUsr)+>
+
+<!ELEMENT ReqInit (Col|DbHome|OutFile|User)+>
+<!ELEMENT ResInit (Col|DbHome|OutFile|User)+>
+
+<!ELEMENT ReqInfo (Col|DbHome|LogFile|TraceFile|OutFile|User|Version)+>
+<!ELEMENT ResInfo (Col|DbHome|LogFile|TraceFile|OutFile|User|Version)+>
+
+<!ELEMENT ReqDb (AddCol|DelCol|GetCol|GetListCol|SetCol)+>
+<!ELEMENT ResDb (AddCol|DelCol|GetCol|ListCol|SetCol)*>
+
+<!ELEMENT ReqCol (AddDoc|AddField|DelDoc|DelField|DelDocIndex|GetDoc|GetField|GetListDoc|GetListField|GetListNdx|IndexDoc|SetDoc|SetField)+>
+<!ELEMENT ResCol (AddDoc|AddField|DelDoc|DelField|DelDocIndex|GetDoc|GetField|IndexDoc|ListDoc|ListField|ListNdx|ListField|SetDoc|SetField)*>
+
+<!ELEMENT ReqUtil ((Tool|Stat|Binary|UserInfo),User?,Col?,Param*)>
+<!ELEMENT ResUtil ((Tool|Stat|Binary|UserInfo),Param*,Result)>
+
+<!ELEMENT ReqDoc (SearchId?,ToolBar?,((DocPagPos,Link?)|File|Tag),Search?)>
+<!ELEMENT ResDoc (SearchId,Plage,ToolBar?,DocTexte*)>
+
+<!ELEMENT ReqSearch (((SearchCrit,Corpus?)|(SearchId,Corpus?)|Corpus)?,NewSearch?,Export?,Contexte?,Def?,Plage,TypeRes?)>
+<!ELEMENT ResSearch (SearchId,Corpus?,Export?,Contexte?,Def?,Plage, TypeRes,NbRes,Status?,DocTexte*)>
+
+<!ELEMENT ReqIndex (IdCrit?,((SearchCrit,Corpus?)|(SearchId,Corpus?)|Corpus)?,IdCrit?,Export?,TypeIndex,TypeTri?,Plage,Grec?)>
+<!ELEMENT ResIndex (SearchId,Export?,Grec?,Plage,Texte*)>
+
+<!ELEMENT ReqSearchCrit ((SearchId|Tag))>
+<!ELEMENT ResSearchCrit (SearchId,SearchCrit)>
+
+<!ELEMENT ReqSearchScreen (User,Col)>
+<!ELEMENT ResSearchScreen (SearchScreen*)>
+
+<!ELEMENT ReqUsr (SearchId?,Plage?,DocTexte?,(Corpus,TypeRes?)?,(Title,SearchCrit*)?,DocPagPos*)>
+<!ATTLIST ReqUsr UsrAction CDATA #IMPLIED>
+<!ELEMENT ResUsr ((Plage|DocTexte|DocPagPos|Corpus|Title|SearchCrit)*)>
+<!ATTLIST ResUsr UsrAction CDATA #IMPLIED>
+
+<!ELEMENT LogFile (#PCDATA)>
+
+<!ELEMENT TraceFile (#PCDATA)>
+
+<!ELEMENT OutFile (#PCDATA)>
+
+<!ELEMENT Action (Open|Close|ClearCacheCol|ClearCacheUsr|ClearCacheUsrDyn|ClearCacheUsrHst|ClearCacheUsrReq
+  |StartIndex|UpdateIndex|GetStatus|MakeTabmat)+>
+<!ELEMENT File (Tabmat?,(Name|DocPagPos),Plage)>
+<!ELEMENT SetOfFiles (BinFile)+>
+<!ELEMENT BinFile (Name,Base64)>
+<!ELEMENT Plage ((DocPagPos|Min|Mot),Nb,Max?)>
+
+<!ELEMENT ToolBar (Object)+>
+<!ATTLIST ToolBar Mode CDATA #IMPLIED>
+
+<!ELEMENT Object (Enabled,Checked,Texte)*>
+<!ATTLIST Object Type CDATA #IMPLIED>
+
+<!ELEMENT SearchCrit (Crit)+>
+
+<!ELEMENT SearchScreen (OpeRech*,Crit+)>
+<!ATTLIST SearchScreen Mode CDATA #IMPLIED>
+
+<!ELEMENT Crit (IdCrit,Texte)>
+<!ATTLIST Crit Type CDATA #IMPLIED>
+
+<!ELEMENT TypeRes (Doc|Page|Pos)>
+
+<!ELEMENT Pos (Para|Phrase|NbMot)>
+
+<!ELEMENT TypeIndex (Index|Liste|Article)>
+
+<!ELEMENT TypeTri (MotFreq|FreqCroi|FreqDecr|FinMot)>
+
+<!ELEMENT Status (Open|Close|StartIndex|Texte)>
+
+<!ELEMENT DocTexte (DocPagPos,Anno?,Signet?,Facsim?,Link?,Texte)>
+
+<!ELEMENT NbRes (NbDoc,NbPage,NbPos)>
+
+<!ELEMENT Name (#PCDATA)>
+
+<!ELEMENT User (#PCDATA)>
+
+<!ELEMENT SearchId (#PCDATA)>
+
+<!ELEMENT Version (#PCDATA)>
+
+<!ELEMENT Tool (#PCDATA)>
+
+<!ELEMENT Stat (#PCDATA)>
+
+<!ELEMENT Binary (#PCDATA)>
+
+<!ELEMENT UserInfo (#PCDATA)>
+
+<!ELEMENT Param (#PCDATA)>
+<!ATTLIST Param Name CDATA #IMPLIED>
+
+<!ELEMENT Corpus (#PCDATA)>
+<!ATTLIST Corpus Num CDATA #IMPLIED>
+
+<!ELEMENT Title (#PCDATA)>
+<!ATTLIST Title Num CDATA #IMPLIED>
+
+<!ELEMENT Result (#PCDATA)>
+
+<!ELEMENT DocPagPos (#PCDATA)>
+
+<!ELEMENT Tag (#PCDATA)>
+
+<!ELEMENT Search (#PCDATA)>
+
+<!ELEMENT Min (#PCDATA)>
+
+<!ELEMENT Mot (#PCDATA)>
+
+<!ELEMENT Nb (#PCDATA)>
+
+<!ELEMENT Max (#PCDATA)>
+
+<!ELEMENT IdCrit (#PCDATA)>
+
+<!ELEMENT Texte (#PCDATA)>
+
+<!ELEMENT Doc (#PCDATA)>
+
+<!ELEMENT Page (#PCDATA)>
+
+<!ELEMENT NbMot (#PCDATA)>
+
+<!ELEMENT NbDoc (#PCDATA)>
+
+<!ELEMENT NbPage (#PCDATA)>
+
+<!ELEMENT NbPos (#PCDATA)>
+
+<!ELEMENT OpeRech (#PCDATA)>
+
+<!ELEMENT DbHome (#PCDATA)>
+
+<!ELEMENT Open EMPTY>
+
+<!ELEMENT Close EMPTY>
+
+<!ELEMENT ClearCacheCol EMPTY>
+
+<!ELEMENT ClearCacheUsr EMPTY>
+
+<!ELEMENT ClearCacheUsrDyn EMPTY>
+
+<!ELEMENT ClearCacheUsrHst EMPTY>
+
+<!ELEMENT ClearCacheUsrReq EMPTY>
+
+<!ELEMENT Col EMPTY>
+<!ATTLIST Col
+	ColId CDATA #IMPLIED
+	ColName CDATA #IMPLIED
+	ColTitle CDATA #IMPLIED
+	ColSalt CDATA #IMPLIED
+	>
+
+<!ELEMENT AddCol (#PCDATA)>
+<!ATTLIST AddCol
+	ColId CDATA #IMPLIED
+	ColName CDATA #IMPLIED
+	ColTitle CDATA #IMPLIED
+	ColSalt CDATA #IMPLIED
+	>
+
+<!ELEMENT SetCol (#PCDATA)>
+<!ATTLIST SetCol
+	ColId CDATA #IMPLIED
+	ColName CDATA #IMPLIED
+	ColTitle CDATA #IMPLIED
+	ColSalt CDATA #IMPLIED
+	>
+
+<!ELEMENT GetCol EMPTY>
+<!ATTLIST GetCol
+	ColId CDATA #IMPLIED
+	>
+
+<!ELEMENT DelCol EMPTY>
+<!ATTLIST DelCol
+	ColId CDATA #REQUIRED
+	>
+
+<!ELEMENT AddDoc (#PCDATA)>
+<!ATTLIST AddDoc
+	DocNum CDATA #IMPLIED
+	CountPge CDATA #IMPLIED
+	FileName CDATA #IMPLIED
+	DcMetadata CDATA #IMPLIED
+	IndexerConfig CDATA #IMPLIED
+	RecordBreakerConfig CDATA #IMPLIED
+	Uuid CDATA #IMPLIED
+	XsltCode CDATA #IMPLIED
+	XmlValidation (0|1|yes|no|true|false) "false"
+	IsIndexed (0|1|yes|no|true|false) "false"
+	>
+
+<!ELEMENT SetDoc (#PCDATA)>
+<!ATTLIST SetDoc
+	DocNum CDATA #IMPLIED
+	CountPge CDATA #IMPLIED
+	FileName CDATA #IMPLIED
+	DcMetadata CDATA #IMPLIED
+	IndexerConfig CDATA #IMPLIED
+	RecordBreakerConfig CDATA #IMPLIED
+	Uuid CDATA #IMPLIED
+	XsltCode CDATA #IMPLIED
+	XmlValidation (0|1|yes|no|true|false) "false"
+	IsIndexed (0|1|yes|no|true|false) "false"
+	>
+
+<!ELEMENT GetDoc EMPTY>
+<!ATTLIST GetDoc
+	DocNum CDATA #IMPLIED
+	>
+
+<!ELEMENT DelDoc EMPTY>
+<!ATTLIST DelDoc
+	DocNum CDATA #REQUIRED
+	>
+
+<!ELEMENT AddField (#PCDATA)>
+<!ATTLIST AddField
+	Type CDATA #IMPLIED
+	Order CDATA #IMPLIED
+	FieldId CDATA #IMPLIED
+	>
+
+<!ELEMENT SetField (#PCDATA)>
+<!ATTLIST SetField
+	Type CDATA #IMPLIED
+	Order CDATA #IMPLIED
+	FieldId CDATA #IMPLIED
+	>
+
+<!ELEMENT GetField EMPTY>
+<!ATTLIST GetField
+	Type CDATA #IMPLIED
+	Order CDATA #IMPLIED
+	FieldId CDATA #IMPLIED
+	>
+
+<!ELEMENT DelField EMPTY>
+<!ATTLIST DelField
+	Type CDATA #IMPLIED
+	FieldId CDATA #IMPLIED
+	>
+
+<!ELEMENT IndexDoc (#PCDATA)>
+<!ATTLIST IndexDoc
+	DocNum CDATA #REQUIRED
+	>
+
+<!ELEMENT DelDocIndex EMPTY>
+<!ATTLIST DelDocIndex
+	DocNum CDATA #REQUIRED
+	>
+
+<!ELEMENT GetListCol EMPTY>
+
+<!ELEMENT ListCol (Texte*)>
+
+<!ELEMENT GetListDoc EMPTY>
+
+<!ELEMENT ListDoc (Texte*)>
+
+<!ELEMENT GetListNdx EMPTY>
+
+<!ELEMENT GetListField EMPTY>
+<!ATTLIST GetListField
+	Type CDATA #IMPLIED
+	>
+
+<!ELEMENT ListField (Texte*)>
+
+<!ELEMENT ListNdx (Texte*)>
+
+<!ELEMENT StartIndex EMPTY>
+
+<!ELEMENT UpdateIndex EMPTY>
+
+<!ELEMENT MakeTabmat EMPTY>
+
+<!ELEMENT Error EMPTY>
+
+<!ELEMENT GetStatus EMPTY>
+
+<!ELEMENT Para EMPTY>
+
+<!ELEMENT Phrase EMPTY>
+
+<!ELEMENT Grec EMPTY>
+
+<!ELEMENT Index EMPTY>
+
+<!ELEMENT Liste EMPTY>
+
+<!ELEMENT Article EMPTY>
+
+<!ELEMENT MotFreq EMPTY>
+
+<!ELEMENT FreqCroi EMPTY>
+
+<!ELEMENT FreqDecr EMPTY>
+
+<!ELEMENT FinMot EMPTY>
+
+<!ELEMENT FormatXml EMPTY>
+
+<!ELEMENT FormatHtml EMPTY>
+
+<!ELEMENT Path (DbHome)*>
+
+<!ELEMENT Tabmat EMPTY>
+
+<!ELEMENT Anno EMPTY>
+
+<!ELEMENT Signet EMPTY>
+
+<!ELEMENT Facsim (#PCDATA)>
+
+<!ELEMENT Link (#PCDATA)>
+
+<!ELEMENT Base64 (#PCDATA)>
+
+<!ELEMENT Export EMPTY>
+
+<!ELEMENT Contexte EMPTY>
+
+<!ELEMENT Def EMPTY>
+
+<!ELEMENT Enabled EMPTY>
+
+<!ELEMENT Checked EMPTY>
+
+<!ELEMENT NewSearch EMPTY>
