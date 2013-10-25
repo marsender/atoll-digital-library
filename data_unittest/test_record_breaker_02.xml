@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book><title>Le récit idyllique</title><chapter><title>première partie</title><section>
+    <title><w pos="12">titre</w> <w pos="13">de</w> <w pos="14">partie</w></title>
+    <subtitle><w pos="15">sous</w>-<w pos="16">titre</w> <w pos="17">de</w> <w pos="18">partie</w></subtitle>
+    </section></chapter></book>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book>
+  <title>Un exemple de livre DocBook</title>
+  <titleabbrev>Exemple</titleabbrev>
+  <bookinfo>
+    <author>
+      <personname>
+        <firstname>Christopher</firstname>
+        <surname>COMPAGNON</surname>
+      </personname>
+    </author>
+  </bookinfo>
+  <preface id="preface1">
+    <title>Une préface simple</title>
+    <para>Rien de plus simple pour créer un paragraphe</para>
+  </preface>
+  <chapter id="chapter1">
+    <title>Chapitre premier</title>
+    <para>Un livre doit contenir au minimum un chapitre</para>
+    <para>Et hop, un autre paragraphe!!!</para>
+    <important>
+      <para>Et ici, quelque chose de très important</para>
+    </important>
+    <tip>
+      <para>Une astuce !</para>
+    </tip>
+    <caution>
+      <para>Encore une chose <code>importante</code>, sinon cela passera inaperçu !</para>
+    </caution>
+    <example>
+      <title>Exemple numéro 1</title>
+      <programlisting>Le code d'un programme ici</programlisting>
+    </example>
+  </chapter>
+</book>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE atoll-plugin-xmlexec SYSTEM "../dtd/atoll_plugin_xmlexec.dtd">
+
+<atoll-plugin-xmlexec version="1.0">
+  <ReqAll>
+
+		<!-- Init parameters -->
+		<ReqInit>
+			<OutFile>./data_unittest/xmlexec_res.xml</OutFile>
+			<DbHome>./data_unittest/</DbHome>
+			<!-- Collection name must not be the same as the unit test suite collection -->
+      <Col ColId="ColUnitTest" />
+      <User>mars</User>
+		</ReqInit>
+
+		<!-- Display infos about the config -->
+		<ReqInfo>
+			<LogFile/>
+			<OutFile/>
+			<Col/>
+			<DbHome/>
+			<User/>
+			<Version/>
+		</ReqInfo>
+
+		<!-- Database request -->
+		<ReqDb>
+			<!-- Display the list of all collections -->
+			<GetListCol/>
+			<!-- Add a collection -->
+			<AddCol ColId="ColUnitTest" ColTitle="Title" ColSalt="Salt">This collection is &lt;only&gt; for unit tests</AddCol>
+			<!-- Set collection metadata -->
+			<SetCol ColId="ColUnitTest" ColTitle="UnitTest collection title" ColSalt="UnitTest collection salt">This collection is &lt;only&gt; for unit tests set (éèà)</SetCol>
+			<!-- Get collection metadata -->
+			<GetCol ColId="ColUnitTest" />
+			<!-- Display the list of all collections -->
+			<GetListCol/>
+		</ReqDb>
+
+		<!-- Collection request -->
+		<ReqCol>
+			<!-- Display the list of all documents -->
+			<GetListDoc/>
+			<!-- Display the list of all index -->
+			<GetListNdx/>
+			<!-- Add documents to the collection -->
+			<AddDoc FileName="./data_unittest/docbook_4-4.xml"
+				IndexerConfig="./data_unittest/indexer_config_test.xml"
+				RecordBreakerConfig="./data_unittest/recordbreaker_config_test.xml"
+				Uuid=""
+				XsltCode="docbook-xsl"
+				XmlValidation="false"><![CDATA[Document DocBook 4.4]]></AddDoc>
+			<AddDoc FileName="./data_unittest/docbook_5.xml"
+				IndexerConfig="./data_unittest/indexer_config_test.xml"
+				RecordBreakerConfig="./data_unittest/recordbreaker_config_test.xml"
+				Uuid=""
+				XsltCode="docbook-xsl-ns"
+				XmlValidation="false"><![CDATA[Document DocBook 5]]></AddDoc>
+			<!-- Set document metadata -->
+			<SetDoc DocNum="1" FileName="./data_unittest/docbook_4-5.xml"
+				IndexerConfig="./data_unittest/indexer_config_test.xml"
+				RecordBreakerConfig="./data_unittest/recordbreaker_config_test.xml"
+				Uuid=""
+				XsltCode=""
+				XmlValidation="false"><![CDATA[Document DocBook 4.5]]></SetDoc>
+			<!-- Get document metadata -->
+			<GetDoc DocNum="1" />
+			<!-- Display the list of all documents -->
+			<GetListDoc/>
+			<!-- Index the documents -->
+			<IndexDoc DocNum="1" />
+			<IndexDoc DocNum="2" />
+			<!-- Display the list of all index -->
+			<GetListNdx/>
+			<!-- Add search fields -->
+			<AddField Type="search" Order="9" FieldId="text">Text</AddField>
+			<AddField Type="search" Order="2" FieldId="aut">Author</AddField>
+			<AddField Type="search" Order="3" FieldId="chap">Chapter</AddField>
+			<AddField Type="search" Order="4" FieldId="tit">Title</AddField>
+			<!-- Set search fields -->
+			<SetField Type="search" Order="1" FieldId="text">Full text</SetField>
+			<!-- Get search field metadata -->
+			<GetField Type="search" FieldId="text" />
+			<!-- Remove a search field -->
+			<DelField Type="search" FieldId="tit" />
+			<!-- Display the list of all search fields -->
+			<GetListField Type="search" />
+		</ReqCol>
+
+		<!-- Display the index content -->
+		<ReqIndex>
+      <IdCrit>aut</IdCrit>
+      <TypeIndex>
+        <Index/>
+      </TypeIndex>
+      <TypeTri>
+        <MotFreq/>
+      </TypeTri>
+      <Plage>
+        <Min>0</Min>
+        <Nb>20</Nb>
+      </Plage>
+		</ReqIndex>
+
+		<!-- Execute a search request -->
+    <ReqSearch>
+      <SearchCrit>
+        <Crit>
+          <IdCrit>chap</IdCrit>
+          <Texte><![CDATA[paragraph]]></Texte>
+        </Crit>
+        <Crit>
+          <IdCrit>tit</IdCrit>
+          <Texte><![CDATA[5e]]></Texte>
+        </Crit>
+        <Crit>
+          <IdCrit>aut</IdCrit>
+          <Texte><![CDATA[spices]]></Texte>
+        </Crit>
+      </SearchCrit>
+      <NewSearch/>
+      <Plage>
+        <Min>0</Min>
+        <Nb>25</Nb>
+      </Plage>
+      <TypeRes>
+        <Pos><NbMot>6-6</NbMot></Pos>
+      </TypeRes>
+    </ReqSearch>
+
+    <ReqDoc>
+			<!-- Display document pages: 1-0-0 2-1-19 -->
+      <DocPagPos>1-0-0</DocPagPos>
+    </ReqDoc>
+
+		<!-- Collection request -->
+		<ReqCol>
+			<!-- Remove the document -->
+			<DelDoc DocNum="1" />
+			<!-- Display the list of all documents -->
+			<GetListDoc/>
+			<!-- Remove the document index -->
+			<DelDocIndex DocNum="2" />
+			<!-- Display the list of all index -->
+			<GetListNdx/>
+		</ReqCol>
+
+		<!-- Database request -->
+		<ReqDb>
+			<!-- Remove the collection -->
+			<DelCol ColId="ColUnitTest" />
+			<!-- Display the list of all collections -->
+			<GetListCol/>
+		</ReqDb>
+
+  </ReqAll>
+</atoll-plugin-xmlexec>

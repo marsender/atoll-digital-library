@@ -1,0 +1,15 @@
+/*
+
+docbook_atoll.css
+ 
+*/
+
+.title {
+	font-size: larger;
+	font-weight: bold;
+	color: #5F5F5F;
+}
+
+span.highword {
+	color: red;
+}

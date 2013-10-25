@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE atoll-indexer-config PUBLIC "-//ATOLL-DIGITAL-LIBRARY//DTD Atoll Indexer Config XML V1.1//EN"
+	"http://www.atoll-digital-library.org/public/atoll/dtd/atoll_indexer_config.dtd">
+
+<atoll-indexer-config>
+  <constant name="indexer_mode" value="all"/>
+  <!-- Action
+    	type (add_config_param) #REQUIRED
+    -->
+  <action type="add_config_param">
+    <!-- Param
+      name ID #IMPLIED
+      elem NMTOKEN #IMPLIED
+      attr NMTOKEN #IMPLIED
+      type (word|field|interv|none) "interv"
+      case (lower|none) "lower"
+	    <param name="nn" elem="ee" attr="aa" type="word" case="lower" />
+	    -->
+    <param name="text" elem="para" type="word"/>
+    <param name="prod" elem="product" type="word"/>
+    <param name="item" elem="item" type="word"/>
+    <param name="item_f" elem="item" type="field"/>
+    <param name="not" elem="not" attr="id" type="word"/>
+    <param name="bold" elem="b" type="word"/>
+    <param name="emph" elem="em" type="word"/>
+    <param name="sku" elem="sku" type="interv"/>
+    <param name="test" elem="indexer_test" attr="id" type="word"/>
+    <param name="test_f" elem="indexer_test" attr="id" type="field"/>
+    <param name="test_i" elem="indexer_test" attr="id" type="interv"/>
+    <param name="title" elem="bk:title" type="word"/>
+    <param name="id_attr" attr="id" type="word"/>
+    <!-- Docbook -->
+    <param name="chap" elem="chapter" type="word"/>
+    <param name="tit" elem="title" type="word"/>
+    <param name="aut" elem="author" type="word"/>
+  </action>
+</atoll-indexer-config>

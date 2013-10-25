@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE atoll-plugin-xmlexec PUBLIC "-//ATOLL-DIGITAL-LIBRARY//DTD Atoll Plugin XmlExec XML V1.1//EN"
+	"http://www.atoll-digital-library.org/public/atoll/dtd/atoll_plugin_xmlexec.dtd" [
+	<!ENTITY reqinit SYSTEM "xmlexec_req_include.xml">
+]>
+
+<atoll-plugin-xmlexec version="1.0">
+	<ReqAll>
+
+		<!-- Init parameters -->
+		&reqinit;
+
+		<!-- Database request -->
+		<ReqDb>
+			<!-- Add a collection -->
+			<AddCol ColId="ColDbTest" ColTitle="Test collection title" ColSalt="Test collection salt">Test collection description</AddCol>
+		</ReqDb>
+
+		<!-- Collection request -->
+		<ReqCol>
+			<!-- Add documents to the collection -->
+			<AddDoc DocNum="0"
+				FileName="./data_unittest/docbook_xsl_test.xml"
+				IndexerConfig="./data_unittest/indexer_config_test.xml"
+				RecordBreakerConfig="./data_unittest/recordbreaker_config_test.xml"
+				KeyWords="Test, Document"
+				XsltCode="docbook-xsl-ns"
+				XmlValidation="false">Document DocBook xsl test</AddDoc>
+			<!-- Index the documents -->
+			<IndexDoc DocNum="1" />
+			<!-- Display the list of all index -->
+			<GetListNdx/>
+			<!-- Add search fields -->
+			<AddField Type="search" Order="1" FieldId="metadata_title">Document title</AddField>
+			<AddField Type="search" Order="2" FieldId="text">Text</AddField>
+			<AddField Type="search" Order="3" FieldId="aut">Author</AddField>
+			<AddField Type="search" Order="4" FieldId="tit">Title</AddField>
+			<!-- Display the list of all search fields -->
+			<GetListField Type="search" />
+		</ReqCol>
+
+		<!-- Execute a search request -->
+    <ReqSearch>
+      <SearchCrit>
+        <Crit>
+          <IdCrit>metadata_title</IdCrit>
+          <Texte><![CDATA[Document DocBook xsl test]]></Texte>
+        </Crit>
+        <Crit>
+          <IdCrit>aut</IdCrit>
+          <Texte><![CDATA[Vincé]]></Texte>
+        </Crit>
+        <Crit>
+          <IdCrit>aut</IdCrit>
+          <Texte><![CDATA["Claudio Galderisi"]]></Texte>
+        </Crit>
+        <Crit>
+          <IdCrit>tit</IdCrit>
+          <Texte><![CDATA[premier]]></Texte>
+        </Crit>
+      </SearchCrit>
+      <NewSearch/>
+      <Plage>
+        <Min>0</Min>
+        <Nb>10</Nb>
+      </Plage>
+      <TypeRes>
+        <Pos><NbMot>6-6</NbMot></Pos>
+      </TypeRes>
+    </ReqSearch>
+
+		<!-- Execute a search request with a search id -->
+		<!--
+    <ReqSearch>
+      <SearchId>084f39e7303aa0992e725c7c8d1210e8</SearchId>
+      <Plage>
+        <Min>0</Min>
+        <Nb>10</Nb>
+      </Plage>
+      <TypeRes>
+        <Pos><NbMot>6-6</NbMot></Pos>
+      </TypeRes>
+    </ReqSearch>
+    -->
+
+		<!-- Display the index content -->
+		<ReqIndex>
+      <IdCrit>aut</IdCrit>
+      <TypeIndex>
+        <Index/>
+      </TypeIndex>
+      <TypeTri>
+        <MotFreq/>
+      </TypeTri>
+      <Plage>
+				<!-- <Min>0</Min> or <Mot>gal</Mot> -->
+				<Min>0</Min>
+        <Nb>10</Nb>
+      </Plage>
+		</ReqIndex>
+
+		<ReqDoc>
+			<DocPagPos>1-0-5</DocPagPos>
+		</ReqDoc>
+
+		<!-- Database request -->
+		<ReqDb>
+			<!-- Remove the collection -->
+			<DelCol ColId="ColDbTest" />
+			<!-- Display the list of all collections -->
+			<GetListCol/>
+		</ReqDb>
+
+		</ReqAll>
+</atoll-plugin-xmlexec>

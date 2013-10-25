@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE atoll-plugin-xmlexec PUBLIC "-//ATOLL-DIGITAL-LIBRARY//DTD Atoll Plugin XmlExec XML V1.1//EN"
+	"http://www.atoll-digital-library.org/public/atoll/dtd/atoll_plugin_xmlexec.dtd" [
+	<!ENTITY reqinit SYSTEM "xmlexec_req_include.xml">
+]>
+
+<atoll-plugin-xmlexec version="1.0">
+	<ReqAll>
+
+		<!-- Init parameters -->
+		&reqinit;
+
+		<!-- Database request -->
+		<ReqDb>
+			<!-- Add a collection -->
+			<AddCol ColId="ColDbTest" ColTitle="Test collection title" ColSalt="Test collection salt">Test collection description</AddCol>
+		</ReqDb>
+
+		<!-- Collection request -->
+		<ReqCol>
+			<!-- Add documents to the collection -->
+			<AddDoc DocNum="0"
+				FileName="/opt/atoll/data_src/demo/col01/Guy_de_Maupassant__Au_soleil.xhtml"
+				DcMetadata="/opt/atoll/data_src/demo/col01/Guy_de_Maupassant__Au_soleil_dcmetadata.xml"
+				IndexerConfig="/opt/dev/atoll/config/atoll_indexer_config_epub.xml"
+				RecordBreakerConfig="/opt/dev/atoll/config/atoll_recordbreaker_config_epub.xml"
+				Uuid=""
+				XsltCode=""
+				XmlValidation="0">Guy de Maupassant: Au soleil</AddDoc>
+			<!-- Index the documents -->
+			<IndexDoc DocNum="1" />
+			<!-- Display the list of all index -->
+			<GetListNdx/>
+			<!-- Add search fields -->
+			<AddField Type="search" Order="1" FieldId="metadata_title">Document title</AddField>
+			<AddField Type="search" Order="2" FieldId="metadata_dc_title">Title</AddField>
+			<AddField Type="search" Order="3" FieldId="metadata_dc_creator">Creator</AddField>
+			<AddField Type="search" Order="4" FieldId="text">Texte</AddField>
+		</ReqCol>
+
+		<!-- Display the index content -->
+		<ReqIndex>
+      <IdCrit>text</IdCrit>
+      <TypeIndex>
+        <Index/>
+      </TypeIndex>
+      <TypeTri>
+        <MotFreq/>
+      </TypeTri>
+      <Plage>
+        <Min>0</Min>
+        <Nb>20</Nb>
+      </Plage>
+		</ReqIndex>
+
+		<ReqDoc>
+			<DocPagPos>1-1-0</DocPagPos>
+		</ReqDoc>
+
+		<!-- Run a search -->
+		<ReqSearch>
+			<SearchCrit>
+				<Crit>
+					<IdCrit>text</IdCrit>
+					<Texte><![CDATA[féerie]]></Texte>
+				</Crit>
+				<Crit>
+					<IdCrit>metadata_dc_title</IdCrit>
+					<Texte><![CDATA[<Au soleil>]]></Texte>
+				</Crit>
+				<Crit>
+					<IdCrit>metadata_dc_creator</IdCrit>
+					<Texte><![CDATA[<Guy de Maupassant>]]></Texte>
+				</Crit>
+			</SearchCrit>
+			<NewSearch/>
+			<Plage>
+				<Min>0</Min>
+				<Nb>100</Nb>
+			</Plage>
+			<TypeRes>
+				<Pos><NbMot>6-6</NbMot></Pos>
+			</TypeRes>
+		</ReqSearch>
+
+		<!-- Database request -->
+		<ReqDb>
+			<!-- Remove the collection -->
+			<DelCol ColId="ColDbTest" />
+			<!-- Display the list of all collections -->
+			<GetListCol/>
+		</ReqDb>
+
+		</ReqAll>
+</atoll-plugin-xmlexec>

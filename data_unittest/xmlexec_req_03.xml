@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE atoll-plugin-xmlexec PUBLIC "-//ATOLL-DIGITAL-LIBRARY//DTD Atoll Plugin XmlExec XML V1.1//EN"
+	"http://www.atoll-digital-library.org/public/atoll/dtd/atoll_plugin_xmlexec.dtd" [
+	<!ENTITY reqinit SYSTEM "xmlexec_req_include.xml">
+]>
+
+<atoll-plugin-xmlexec version="1.0">
+	<ReqAll>
+
+		<!-- Init parameters -->
+		&reqinit;
+
+		<!-- Database request -->
+		<ReqDb>
+			<!-- Add a collection -->
+			<AddCol ColId="ColDbTest" ColTitle="Test collection title" ColSalt="Test collection salt">Test collection description</AddCol>
+		</ReqDb>
+
+		<!-- Collection request -->
+		<ReqCol>
+			<!-- Add documents to the collection -->
+			<AddDoc DocNum="0"
+				FileName="/opt/atoll/data_src/demo/col01/VernesJulesLesNaufragesDuJonathan.html"
+				IndexerConfig="/opt/dev/atoll/config/atoll_indexer_config_html.xml"
+				RecordBreakerConfig="/opt/dev/atoll/config/atoll_recordbreaker_config_html.xml"
+				Uuid=""
+				XsltCode=""
+				XmlValidation="0">Vernes, Jules - Les naufragés du Jonathan</AddDoc>
+			<AddDoc DocNum="0"
+				FileName="/opt/atoll/data_src/demo/col02/distributedeb.xml"
+				IndexerConfig="/opt/dev/atoll/config/atoll_indexer_config_docbook.xml"
+				RecordBreakerConfig="/opt/dev/atoll/config/atoll_recordbreaker_config_docbook.xml"
+				Uuid=""
+				XsltCode="docbook-xsl"
+				XmlValidation="1">Docbook 4: How to distribute software in Debian format</AddDoc>
+			<AddDoc DocNum="0"
+				FileName="/opt/atoll/data_src/demo/col01/docbook_5.xml"
+				IndexerConfig="/opt/dev/atoll/config/atoll_indexer_config_docbook.xml"
+				RecordBreakerConfig="/opt/dev/atoll/config/atoll_recordbreaker_config_docbook.xml"
+				Uuid=""
+				XsltCode="docbook-xsl-ns"
+				XmlValidation="1">Docbook 5</AddDoc>
+			<AddDoc DocNum="0"
+				FileName="/opt/atoll/data_src/demo/col01/PrechacJeanLaDuchesseDeMilan.xml"
+				IndexerConfig="/opt/dev/atoll/config/atoll_indexer_config_tei.xml"
+				RecordBreakerConfig="/opt/dev/atoll/config/atoll_recordbreaker_config_tei.xml"
+				Uuid=""
+				XsltCode="tei-xsl"
+				XmlValidation="1">Préchac, Jean - La Duchesse de Milan</AddDoc>
+			<!-- Index the documents -->
+			<IndexDoc DocNum="1" />
+			<IndexDoc DocNum="2" />
+			<IndexDoc DocNum="3" />
+			<!-- Display the list of all index -->
+			<GetListNdx/>
+			<!-- Add search fields -->
+			<AddField Type="search" Order="1" FieldId="text">Texte</AddField>
+			<AddField Type="search" Order="2" FieldId="aut">Author</AddField>
+		</ReqCol>
+
+		<!-- Display the index content -->
+		<ReqIndex>
+      <IdCrit>text</IdCrit>
+      <TypeIndex>
+        <Index/>
+      </TypeIndex>
+      <TypeTri>
+        <MotFreq/>
+      </TypeTri>
+      <Plage>
+        <Min>0</Min>
+        <Nb>20</Nb>
+      </Plage>
+		</ReqIndex>
+
+		<ReqDoc>
+			<DocPagPos>1-1-0</DocPagPos>
+		</ReqDoc>
+
+		<!-- Database request -->
+		<ReqDb>
+			<!-- Remove the collection -->
+			<DelCol ColId="ColDbTest" />
+			<!-- Display the list of all collections -->
+			<GetListCol/>
+		</ReqDb>
+
+		</ReqAll>
+</atoll-plugin-xmlexec>

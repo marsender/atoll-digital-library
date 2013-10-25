@@ -1,0 +1,8 @@
+		<!-- Init parameters -->
+		<ReqInit>
+			<OutFile>./data_unittest/xmlexec_res.xml</OutFile>
+			<DbHome>./data_unittest/</DbHome>
+			<!-- Collection name must not be the same as the unit test suite collection -->
+      <Col ColId="ColDbTest" />
+      <User>mars</User>
+		</ReqInit>

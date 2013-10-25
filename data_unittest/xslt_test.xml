@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book>
+  <title><w pos="1">Un</w> <w pos="2">exemple</w> <w pos="3">de</w> <w pos="4">livre</w> <w pos="5">DocBook</w></title>
+  <titleabbrev><w pos="6">Exemple</w></titleabbrev>
+  <bookinfo>
+    <author>
+      <personname>
+        <firstname><w pos="7">Christopher</w></firstname>
+        <surname><w pos="8">COMPAGNON</w></surname>
+      </personname>
+    </author>
+  </bookinfo>
+  <preface id="preface1">
+    <title><w pos="9">Une</w> <w pos="10">préface</w> <w pos="11">simple</w></title>
+    <para><w pos="12">Rien</w> <w pos="13">de</w> <w pos="14">plus</w> <w pos="15">simple</w> <w pos="16">pour</w> <w pos="17">créer</w> <w pos="18">un</w> <w pos="19">paragraphe</w></para>
+  </preface>
+  <chapter id="chapter1">
+    <title><w pos="20">Chapitre</w> <w pos="21">premier</w></title>
+    <para><w pos="22">Un</w> <w pos="23">livre</w> <w pos="24">doit</w> <w pos="25">contenir</w> <w pos="26">au</w> <w pos="27">minimum</w> <w pos="28">un</w> <w pos="29">chapitre</w></para>
+    <para><w pos="30">Et</w> <w pos="31">hop</w>, <w pos="32">un</w> <w pos="33">autre</w> <w pos="34">paragraphe</w>!!!</para>
+    <important>
+      <para><w pos="35">Et</w> <w pos="36">ici</w>, <w pos="37">quelque</w> <w pos="38">chose</w> <w pos="39">de</w> <w pos="40">très</w> <w pos="41">important</w></para>
+    </important>
+    <tip>
+      <para><w pos="42">Une</w> <w pos="43">astuce</w> !</para>
+    </tip>
+    <caution>
+      <para><w pos="44">Encore</w> <w pos="45">une</w> <w pos="46">chose</w> <code><w pos="47">importante</w></code>, <w pos="48">sinon</w> <w pos="49">cela</w> <w pos="50">passera</w> <w pos="51">inaperçu</w> !</para>
+    </caution>
+    <example>
+      <title><w pos="52">Exemple</w> <w pos="53">numéro</w> <w pos="54">1</w></title>
+      <programlisting><w pos="55">Le</w> <w pos="56">code</w> <w pos="57">d'un</w> <w pos="58">programme</w> <w pos="59">ici</w></programlisting>
+    </example>
+  </chapter>
+</book>

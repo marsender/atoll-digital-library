@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product>
+  <w pos="1">Le</w> <w pos="2">5</w><em><w pos="2">e</w></em> <w pos="3">élément</w>
+	<w pos="4">fruité</w> <w pos="5">pacific</w> <w pos="6">drink</w>
+	<item><w pos="7">All</w> <w pos="8">all</w><b> <w pos="9">spices</w></b></item>
+	<inventory>
+		<sku><w pos="10">All</w> <w pos="11">fruits</w>:
+			<not id="1"><w pos="100001">The</w> <b><w pos="100002">best</w></b> <w pos="100003">m</w><ptm><w pos="100003">angoes</w></ptm> <c><w pos="100004">c</w></c><b><w pos="100004">a</w></b><w pos="100004">re</w> <w pos="100005">in</w> <w pos="100006">town</w></not>
+		</sku>
+		<price><w pos="12">0.48</w></price>
+		<inventory><w pos="13">634</w></inventory>
+	</inventory>
+	<vendor><w pos="14">Tri</w> <w pos="15">County</w> <w pos="16">Produce</w></vendor> <br></br>
+	<item>
+		<w pos="17">Item</w> <w pos="18">with</w>
+		<b><w pos="19">two</w></b> <w pos="20">lines</w>
+	</item>
+	<w pos="21">Test</w> <w pos="22">with</w> <w pos="23">punctuation</w>: <w pos="24">aa</w>, <w pos="25">bb</w>; &quot;<w pos="26">cc</w>&quot; <w pos="27">dd</w>-<w pos="28">ee</w> <w pos="29">ff</w>? <w pos="30">gg</w>* &lt;<w pos="31">hh</w>&gt; <w pos="32">ii</w>&quot; <w pos="33">jj</w>&amp; <w pos="34">kk</w>&apos;
+</product>

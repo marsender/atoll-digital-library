@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V5.0//EN" "http://docbook.org/xml/5.0/dtd/docbook.dtd">
+
+<book xmlns="http://docbook.org/ns/docbook" version="5.0">
+  <title>Book title</title>
+  <titleabbrev>Abbreviated book title</titleabbrev>
+  <info>
+    <legalnotice>
+      <para>First paragraph</para>
+    </legalnotice>
+    <author>
+      <personname>
+        <firstname>First name</firstname>
+        <surname>Surname</surname>
+      </personname>
+    </author>
+  </info>
+  <dedication>
+    <para>Dedication</para>
+  </dedication>
+  <preface>
+    <title>Preface title</title>
+    <para>First paragraph</para>
+  </preface>
+  <chapter>
+    <title>Chapter title</title>
+    <para>First paragraph</para>
+  </chapter>
+  <appendix>
+    <title>Appendix title</title>
+    <para>First paragraph</para>
+  </appendix>
+</book>

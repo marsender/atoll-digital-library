@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE TEI PUBLIC "-//TEI P5//DTD Main Document Type//EN"
+	"tei_all.dtd">
+	
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+	<teiHeader>
+		<fileDesc>
+			<titleStmt>
+				<title>TEI title</title>
+			</titleStmt>
+			<publicationStmt>
+				<p>Publication information</p>
+			</publicationStmt>
+			<sourceDesc>
+				<p>Information about the source</p>
+			</sourceDesc>
+		</fileDesc>
+	</teiHeader>
+	<text>
+		<front>
+			<docTitle>
+				<titlePart type="main"><hi rend="title">TEI test</hi></titlePart>
+			</docTitle>
+			<pb/>
+		</front>
+		<body>
+			<div>
+				<head>Header</head>
+				<p>Paragraph 1.</p>
+				<p>Paragraph 2.</p>
+			</div>
+			<pb/>
+			<div>
+				<head>Content</head>
+				<p>Paragraph 3.</p>
+			</div>
+		</body>
+	</text>
+</TEI>

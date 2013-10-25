@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book>
+  <title><w pos="1">Le</w> <w pos="2">récit</w> <w pos="3">idyllique</w></title>
+  <info>
+    <author>
+      <personname>
+        <firstname><w pos="4">Jean</w>-<w pos="5">Jacques</w> <w pos="6">Vincensini</w> <w pos="7">et</w> <w pos="8">Claudio</w> <w pos="9">Galderisi</w></firstname>
+      </personname>
+    </author>
+  </info></book>

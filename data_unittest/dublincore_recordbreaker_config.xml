@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE atoll-recordbreaker-config PUBLIC "-//ATOLL-DIGITAL-LIBRARY//DTD Atoll RecordBreaker Config XML V1.1//EN"
+	"http://www.atoll-digital-library.org/public/atoll/dtd/atoll_recordbreaker_config.dtd">
+
+<atoll-recordbreaker-config>
+  <constant name="recordbreaker_mode" value="all"/>
+  <!-- Action
+    	type (add_config_param) #REQUIRED
+    -->
+  <action type="add_config_param">
+    <!-- Param
+      elem NMTOKEN #IMPLIED
+      attr NMTOKEN #IMPLIED
+      type (open|close|store) "open"
+	    <param elem="pge" type="open" />
+	    -->
+    <param elem="Description" type="close"/>
+  </action>
+</atoll-recordbreaker-config>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V5.0//EN" "http://docbook.org/xml/5.0/dtd/docbook.dtd">
+
+<book xmlns="http://docbook.org/ns/docbook" version="5.0">
+  <title>Le récit idyllique</title>
+  <info>
+    <author>
+      <personname>
+        <firstname>Jean-Jacques Vincé et Claudio Galderisi</firstname>
+      </personname>
+    </author>
+  </info>
+<chapter>
+  <title>première partie</title>
+  <section>
+    <title>titre de partie</title>
+    <subtitle>sous-titre de partie</subtitle>
+    <section>
+      <title>Titre de chapitre</title>
+      <para>cdsdddzjdibnjdbscjs de mncxsjcmc<?linebreak?>s cdcdccd cdcdcd cdcdcdcdc dc</para>
+      <para>Quelques styles de caractères romains : nonsed mincipit praesed exeriurem. Styles de caractère italique souligné et italique Times New Roman : nullam vel delis am.</para>
+      <?pagebreak?>
+      <para>titre 3<?linebreak?>style de caractère "base de casse"</para>
+      <para>Les tyles de caractère gras et demi-gras : qui dolestrud minis del utpat. Accum susto od amet. Une énumération :</para>
+      <itemizedlist mark="bullet">
+        <listitem>
+            <para>premier élément de l’énumération ;</para>
+          </listitem>
+        <listitem>
+            <para>deuxième élément de l’énumération ;</para>
+          </listitem>
+        <listitem>
+            <para>troisième élément de l’énumération ;</para>
+          </listitem>
+        <listitem>
+            <para>quatrième élé ment de l’énumération.</para>
+          </listitem>
+      </itemizedlist>
+      <para>Suite et fin du paragraphe<footnote>
+            <para>Re tet er at, qui tie dolestrud minis del utpat. Accum zzrillandrer susto od min enim volor amet incinisit lor si tat .<?linebreak?>At am dolore tie feugait inis euis do core do etum quam dolorperci blandit utatumsan eu facipisi.<?linebreak?>Tat veliquisi tem quat landre dio od <?linebreak?>er senibh ero dolutat. Tat veliquisi<?linebreak?>Tat veliquisi tem quat landre dio od<?linebreak?>Molorer ostrud tis alissis accummy nim alisl utpat augiam.</para>
+          </footnote>.</para>
+      <para>Utpat. Ut dunt lore commy non henim dolortisl enim vulla aliquatie dolummo loreet deleseq uismodo lortisi.</para>
+      <para>Odiam zzrit, sustrud molore magna facilis aliquat umsandiao dio odion henisim volor in voluptat.</para>
+      <para>Agna faccum dolobore eratem alit praesecte eu faccum velisi<footnote>
+            <para>Odiam zzrit, sustrud molore magna facilis aliquat umsandiam.</para>
+          </footnote>.</para>
+      <para>Xercidui tie eugue conse eum do dolorpe rostrud dolore min ex enim dolor autat volobortio consecte minia si :</para>
+      <para>At am dolore tie : feugait inis euis do core do etum quam dolorperci blandit utatumsan eu facipisi.</para>
+      <para>Rud tat praese enibh et pratummod ming ercipis eui tincilla feu. Molorer ostrud tis alissis accummy nim alisl utpat augiam incipsusto odolendit nis eugiam dolore volent nulputat.</para>
+      <para>* * *</para>
+      <para>Molorer ostrud tis alissis accummy nim alisl utpat augiam incipsusto odolendit nis eugiam dolore volent nulputat. Magna at.</para>
+      <para>* * *</para>
+      <para>Odiam sustrud mod dio odolut exero dio odion henisim volor in voluptat.</para>
+      <para>* * *</para>
+      <para>llam etuercillan hendrem ilisl elesting estio conullam nim iustisi tionsequi blam diat luptat.</para>
+      <para>* * *</para>
+      <para>Deuxième titre 3</para>
+      <para>Titre 4</para>
+      <para>premier titre 5</para>
+      <para>Ut lor sum del utatum nos et laore minis dolorerat volore verillaore.</para>
+      <para>Tat veliquisi tem quat landre dio od </para>
+      <para>er senibh ero dolutat. Tat veliquisi</para>
+      <para>3 Tat veliquisi tem quat landre dio od </para>
+      <para>Tat veliquisi tem quat landre dio od </para>
+      <para>At am dolore tie feugait inis euis do core do etum quam dolorperci blandit utatumsan eu facipisi.</para>
+      <para>deuxième titre 5</para>
+      <para>Sequis adipsuscil ing enibh ex euguercidunt adigna faci tat, quatiscilisl utat, quam dignit luptat augait aci tie.</para>
+      <para>Premier titre 6</para>
+      <para>Or sumsandreet ulla feugait lore dui bla con ut lut lumsandrure vel dionsed magna acipit accum nonsequamet alisl inci tat.</para>
+      <para>Deuxième titre 6</para>
+      <para>Na feu faccumm odigna aliquat ipsustisit atio ea at. Ut la alit, quis exerit ut luptat, vel do odipsum molorperosto dionsequat. San ut velent dolum iustrud et wisl ullutpate feum quisit la facipisl ip ecte dolore dolobore magna alis dolessequat aliquat.</para>
+      <para>Deuxième titre 4</para>
+      <para>Dui core et atio cons dolese dolut wis nos aci tionseq uamcon ullut delendre tem aute consed magna ate feuis duisl utpat.</para>
+      <para>troisième titre 3</para>
+      <para>Dolorpero doloree tueros ad tem et nonsectem el dolore vel in estie eum ver at. Deliquisl do dolortin ese tatuerat, verosto con utpat lan utpat.</para>
+      <para>Sandipsuscil ex eum quat. Ut adionsequat volut il ullummy nonsequamet nibh eugiam digna faccum voleniam enis dit ad ectem veliquat. Vulla am, sit, si.</para>
+      <para>Ibh eu feugue modiat. Volorer cilisl ex eliquam zzrit nulla commy nibh enim vullum velesto conulputpate tetummodo dit adigna augait autetue min velisit in henisci llaoreet endrem num zzrilit iliquat.</para>
+      <para>Equat, si. Suscip euisit aciduis num vel utet luptate tat dolorem nons euip essed tincilissi blan henis doloreet praessi bla conulla facing et, quis elesequamcon exero conse mod tat. Ut praessi.</para>
+      <para>Jean-Louis Dupont-Turrière<?linebreak?>UMR 3897 – Université Paris LXXII</para>
+    </section>
+    <section>
+      <title>deuxième chapitre</title>
+    <subtitle>Sous-titre de chapitre</subtitle>
+    <section>
+    <title>premier sous-chapitre</title>
+    <para>It dui tat at, quat. Ercilla ndignis sectem auguera estion hendrem quamet, sum vero consecte min eugue tem eugiam il ut praessequate min exeros dolorper incipsu sciniatum ver alis nosto eugait utpat.</para>
+    <para>An ullum amconulla feugait eugiame tueriure duismod eugiat.</para>
+    <para>Guer sequis eniat, sustis erit lum velessenisit ut lam, velenim ing eniatie tat wisi tionsed delendre commy nonsequisim ipit ipsum nismolor ad tio odit iuscinim</para>
+    <para>Magnim vel dolorpercil euisissit, si.</para>
+    <para>Equisse quipisl exercidunt autem iuscilit lortionsequi el irit aliquisi ilisisis doloborero dolor susto essi bla feugue duisim vullaorem et nulputpat.</para>
+    <para>Nulla feugiam consequate molobor sustio odolor sed dolorer aciniat umsandre dolum nulla facipit esse feum nim augue dio dolore ea feu facidunt adio commod exerostrud tie cons do ercilla ad modit nonsed duismolorem iriure<footnote>
+            <para>Lor ilit et enissit aliquis exer senibh eugue magnit pratem in henim am, qui te dipismodiat praesse ndiamcore do erit.<?linebreak?>An ullum amconulla feugait eugiame tueriure<?linebreak?>An ullum amconulla feugait eugiame tueriure</para>
+          </footnote> magna corting eum eum zzril ero odit dolorper ing essim.</para>
+    <para>Modio odiam, commy nis exerit vel dolor sed et la faccums andrerci tionsenim quis am nibh el eliquis eros eum vulla cons euis exer sed dipsustis nonsenibh el ero essequatis alit non hendipit utatie dio dolortio core.</para>
+    <para>Smoloreet diate consed molobor alit nim zzrit, sit atie dunt iure dunt ulputpat iuscidu ipsustrud exeros ecte vel ute mod modolenis niamet, quisis ecte commod dolutat.</para>
+    <para>Sed dipsustis nonsenibh el ero essequatis alit non hendipit utatie dio dolortio core magna faci bla feugiat alit irit vulputatinit aliquisit nit acidunt iriuscinci tions ad modip exer.</para>
+    <para>Lor ilit et enissit aliquis exer senibh eugue magnit pratem in henim am, qui te dipismodiat praesse ndiamcore do erit.Estie magna feum illuptat. </para>
+    </section>
+    </section>
+	</section>
+</chapter>
+</book>

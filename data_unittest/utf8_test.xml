@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	utf8_test.xml
+	// 12/03/08 Version 1.1 Add non breaking space
+	// 01/07/07 Version 1.0 Begining of implementation
+-->
+
+<!DOCTYPE product [
+  <!ENTITY nbsp '&#160;'>
+]>
+
+<product>
+  Le 5<em>e</em> élément
+	fruité pacific&nbsp;drink
+	<item>All all<b> spices</b></item>
+	<inventory>
+		<sku>All fruits:
+			<not id="1">The <b>best</b> m<ptm>angoes</ptm> <c>c</c><b>a</b>re in town</not>
+		</sku>
+		<price>0.48</price>
+		<inventory>634</inventory>
+	</inventory>
+	<vendor>Tri County Produce</vendor> <br />
+	<item>
+		Item with
+		<b>two</b> lines
+	</item>
+	Test with punctuation: aa, bb; "cc" dd-ee ff? gg* &lt;hh&gt; ii&quot; jj&amp; kk&apos;
+</product>

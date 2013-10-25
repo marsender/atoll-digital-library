@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE atoll-indexer-config PUBLIC "-//ATOLL-DIGITAL-LIBRARY//DTD Atoll Indexer Config XML V1.1//EN"
+	"http://www.atoll-digital-library.org/public/atoll/dtd/atoll_indexer_config.dtd">
+
+<atoll-indexer-config>
+  <constant name="indexer_mode" value="all"/>
+  <!-- Action
+    	type (add_config_param) #REQUIRED
+    -->
+  <action type="add_config_param">
+    <!-- Param
+      name ID #IMPLIED
+      elem NMTOKEN #IMPLIED
+      attr NMTOKEN #IMPLIED
+      type (word|field|interv|none) "interv"
+      case (lower|none) "lower"
+	    <param name="nn" elem="ee" attr="aa" type="word" case="lower" />
+	    -->
+    <param name="dc_title" elem="dc:title" type="word"/>
+    <param name="dc_title_f" elem="dc:title" type="field"/>
+    <param name="dc_creator" elem="dc:creator" type="word"/>
+    <param name="dc_creator_f" elem="dc:creator" type="field"/>
+  </action>
+</atoll-indexer-config>

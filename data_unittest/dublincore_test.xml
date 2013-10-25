@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF PUBLIC "-//DUBLIN CORE//DCMES DTD 2002/07/31//EN"
+    "http://dublincore.org/documents/2002/07/31/dcmes-xml/dcmes-xml-dtd.dtd">
+<!-- An XML Encoding of Simple Dublin Core Metadata: http://dublincore.org/documents/2001/04/11/dcmes-xml/ -->
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<rdf:Description rdf:about="http://www.ilrt.bristol.ac.uk/people/cmdjb/">
+		<dc:title>Dave Beckett's Home Page</dc:title>
+		<dc:creator>Dave Beckett</dc:creator>
+		<dc:publisher>ILRT, University of Bristol</dc:publisher>
+		<dc:description>The Dublin Core Metadata Initiative Web site.</dc:description>
+		<dc:date>1998-10-10</dc:date>
+		<dc:format>text/html</dc:format>
+		<dc:language>en</dc:language>
+		<dc:contributor>The Dublin Core Metadata Initiative</dc:contributor>
+		<dc:contributor xml:lang="fr">L'Initiative de métadonnées du Dublin Core</dc:contributor>
+		<dc:contributor xml:lang="de">der Dublin-Core Metadata-Diskussionen</dc:contributor>
+	</rdf:Description>
+</rdf:RDF>
