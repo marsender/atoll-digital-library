@@ -1,4 +1,3 @@
-atoll-digital-library
-=====================
+## atoll-digital-library
 
-Atoll Digital Library is a document publishing system that allows users to create their own digital library.
+See [Atoll Digital Library](http://www.atoll-digital-library.org/index.php?language=2) project home page.
