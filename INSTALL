@@ -1,0 +1,124 @@
+## =============================================================================
+## Atoll Digital Library install
+## =============================================================================
+
+
+This documentation explains how to build and install atoll-digital-library.
+
+The project code is available through GitHub: https://github.com/marsender/atoll-digital-library
+
+
+## Install the dependencies
+## -----------------------------------------------------------------------------
+
+# Before you can start compiling, you need a couple of packages that are required
+# to compile the project. Use your distributions package manager to install those
+# packages.
+#   CMake - Cross-platform build system - http://www.cmake.org/
+#   A C++ compiler. We test mostly on GCC and Visual Studio 9+
+#   ICU - International Components for Unicode - http://www.icu-project.org/
+#   CppUnit - C++ unit testing framework - http://cppunit.sourceforge.net/
+#   Xerces-C++: XML parser - http://xerces.apache.org/xerces-c/
+#   Xalan-C++: - XSLT processor - http://xml.apache.org/xalan-c/
+#   Berkeley DB - Embeddable database: http://www.oracle.com/us/products/database/berkeley-db/overview/index.html
+#   zlib - Compression Library - http://www.zlib.net/
+
+# For debian based linux, the folowing commands will install all the dependencies
+sudo apt-get install cmake
+sudo apt-get install g++
+sudo apt-get install libicu-dev
+sudo apt-get install libcppunit-dev
+sudo apt-get install libxerces-c-dev
+sudo apt-get install libxalan-c-dev
+sudo apt-get install libdb-dev libdb++-dev
+sudo apt-get install zlib1g-dev
+sudo apt-get install xml-core
+
+
+## Build the code
+## -----------------------------------------------------------------------------
+
+# Set the root of the sourcecode (from now on referred to as ${AtollRoot})
+AtollRoot=~/atoll-digital-library
+
+# Get the source code
+git clone https://github.com/marsender/atoll-digital-library.git ${AtollRoot}
+
+# Change directory into the root of the sourcecode
+cd ${AtollRoot}
+
+# Create the build directory
+# You can create multiple build directories, one for each type of build
+mkdir build
+cd build
+
+# Configure using cmake
+#   The basic syntax is cmake [-G "Script name"] ..
+#   Where "Script name" is the name of the scripts to build (e.g. Visual Studio 8 2005).
+#   A list of supported build scripts can be found by: cmake --help
+#   You can configure several options such as the build type, debugging information,
+#   etc, by using the CMake GUI or by calling: ccmake ..
+# Common options:
+#   cmake -D CMAKE_BUILD_TYPE=Release .. # Debug, Release, RelWithDebInfo and MinSizeRel
+#   cmake -G "Unix Makefiles" .. # Use a specific generator (e.g. Visual Studio 8 2005)
+#   cmake --warn-uninitialized .. # Warn about uninitialized values
+cmake ..
+
+# Start the build
+# This depends on which build script you specified, but it would be something like
+# make or nmake or open the solution files with your IDE.
+# The binary files will be available in ${AtollRoot}/build/bin
+make
+
+# Test the code with one of this command
+ctest -V
+make test
+
+# Install the library
+# The install log file install_manifest.txt will contain the list of installed files
+sudo make install
+
+# Generate the doxygen html documentation
+make doc
+
+
+## Samples
+## -----------------------------------------------------------------------------
+
+# In order to test and validate each dependency you can build the sample projects
+# located in the directory ${AtollRoot}/src/samples
+#   berkeleydb
+#   cppunit
+#   icu
+#   plugin_architecture
+#   xalan
+#   xerces
+# To build a project (from now on referred to as ${Project}), do the folowing
+
+# Set the project name
+Project=berkeleydb
+
+# Change directory into the root of the sample project
+cd ${AtollRoot}/src/samples/${Project}
+
+# Create the build directory
+mkdir build
+cd build
+
+# Configure using cmake
+cmake ..
+
+# Start the build
+make
+
+# Test the code with one of this command
+ctest -V
+make test
+
+
+## Wiki and issues
+## -----------------------------------------------------------------------------
+
+Project Wiki: https://github.com/marsender/atoll-digital-library/wiki
+
+Please report any issues on the project issue tracker: https://github.com/marsender/atoll-digital-library/issues
