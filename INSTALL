@@ -97,6 +97,9 @@ make doc
 #   xerces
 # To build a project (from now on referred to as ${Project}), do the folowing
 
+# Set the root of the sourcecode (from now on referred to as ${AtollRoot})
+AtollRoot=~/atoll-digital-library
+
 # Set the project name
 Project=berkeleydb
 
