@@ -1,0 +1,4 @@
+*.log
+*.db
+__db.*
+xmlexec_res.xml
