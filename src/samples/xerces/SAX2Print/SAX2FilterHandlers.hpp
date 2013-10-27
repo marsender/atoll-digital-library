@@ -16,11 +16,7 @@
  */
 
 /*
- * $Log$
- * Revision 1.1  2004/12/24 19:44:21  amassari
- * Add support for SAX2 filters (jira# 1133)
- *
- *
+ * $Id: SAX2FilterHandlers.hpp 471735 2006-11-06 13:53:58Z amassari $
  */
 
 #include    <xercesc/parsers/SAX2XMLFilterImpl.hpp>

@@ -43,7 +43,7 @@ const char gHelpString[] =
  *    These global variables are set according to the options specified
  *    on the command line by the user.
  */
-const char * opt_locale     = "en_US";
+const char * opt_locale     = "en_US_POSIX";
 char * opt_rules      = 0;
 UBool  opt_help       = false;
 UBool  opt_norm       = false;

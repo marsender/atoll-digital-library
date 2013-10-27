@@ -70,10 +70,10 @@ public:
         const   XMLByte* const  toWrite
     );
 
-    void writeChars
+    virtual void writeChars
     (
         const   XMLByte* const  toWrite
-        , const unsigned int    count
+        , const XMLSize_t       count
         , XMLFormatter* const   formatter
     );
 
@@ -87,12 +87,12 @@ public:
 					 const XMLCh* const localname,
 					 const XMLCh* const qname);
 
-    void characters(const XMLCh* const chars, const unsigned int length);
+    void characters(const XMLCh* const chars, const XMLSize_t length);
 
     void ignorableWhitespace
     (
         const   XMLCh* const    chars
-        , const unsigned int    length
+        , const XMLSize_t       length
     );
 
     void processingInstruction

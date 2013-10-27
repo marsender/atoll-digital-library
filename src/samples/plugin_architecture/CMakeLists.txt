@@ -68,10 +68,11 @@ endif()
 
 # Build application
 add_executable(myapplication ${myapplication_files})
-target_link_libraries(myapplication myengine -ldl)
+target_link_libraries(myapplication myengine)
 
 # Build engine library
 add_library(myengine SHARED ${myengine_files})
+target_link_libraries(myengine -ldl)
 
 # Build plugins
 add_library(opengl_plugin SHARED ${opengl_plugin_files})
