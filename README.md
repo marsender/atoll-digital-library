@@ -8,4 +8,8 @@ It provides a cross platform search engine that integrate ePub eBooks or any XML
 This program is distributed under the GNU General Public License Version 3.
 Read the LICENSE file for more about the license.
 
-See [Atoll Digital Library](http://www.atoll-digital-library.org/index.php?language=2) project home page.
+Read the INSTALL file for prerequisites and installation instructions.
+
+Project home page: [Atoll Digital Library](http://www.atoll-digital-library.org/index.php?language=2).
+
+Get the latest news on [Google+](https://plus.google.com/101634373939373367037).
