@@ -12,4 +12,4 @@ Read the INSTALL file for prerequisites and installation instructions.
 
 Project home page: [Atoll Digital Library](http://www.atoll-digital-library.org/index.php?language=2).
 
-Get the latest news on [Google+](https://plus.google.com/101634373939373367037).
+Get the latest news on [Google+](https://plus.google.com/+Atoll-digital-libraryOrg).
