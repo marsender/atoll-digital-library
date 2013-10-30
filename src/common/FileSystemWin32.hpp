@@ -1,7 +1,5 @@
 /*******************************************************************************
 
-FileSystemWin32.hpp
-
 uce-dirent.h - operating system independent dirent implementation
 
 Copyright (C) 1998-2002  Toni Ronkko
@@ -17,47 +15,7 @@ the following conditions:
 The above copyright notice and this permission notice shall be included
 in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED ''AS IS'', WITHOUT WARRANTY OF ANY KIND, EXPRESS
-OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL TONI RONKKO BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
-
-
-May 28 1998, Toni Ronkko <tronkko@messi.uku.fi>
-
-Revision 1.7  2002/05/13 10:48:35  tr
-embedded some source code directly to the header so that no source
-modules need to be included in the MS Visual C project using the
-interface, removed all the dependencies to other headers of the 'uce'
-library so that the header can be made public
-
-Revision 1.6  2002/04/12 16:22:04  tr
-Unified Compiling Environment (UCE) replaced 'std' library
-
-Revision 1.5  2001/07/20 16:33:40  tr
-moved to 'std' library and re-named defines accordingly
-
-Revision 1.4  2001/07/10 16:47:18  tronkko
-revised comments
-
-Revision 1.3  2001/01/11 13:16:43  tr
-using ''uce-machine.h'' for finding out defines such as 'FREEBSD'
-
-Revision 1.2  2000/10/08 16:00:41  tr
-copy of FreeBSD man page
-
-Revision 1.1  2000/07/10 05:53:16  tr
-Initial revision
-
-Revision 1.2  1998/07/19 18:29:14  tr
-Added error reporting capabilities and some asserts.
-
-Revision 1.1  1998/07/04 16:27:51  tr
-Initial revision
-
+FileSystemWin32.hpp
 
 MSVC 1.0 scans automatic dependencies incorrectly when your project
 contains this very header.  The problem is that MSVC cannot handle
@@ -238,43 +196,43 @@ HAVE_SYS_NDIR_H according to the files found.
 # endif
 
 
-  /*
-   * Substitute for real dirent structure.  Note that 'd_name' field is a
-   * true character array although we have it copied in the implementation
-   * dependent data.  We could save some memory if we had declared 'd_name'
-   * as a pointer refering the name within implementation dependent data.
-   * We have not done that since some code may rely on sizeof(d_name) to be
-   * something other than four.  Besides, directory entries are typically so
-   * small that it takes virtually no time to copy them from place to place.
-   */
-  typedef struct dirent {
-    char d_name[NAME_MAX + 1];
+/*
+ * Substitute for real dirent structure.  Note that 'd_name' field is a
+ * true character array although we have it copied in the implementation
+ * dependent data.  We could save some memory if we had declared 'd_name'
+ * as a pointer refering the name within implementation dependent data.
+ * We have not done that since some code may rely on sizeof(d_name) to be
+ * something other than four.  Besides, directory entries are typically so
+ * small that it takes virtually no time to copy them from place to place.
+ */
+typedef struct dirent {
+	char d_name[NAME_MAX + 1];
 
-    /*** Operating system specific part ***/
+	/*** Operating system specific part ***/
 # if defined(DIRENT_WIN32_INTERFACE)       /*WIN32*/
-    WIN32_FIND_DATA data;
+	WIN32_FIND_DATA data;
 # elif defined(DIRENT_MSDOS_INTERFACE)     /*MSDOS*/
 #   if defined(DIRENT_USE_FFBLK)
-    struct ffblk data;
+	struct ffblk data;
 #   else
-    struct _find_t data;
+	struct _find_t data;
 #   endif
 # endif
-  } dirent;
+} dirent;
 
-  /* DIR substitute structure containing directory name.  The name is
-   * essential for the operation of ''rewinndir'' function. */
-  typedef struct DIR {
-    char          *dirname;                    /* directory being scanned */
-    dirent        current;                     /* current entry */
-    int           dirent_filled;               /* is current un-processed? */
+/* DIR substitute structure containing directory name.  The name is
+ * essential for the operation of ''rewinndir'' function. */
+typedef struct DIR {
+	char          *dirname;                    /* directory being scanned */
+	dirent        current;                     /* current entry */
+	int           dirent_filled;               /* is current un-processed? */
 
-  /*** Operating system specific part ***/
+/*** Operating system specific part ***/
 #  if defined(DIRENT_WIN32_INTERFACE)
-    HANDLE        search_handle;
+	HANDLE        search_handle;
 #  elif defined(DIRENT_MSDOS_INTERFACE)
 #  endif
-  } DIR;
+} DIR;
 
 # ifdef __cplusplus
 extern "C" {
@@ -346,9 +304,7 @@ static void _setdirname (struct DIR *dirp);
  * </table>
  * </function>
  */
-static DIR *
-opendir(
-    const char *dirname)
+static DIR *opendir(const char *dirname)
 {
   DIR *dirp;
   assert (dirname != NULL);
@@ -439,8 +395,7 @@ opendir(
  * </table>
  * </function>
  */
-static struct dirent *
-readdir (DIR *dirp)
+static struct dirent *readdir(DIR *dirp)
 {
   assert (dirp != NULL);
   if (dirp == NULL) {
@@ -513,8 +468,7 @@ readdir (DIR *dirp)
  * The global 'errno' variable will set to EBADF in case of error.
  * </function>
  */
-static int
-closedir (DIR *dirp)
+static int closedir (DIR *dirp)
 {
   int retcode = 0;
 
@@ -570,8 +524,7 @@ closedir (DIR *dirp)
  * <ret>Returns nothing.  If something went wrong while rewinding, you will
  * notice it later when you try to retrieve the first directory entry.
  */
-static void
-rewinddir (DIR *dirp)
+static void rewinddir(DIR *dirp)
 {
   /* make sure that dirp is legal */
   assert (dirp != NULL);
@@ -604,8 +557,7 @@ rewinddir (DIR *dirp)
  * Open native directory stream object and retrieve first file.
  * Be sure to close previous stream before opening new one.
  */
-static int
-_initdir (DIR *dirp)
+static int _initdir(DIR *dirp)
 {
   assert (dirp != NULL);
   assert (dirp->dirname != NULL);
@@ -661,7 +613,7 @@ static const WCHAR *
 #else
 static const char *
 #endif
-_getdirname (const struct dirent *dp)
+_getdirname(const struct dirent *dp)
 {
 #if defined(DIRENT_WIN32_INTERFACE)
   return dp->data.cFileName;
@@ -678,8 +630,8 @@ _getdirname (const struct dirent *dp)
 /*
  * Copy name of implementation dependent directory entry to the d_name field.
  */
-static void
-_setdirname (struct DIR *dirp) {
+static void _setdirname(struct DIR *dirp)
+{
 #ifdef UNICODE
 	const WCHAR *s = _getdirname (&dirp->current);
 	for (int i = 0; i <= NAME_MAX; ++i) {
