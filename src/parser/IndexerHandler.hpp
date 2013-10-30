@@ -1,0 +1,80 @@
+/*******************************************************************************
+
+Copyright © 2010 Didier Corbiere
+
+Distributable under the terms of the GNU Lesser General Public License,
+as specified in the LICENSE file.
+
+IndexerHandler.hpp
+
+*******************************************************************************/
+
+#ifndef __IndexerHandler_HPP
+#define __IndexerHandler_HPP
+//------------------------------------------------------------------------------
+
+#include "../common/XercesBaseHandler.hpp"
+#include "unicode/unistr.h"
+//------------------------------------------------------------------------------
+
+namespace Atoll
+{
+class Indexer;
+class DbManager;
+
+//! Xerces parser handler for the xml indexer
+/**
+	Logic:
+		- Receive notification of parser events and send it to the xml indexer
+		- Xerces strings are converted in unicode strings
+	Xerces API:
+		http://xerces.apache.org/xerces-c/apiDocs-3/classDefaultHandler.html
+*/
+class IndexerHandler : public Common::XercesBaseHandler
+{
+private:
+	Indexer *mIndexer;
+
+public:
+	IndexerHandler();
+	virtual ~IndexerHandler();
+
+	//! Init the db manager. Must be set before parsing
+	void SetDbManager(DbManager *inDbMgr);
+	//! Load the indexer configuration. Must be set before parsing
+	void LoadIndexerConfig(const std::string &inFileName);
+	//! Load the record breaker configuration. Must be set before parsing
+	void LoadRecordBreakerConfig(const std::string &inFileName);
+
+	//! Init the document number. Must be set before parsing
+	void SetDocRef(unsigned int inNumDoc);
+	//! Init the destination file name. Must be set before parsing
+	void SetDstFileName(const std::string &inFileName);
+	//! Enable the record breaker
+	void EnableRecordBreaker(bool inEnable);
+	//! Enable the document storage into database
+	void EnableDbDocStorage(bool inEnable);
+
+	//! Init the handler before parsing
+	bool InitHandler();
+
+	//! Handler called before parsing
+  virtual void BeginDocument();
+	//! Handler called after parsing
+  virtual void EndDocument(bool inIsException);
+
+	// -----------------------------------------------------------------------
+	//  Handlers for the SAX DocumentHandler interface
+	// -----------------------------------------------------------------------
+	virtual void startElement(const XMLCh * const uri, const XMLCh * const localname,
+										const XMLCh * const qname, const Attributes &attrs);
+	virtual void endElement(const XMLCh * const uri, const XMLCh * const localname,
+										const XMLCh * const qname);
+	virtual void characters(const XMLCh * const chars, const XmlLength length);
+	virtual void ignorableWhitespace(const XMLCh * const chars, const XmlLength length);
+};
+
+} // namespace Atoll
+
+//------------------------------------------------------------------------------
+#endif
