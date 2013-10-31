@@ -92,7 +92,7 @@ make doc
 #   berkeleydb
 #   cppunit
 #   icu
-#   plugin_architecture
+#   pluginarchitecture
 #   xalan
 #   xerces
 # To build a project (from now on referred to as ${Project}), do the folowing
