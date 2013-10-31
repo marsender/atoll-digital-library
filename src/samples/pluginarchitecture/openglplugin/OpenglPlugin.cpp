@@ -1,6 +1,6 @@
 /*******************************************************************************
 
- opengl_plugin.cpp
+ OpenglPlugin.cpp
 
  Copyright © 2010 Didier Corbiere
 

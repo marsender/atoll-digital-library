@@ -74,8 +74,8 @@ int main()
 
 		// Now load the plugins
 		cout << "Loading plugins..." << endl;
-		TheKernel.loadPlugin("opengl_plugin");
-		TheKernel.loadPlugin("zip_plugin");
+		TheKernel.loadPlugin("OpenglPlugin");
+		TheKernel.loadPlugin("ZipPlugin");
 		cout << endl;
 
 		// Try the same again, this time the plugins are loaded

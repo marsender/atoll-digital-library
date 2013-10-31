@@ -26,8 +26,8 @@ endif(WIN32)
 # Add the project groups
 source_group("myapplication" ${CMAKE_SOURCE_DIR}/myapplication/*)
 source_group("myengine" ${CMAKE_SOURCE_DIR}/myengine/*)
-source_group("opengl_plugin" ${CMAKE_SOURCE_DIR}/opengl_plugin/*)
-source_group("zip_plugin" ${CMAKE_SOURCE_DIR}/zip_plugin/*)
+source_group("openglplugin" ${CMAKE_SOURCE_DIR}/openglplugin/*)
+source_group("zipplugin" ${CMAKE_SOURCE_DIR}/zipplugin/*)
 
 # myapplication files
 set(myapplication_files
@@ -41,14 +41,14 @@ set(myengine_files
 	${CMAKE_SOURCE_DIR}/myengine/PluginKernel.cpp
 	)
 
-# opengl_plugin files
-set(opengl_plugin_files
-	${CMAKE_SOURCE_DIR}/opengl_plugin/opengl_plugin.cpp
+# openglplugin files
+set(openglplugin_files
+	${CMAKE_SOURCE_DIR}/openglplugin/OpenglPlugin.cpp
 	)
 
-# zip_plugin files
-set(zip_plugin_files
-	${CMAKE_SOURCE_DIR}/zip_plugin/zip_plugin.cpp
+# zipplugin files
+set(zipplugin_files
+	${CMAKE_SOURCE_DIR}/zipplugin/ZipPlugin.cpp
 	)
 
 # Set compiler flags
@@ -75,8 +75,8 @@ add_library(myengine SHARED ${myengine_files})
 target_link_libraries(myengine -ldl)
 
 # Build plugins
-add_library(opengl_plugin SHARED ${opengl_plugin_files})
-add_library(zip_plugin SHARED ${zip_plugin_files})
+add_library(openglplugin SHARED ${openglplugin_files})
+add_library(zipplugin SHARED ${zipplugin_files})
 
 # Tests
 enable_testing()

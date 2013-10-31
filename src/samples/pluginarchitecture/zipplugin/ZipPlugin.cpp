@@ -1,6 +1,6 @@
 /*******************************************************************************
 
- zip_plugin.cpp
+ ZipPlugin.cpp
 
  Copyright © 2010 Didier Corbiere
 
