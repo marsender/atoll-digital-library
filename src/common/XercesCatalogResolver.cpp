@@ -136,7 +136,7 @@ bool XercesCatalogResolver::LoadCatalog(const std::string &inFileName)
 
 	bool wantLog = false;
 	if (wantLog && isOk)
-		gLog.log(eTypLogDebug, "Deb > Parse catalog: %s: %lu ms", inFileName.c_str(), duration);
+		gLog.log(eTypLogDebug, "Deb > Parse catalog: %s in %lu ms", inFileName.c_str(), duration);
 
 	if (!isOk)
 		gLog.log(eTypLogError, "Err > Error catalog: %s", inFileName.c_str());

@@ -2,9 +2,7 @@
 
  Collation.cpp
 
- Copyright © 2002-2006 IBM, Inc. All Rights Reserved.
-
- See the file ICULicense.txt for redistribution information.
+ Copyright (C) 2002-2006 IBM, Inc.   All Rights Reserved.
 
 *******************************************************************************/
 

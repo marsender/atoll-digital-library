@@ -211,7 +211,7 @@ bool XsltTransformer::XslTransform(const UChar *inStr, int32_t inLength,
 	}
 
 	if (isOk)
-		mLog.log(eTypLogAction, "Act > Xslt transform string: %lu ms", duration);
+		mLog.log(eTypLogAction, "Act > Xslt transform string in %lu ms", duration);
 
 	return isOk;
 }

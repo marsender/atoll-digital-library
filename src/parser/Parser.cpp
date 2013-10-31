@@ -145,7 +145,7 @@ bool Parser::XercesParse(const std::string &inFileName)
 		isOk = false;
 
 	if (isOk)
-		gLog.log(eTypLogDebug, "Deb > Parse: %s: %lu ms", inFileName.c_str(), duration);
+		gLog.log(eTypLogDebug, "Deb > Parse: %s in %lu ms", inFileName.c_str(), duration);
 	else
 		gLog.log(eTypLogError, "Err > Parse error: %s", inFileName.c_str());
 
@@ -210,7 +210,7 @@ bool Parser::XercesParse(const UChar *inStr, int32_t inLength /*= -1*/)
 		isOk = false;
 
 	if (isOk)
-		gLog.log(eTypLogDebug, "Deb > Parse string: %lu ms", duration);
+		gLog.log(eTypLogDebug, "Deb > Parse string in %lu ms", duration);
 	else
 		gLog.log(eTypLogError, "Err > Parse error");
 

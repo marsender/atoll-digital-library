@@ -121,7 +121,7 @@ bool XmlExecParser::XercesParse(const std::string &inFileName)
 		isOk = false;
 
 	if (isOk)
-		mLog.log(eTypLogAction, "Act > XmlExec parse: %s: %lu ms (%.2f h)", inFileName.c_str(), duration, (double)duration / 3600000.0);
+		mLog.log(eTypLogAction, "Act > XmlExec parse: %s in %lu ms (%.2f h)", inFileName.c_str(), duration, (double)duration / 3600000.0);
 	else
 		mLog.log(eTypLogError, "Err > XmlExec parse error: %s", inFileName.c_str());
 
@@ -186,7 +186,7 @@ bool XmlExecParser::XercesParse(const UChar *inStr, int32_t inLength /*= -1*/)
 		isOk = false;
 
 	if (isOk)
-		mLog.log(eTypLogAction, "Act > XmlExec parse string: %lu ms (%.2f h)", duration, (double)duration / 3600000.0);
+		mLog.log(eTypLogAction, "Act > XmlExec parse string in %lu ms (%.2f h)", duration, (double)duration / 3600000.0);
 	else
 		mLog.log(eTypLogAction, "Act > XmlExec parse error");
 
