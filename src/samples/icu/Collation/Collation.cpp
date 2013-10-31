@@ -1,6 +1,6 @@
 /*******************************************************************************
 
- coll.cpp
+ Collation.cpp
 
  Copyright © 2002-2006 IBM, Inc. All Rights Reserved.
 

@@ -1,11 +1,22 @@
 /*******************************************************************************
 
- getopt.cpp
-
  Copyright © 2010 Didier Corbiere
 
  Distributable under the terms of the GNU Lesser General Public License,
  as specified in the COPYING file.
+
+getopt.cpp
+
+Get program options for platforms without this function
+
+#ifdef _WIN32
+extern "C" {
+  extern int getopt(int, char * const *, const char *);
+  extern char *optarg;
+}
+#else
+#include <unistd.h>
+#endif
 
 *******************************************************************************/
 
