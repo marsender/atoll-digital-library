@@ -1,29 +1,27 @@
 /*******************************************************************************
 
- Copyright © 2010 Didier Corbiere
+Copyright © 2010 Didier Corbiere
 
- Distributable under the terms of the GNU Lesser General Public License,
- as specified in the COPYING file.
+Distributable under the terms of the GNU Lesser General Public License,
+as specified in the COPYING file.
 
 getopt.cpp
 
 Get program options for platforms without this function
 
-#ifdef _WIN32
+*******************************************************************************/
+
+#ifndef _WIN32
+#include <unistd.h>
+#else
+
+#include <stdio.h>
+#include <string.h>
+
 extern "C" {
   extern int getopt(int, char * const *, const char *);
   extern char *optarg;
 }
-#else
-#include <unistd.h>
-#endif
-
-*******************************************************************************/
-
-#ifdef _WIN32
-
-#include <stdio.h>
-#include <string.h>
 
 #undef	BADCH
 #define	BADCH (int)'?'
@@ -32,6 +30,7 @@ extern "C" {
 #undef	EMSG
 #define	EMSG	""
 char	*optarg = NULL; // argument associated with option
+
 //! Parse argc/argv argument vector.
 int getopt(int nargc, char * const *nargv, const char *ostr)
 {
