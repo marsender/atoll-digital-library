@@ -35,9 +35,12 @@ find_path(
 IF (NOT BDB_LIBRARY_DIR)
 	set(BDB_LIBRARY_DIR)
 ENDIF (NOT BDB_LIBRARY_DIR)
+IF (NOT BDB_VERSION)
+	set(BDB_VERSION)
+ENDIF (NOT BDB_VERSION)
 find_library(
   BDB_LIBRARY
-  NAMES db_cxx libdb48
+  NAMES db_cxx libdb${BDB_VERSION}
   PATHS ${BDB_LIBRARY_DIR}
   DOC "Libraries to link against for the common parts of BDB")
 
