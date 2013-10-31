@@ -13,8 +13,8 @@
 #define MYENGINE_KERNEL_H
 
 #include "LibExport.hpp"
-#include "storage_server.hpp"
-#include "graphics_server.hpp"
+#include "StorageServer.hpp"
+#include "GraphicsServer.hpp"
 #include "Plugin.hpp"
 
 #include <string>

@@ -1,6 +1,6 @@
 /*******************************************************************************
 
- storage_server.hpp
+ StorageServer.hpp
 
  Copyright © 2010 Didier Corbiere
 
@@ -9,8 +9,8 @@
 
 *******************************************************************************/
 
-#ifndef MYENGINE_STORAGE_SERVER_H
-#define MYENGINE_STORAGE_SERVER_H
+#ifndef MYENGINE_STORAGESERVER_H
+#define MYENGINE_STORAGESERVER_H
 
 #include "LibExport.hpp"
 #include <list>
@@ -88,4 +88,4 @@ private:
 
 } // namespace MyEngine
 
-#endif // MYENGINE_STORAGE_SERVER_H
+#endif // MYENGINE_STORAGESERVER_H

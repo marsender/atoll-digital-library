@@ -1,6 +1,6 @@
 /*******************************************************************************
 
- graphics_server.hpp
+ GraphicsServer.hpp
 
  Copyright © 2010 Didier Corbiere
 
@@ -9,8 +9,8 @@
 
 *******************************************************************************/
 
-#ifndef MYENGINE_GRAPHICS_SERVER_H
-#define MYENGINE_GRAPHICS_SERVER_H
+#ifndef MYENGINE_GRAPHICSSERVER_H
+#define MYENGINE_GRAPHICSSERVER_H
 
 #include "LibExport.hpp"
 #include <vector>
@@ -67,4 +67,4 @@ private:
 
 } // namespace MyEngine
 
-#endif // MYENGINE_GRAPHICS_SERVER_H
+#endif // MYENGINE_GRAPHICSSERVER_H
