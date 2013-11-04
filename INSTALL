@@ -37,7 +37,7 @@ sudo apt-get install xml-core
 sudo apt-get install doxygen # Optional
 
 
-## Build the code
+## Build the code on linux with CMake
 ## -----------------------------------------------------------------------------
 
 # Set the root of the sourcecode (from now on referred to as ${AtollRoot})
@@ -56,13 +56,13 @@ cd build
 
 # Configure using cmake
 #   The basic syntax is cmake [-G "Script name"] ..
-#   Where "Script name" is the name of the scripts to build (e.g. Visual Studio 8 2005).
+#   Where "Script name" is the name of the scripts to build.
 #   A list of supported build scripts can be found by: cmake --help
 #   You can configure several options such as the build type, debugging information,
 #   etc, by using the CMake GUI or by calling: ccmake ..
 # Common options:
+#   cmake -G "Unix Makefiles" .. # Use a specific generator
 #   cmake -D CMAKE_BUILD_TYPE=Release .. # Debug, Release, RelWithDebInfo and MinSizeRel
-#   cmake -G "Unix Makefiles" .. # Use a specific generator (e.g. Visual Studio 8 2005)
 #   cmake --warn-uninitialized .. # Warn about uninitialized values
 cmake ..
 
@@ -84,11 +84,11 @@ sudo make install
 make doc
 
 
-## Samples
+## Build the samples on linux with CMake
 ## -----------------------------------------------------------------------------
 
 # In order to test and validate each dependency you can build the sample projects
-# located in the directory ${AtollRoot}/src/samples
+# located in the directory src/samples
 #   berkeleydb
 #   cppunit
 #   icu
@@ -119,6 +119,79 @@ make
 # Test the code with one of this command
 ctest -V
 make test
+
+
+## Build the code on windows Visual Studio
+## -----------------------------------------------------------------------------
+
+# In order to test and validate each dependency you can build the sample projects
+# located in the directory src/samples
+# Here is the list of Visual Studio 2010 projects:
+#   berkeleydb/berkeleydb.sln
+#   cppunit <= Todo
+#   icu <= Todo
+#   pluginarchitecture/pluginarchitecture.sln
+#   xalan <= Todo
+#   xerces/xerces.sln
+
+# Atoll Visual Studio 2010 project is in the directory:
+win/atoll.sln
+
+
+## Build the code on windows with CMake and Visual Studio
+## -----------------------------------------------------------------------------
+
+# Set the root of the sourcecode (from now on referred to as %AtollRoot%
+set AtollRoot=C:\soft\atoll-digital-library
+
+# Init Visual Studio variables
+"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86
+
+# Create the build directory
+# You can create multiple build directories, one for each type of build
+cd /D %AtollRoot%
+set BuildType=Release
+mkdir build_vc_%BuildType%
+cd build_vc_%BuildType%
+
+# Set library paths
+set ICUROOT=C:\soft\icu
+set BERKELEYDBROOT=C:\soft\berkeleydb
+set XERCESCROOT=C:\soft\xerces
+set XALANCROOT=C:\soft\xalan
+set ZLIBROOT=C:\soft\lib\zlib
+set CPPUNITROOT=C:\soft\lib\cppunit
+set VLDROOT=C:\soft\lib\vld
+
+# Configure using cmake
+#   The basic syntax is cmake [-G "Script name"] ..
+#   Where "Script name" is the name of the scripts to build.
+#   A list of supported build scripts can be found by: cmake --help
+#   You can configure several options such as the build type, debugging information,
+#   etc, by using the CMake GUI or by calling: ccmake ..
+# Common options:
+#   cmake -G "Unix Makefiles" .. # Use a specific generator
+#   cmake -D CMAKE_BUILD_TYPE=Release .. # Debug, Release, RelWithDebInfo and MinSizeRel
+#   cmake --warn-uninitialized .. # Warn about uninitialized values
+cmake -G "NMake Makefiles" ..
+cmake -D CMAKE_BUILD_TYPE=%BuildType% ..
+cmake -D ICU_INCLUDE_DIR=%ICUROOT%\include -D ICU_LIBRARY_DIR=%ICUROOT%\lib ..
+cmake -D BDB_INCLUDE_DIR=%BERKELEYDBROOT%\build_windows -D BDB_LIBRARY_DIR=%BERKELEYDBROOT%\build_windows\Win32\Release -D BDB_VERSION=53 ..
+cmake -D XERCESC_INCLUDE_DIR=%XERCESCROOT%\src -D XERCESC_LIBRARY_DIR=%XERCESCROOT%\lib ..
+cmake -D XALAN_INCLUDE_DIR=%XALANCROOT%\src -D XALAN_INCLUDE_MSG_DIR=%XALANCROOT%\Build\Win32\VC10\Release\Nls\Include -D XALAN_LIBRARY_DIR=%XALANCROOT%\lib ..
+cmake -D ZLIB_INCLUDE_DIR=%ZLIBROOT%\include -D ZLIB_LIBRARY_DIR=%ZLIBROOT%\lib ..
+cmake -D CPPUNIT_INCLUDE_DIR=%CPPUNITROOT%\include -D CPPUNIT_LIBRARY_DIR=%CPPUNITROOT%\lib ..
+cmake -D VLD_INCLUDE_DIR=%VLDROOT%\include -D VLD_LIBRARY_DIR=%VLDROOT%\lib\Win32 ..
+cmake ..
+
+# Start the build
+nmake
+
+set Path=%Path%;%XERCESCROOT%\bin
+set Path=%Path%;%AtollRoot%\build_vc_Release\bin
+cd /D %AtollRoot%
+atoll_console "-j" "test" "-l" "./data_unittest/_atoll.log"
+ctest -V
 
 
 ## Wiki and issues
