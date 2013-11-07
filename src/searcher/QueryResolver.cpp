@@ -76,7 +76,8 @@ void QueryResolver::OrSetIntersection(EntrySet *inSet1, EntrySet *inSet2)
 {
 	EntrySet::const_iterator it = inSet2->begin(), itEnd = inSet2->end();
 	for (; it != itEnd; ++it) {
-		inSet1->insert(*it);
+		const Entry &e = *it;
+		inSet1->insert(e);
 	}
 }
 //------------------------------------------------------------------------------
@@ -86,13 +87,15 @@ void QueryResolver::AndSetIntersection(EntrySet *inSet1, EntrySet *inSet2)
 	EntrySet::iterator it1 = inSet1->begin(), it1End = inSet1->end(),
 		it2 = inSet2->begin(), it2End = inSet2->end();
 	while (it1 != it1End && it2 != it2End) {
-		if (*it1 < *it2) {
+		const Entry &e1 = *it1;
+		const Entry &e2 = *it2;
+		if (e1 < e2) {
 			inSet1->erase(it1++);
 		}
-		else if (*it2 < *it1) {
+		else if (e2 < e1) {
 			++it2;
 		}
-		else { // *it1 == *it2
+		else { // e1 == e2
 			++it1;
 			++it2;
 		}
@@ -512,8 +515,11 @@ EntrySet *QueryResolver::ReduceNearList(std::vector<EntrySet *> &inVector, unsig
 			isEmpty = true;
 			break;
 		}
+		if (pl != plFirst)
+			NearSetIntersection(plFirst, entrySet, inWindow);
 		OrSetIntersection(plFirst, entrySet);
 		pl = entrySet;
+		//inWindow++;
 	}
 
 	if (isEmpty)

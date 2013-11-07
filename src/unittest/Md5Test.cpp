@@ -64,7 +64,7 @@ void Md5Test::testMain(void)
 	CPPUNIT_ASSERT_MESSAGE("Md5 binary buffer", sMd5 == sMd5Ok);
 
 	// File
-	//   md5sum /opt/dev/atoll/data_unittest/utf8_demo.xml
+	//   md5sum ./data_unittest/utf8_demo.xml
 	std::string fileName = mPath + "utf8_demo.xml";
 	Md5File(sMd5, fileName);
 	mess = "Md5 file: " + sMd5;

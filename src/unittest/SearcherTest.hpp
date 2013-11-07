@@ -35,6 +35,7 @@ class SearcherTest : public CPPUNIT_NS::TestFixture
   CPPUNIT_TEST(testSearcherOr);
   CPPUNIT_TEST(testSearcherAnd);
   CPPUNIT_TEST(testSearcherPhrase);
+  CPPUNIT_TEST(testSearcherPhraseSlop);
   CPPUNIT_TEST(testSearcherWildcard);
   CPPUNIT_TEST(testSearcherFuzzy);
   CPPUNIT_TEST(testSearcherRange);
@@ -64,6 +65,8 @@ protected:
   void testSearcherAnd(void);
 	//! Search PHRASE query between terms
   void testSearcherPhrase(void);
+	//! Search PHRASE SLOP query between terms
+  void testSearcherPhraseSlop(void);
 	//! Search Wildcard term
   void testSearcherWildcard(void);
 	//! Search Fuzzy term

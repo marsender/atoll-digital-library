@@ -219,7 +219,7 @@ void DocMeta::ToXml(UnicodeString &outStr) const
 	outStr.remove();
 
 	// Metadata search fields, as in the metadata indexer config file
-	//   /opt/dev/atoll/config/atoll_indexer_config_metadata.xml
+	//   ./config/atoll_indexer_config_metadata.xml
 	outStr += "<docmeta xmlns:atoll=\"urn:atoll\" xmlns:metadata=\"urn:atoll:metadata\">";
 	outStr += "	<metadata:title>"; UnicodeStringAddXmlEntities(outStr, mDocTitle); outStr += "</metadata:title>";
 	outStr += "	<metadata:uuid>"; UnicodeStringAddXmlEntities(outStr, mUuid); outStr += "</metadata:uuid>";

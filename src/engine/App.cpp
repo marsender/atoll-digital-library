@@ -17,7 +17,7 @@ Project settings | Debug
 			-vv -l ./data_unittest/_atoll.log -x ./data_unittest/xmlexec_req.xml
 			-v -l ./data_unittest/_atoll.log -x ./data_unittest/xmlexec_test.xml
 		Xml plugin release execution:
-		  sudo rm /opt/trace/atoll_res.xml /opt/dev/atoll/data_xmlexec/_atoll_trace.log
+		  sudo rm /opt/trace/atoll_res.xml ./data_xmlexec/_atoll_trace.log
 			sudo rm -f /opt/atoll/data_db/demo/__db.* /opt/atoll/data_db/demo/db*
 			-vv -l ./data_xmlexec/_atoll.log -x ./data_xmlexec/ReqCreateDb_demo.xml
 			-vv -l ./data_xmlexec/_atoll.log -x ./data_xmlexec/ReqAdmin.xml
@@ -89,10 +89,10 @@ Sample directories:
 	#define WIN32_LEAN_AND_MEAN
 	#include <windows.h>
 	#include <shellapi.h>  // For ShellExecute
-#endif 
+#endif
 #ifdef _WIN32
 	#include "vld.h" // Visual Leak Detector (Memory leak detection)
-#endif 
+#endif
 //------------------------------------------------------------------------------
 
 using namespace Atoll;
@@ -351,7 +351,7 @@ bool App::ParseDataIndexer()
 	std::auto_ptr<Parser> xercesParser(new Parser(SAX2XMLReader::Val_Auto, catalogFile, eTypHandlerIndexer));
 	// Get the handler
 	IndexerHandler *indexerHandler = static_cast<IndexerHandler *>(xercesParser->GetHandler());
-	
+
 	// Initialize the handler database manager
 	indexerHandler->SetDbManager(dbMgr.get());
 
@@ -410,7 +410,7 @@ bool App::ParseDataIndexer()
 int App::RunUnitTest()
 {
 	AppAssert(mIsValid);
-	
+
 	std::set<int> logLevelsBak = gLog.getLogLevels();
 	gLog.clearLogLevels(); // Raz log levels
 	gLog.setVerbose(1); // Show only errors

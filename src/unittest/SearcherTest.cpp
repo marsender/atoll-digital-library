@@ -384,6 +384,92 @@ void SearcherTest::testSearcherPhrase(void)
 }
 //------------------------------------------------------------------------------
 
+void SearcherTest::testSearcherPhraseSlop(void)
+{
+	UnicodeString strQuery;
+	const UChar *uStr;
+
+	// Populate the database
+	Entry e;
+	EntrySet entrySet;
+	UnicodeString word = "test1";
+	// Add one word and entry
+	e.Set(1, 1, 1);
+	entrySet.insert(e);
+	// Add one word and entry
+	mDbNdx->AddWordEntry(word, e);
+	// Add a new word and entry
+	e.Set(1, 1, 2);
+	word = "test2";
+	entrySet.insert(e);
+	mDbNdx->AddWordEntry(word, e);
+	// Add a new entry to this word
+	e.Set(2, 2, 2);
+	mDbNdx->AddWordEntry(word, e);
+
+	// Search the database
+	strQuery = "\"test1 test2\"~2";
+	uStr = strQuery.getTerminatedBuffer();
+	mSearcher->SetQuery(cStrField, uStr);
+	mSearcher->Compute();
+	CPPUNIT_ASSERT(entrySet == *(mSearcher->GetEntrySet()));
+
+	// Add a new word and entry
+	e.Set(1, 1, 3);
+	word = "test3";
+	entrySet.insert(e);
+	mDbNdx->AddWordEntry(word, e);
+	// Add a new entry to this word
+	e.Set(1, 1, 5);
+	mDbNdx->AddWordEntry(word, e);
+	// Add a new entry to this word
+	e.Set(3, 3, 3);
+	mDbNdx->AddWordEntry(word, e);
+
+	// Search the database
+	strQuery = "\"test1 test2 test3\"~3";
+	uStr = strQuery.getTerminatedBuffer();
+	mSearcher->SetQuery(cStrField, uStr);
+	mSearcher->Compute();
+	CPPUNIT_ASSERT(entrySet == *(mSearcher->GetEntrySet()));
+
+	// Search the database
+	e.Set(1, 1, 5);
+	entrySet.insert(e);
+	strQuery = "\"test1 test2 test3\"~10";
+	uStr = strQuery.getTerminatedBuffer();
+	mSearcher->SetQuery(cStrField, uStr);
+	mSearcher->Compute();
+	CPPUNIT_ASSERT(entrySet == *(mSearcher->GetEntrySet()));
+
+	// Add a new word and entry
+	e.Set(1, 1, 4);
+	word = "test4";
+	entrySet.insert(e);
+	mDbNdx->AddWordEntry(word, e);
+
+	// Search the database
+	strQuery = "\"test4 test3 test2 test1\"~4";
+	uStr = strQuery.getTerminatedBuffer();
+	mSearcher->SetQuery(cStrField, uStr);
+	mSearcher->Compute();
+	CPPUNIT_ASSERT(entrySet == *(mSearcher->GetEntrySet()));
+
+	// Add a new word and entry
+	//entrySet.clear();
+	e.Set(1, 1, 50);
+	word = "test4";
+	mDbNdx->AddWordEntry(word, e);
+
+	// Search the database
+	strQuery = "\"test1 test2 test3 test4\"~40";
+	uStr = strQuery.getTerminatedBuffer();
+	mSearcher->SetQuery(cStrField, uStr);
+	mSearcher->Compute();
+	CPPUNIT_ASSERT(entrySet == *(mSearcher->GetEntrySet()));
+}
+//------------------------------------------------------------------------------
+
 void SearcherTest::testSearcherWildcard(void)
 {
 	UnicodeString strQuery;

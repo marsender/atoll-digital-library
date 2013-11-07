@@ -298,7 +298,11 @@ Atoll::EntrySet* PhraseQuery::Search(Searcher *inSearcher)
 		//if (list.size() > 1)
 		//	entrySet = QueryResolver::ReducePhraseList(list, p);
 	}
-	entrySet = QueryResolver::ReducePhraseList(list, 1);
+	int32_t slop = this->getSlop();
+	if (slop)
+		entrySet = QueryResolver::ReduceNearList(list, slop);
+	else
+		entrySet = QueryResolver::ReducePhraseList(list, 1);
 
 	return entrySet;
 }
