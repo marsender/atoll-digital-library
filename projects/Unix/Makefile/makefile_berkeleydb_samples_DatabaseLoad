@@ -1,0 +1,68 @@
+#
+# Copyright © 2010 Didier Corbiere
+#
+# Distributable under the terms of the GNU Lesser General Public License,
+# as specified in the LICENSE file.
+#
+# Makefile BerkeleyDB samples DatabaseLoad
+#
+# This makefile is an alternative to cmake
+#
+# This makefile is an alternative to cmake
+#
+
+PLATFORM = LINUX
+COMPILER = g++
+CXXVER =
+GCC = yes
+GXX = yes
+CXXFLAGS = -w -O2 -DNDEBUG -DXML_USE_PTHREADS
+CFLAGS = -w -O2 -DNDEBUG -DXML_USE_PTHREADS
+LDFLAGS =
+THREADS = pthread
+EXTRA_LIBS = -lpthread
+PREFIX = /usr/local
+
+################## LIBRARY NAMES AND DIRECTORIES ##################
+
+INCLUDES= -I.
+LIBRARY_NAMES=-ldb_cxx
+
+OUTSAMPLES=../../../out_samples/berkeleydb
+SRCSAMPLES=	../../../src_samples/berkeleydb
+
+####################### PLATFORM DEPENDENCIES #####################
+CMP= -c ${CXXFLAGS}
+CC= ${COMPILER} -c -D${PLATFORM} -fpic
+LINK = ${COMPILER} -D${PLATFORM} -fpic ${LDFLAGS}
+PLATFORM_LIB_LINK_OPTIONS=-L/usr/local/lib
+EXTRA_LINK_OPTIONS=${EXTRA_LIBS}
+
+ifneq (${THREADS},none)
+	CMP += -D_REENTRANT
+endif
+
+################## PROGRAM ##################
+APP_NAME=DatabaseLoad
+
+OUTDIR= ${OUTSAMPLES}/bin/obj/${APP_NAME}
+SRCDIR= ${SRCSAMPLES}/${APP_NAME}
+EXEC=	${OUTSAMPLES}/bin
+OBJS=	${OUTDIR}/MyDb.o ${OUTDIR}/excxx_example_database_load.o
+
+all: makedir ${EXEC}/${APP_NAME}
+
+makedir:
+	-mkdir -p $(OUTDIR)
+
+${EXEC}/${APP_NAME}: ${OBJS}
+	${LINK} ${PLATFORM_LIB_LINK_OPTIONS} ${OBJS} -o $@ ${LIBRARY_NAMES} ${EXTRA_LINK_OPTIONS}
+
+$(OUTDIR)/MyDb.o:
+	${CC} ${INCLUDES} ${CMP} -o $(OUTDIR)/MyDb.o ${SRCDIR}/MyDb.cpp
+
+$(OUTDIR)/excxx_example_database_load.o:
+	${CC} ${INCLUDES} ${CMP} -o $(OUTDIR)/excxx_example_database_load.o ${SRCDIR}/excxx_example_database_load.cpp
+
+clean:
+	rm -f ${OBJS} ${EXEC}/${APP_NAME}

@@ -1,0 +1,64 @@
+#
+# Copyright © 2010 Didier Corbiere
+#
+# Distributable under the terms of the GNU Lesser General Public License,
+# as specified in the LICENSE file.
+#
+# Makefile Icu samples Collation
+#
+# This makefile is an alternative to cmake
+#
+
+PLATFORM = LINUX
+COMPILER = g++
+CXXVER = 
+GCC = yes
+GXX = yes
+CXXFLAGS = -w -O2 -DNDEBUG -DXML_USE_PTHREADS
+CFLAGS = -w -O2 -DNDEBUG -DXML_USE_PTHREADS
+LDFLAGS =
+THREADS = pthread
+EXTRA_LIBS = -lpthread
+PREFIX = /usr/local
+
+################## LIBRARY NAMES AND DIRECTORIES ##################
+
+INCLUDES= -I. -I/usr/local/include
+LIBRARY_NAMES=-licudata -licui18n -licuio -licuuc
+LIBRARY_SEARCH_PATHS=-L/usr/local/lib
+
+OUTSAMPLES=../../../out_samples/icu
+SRCSAMPLES=	../../../src_samples/icu
+
+####################### PLATFORM DEPENDENCIES #####################
+CMP= -c ${CXXFLAGS}
+CC= ${COMPILER} -c -D${PLATFORM} -fpic
+LINK = ${COMPILER} -D${PLATFORM} -fpic ${LDFLAGS}
+PLATFORM_LIB_LINK_OPTIONS=-L/usr/local/lib
+EXTRA_LINK_OPTIONS=${EXTRA_LIBS}
+
+ifneq (${THREADS},none)
+	CMP += -D_REENTRANT
+endif
+
+################## PROGRAM ##################
+APP_NAME=Collation
+
+OUTDIR= ${OUTSAMPLES}/bin/obj/${APP_NAME}
+SRCDIR= ${SRCSAMPLES}/${APP_NAME}
+EXEC=	${OUTSAMPLES}/bin
+OBJS=	${OUTDIR}/Collation.o
+
+all: makedir ${EXEC}/${APP_NAME}
+
+makedir:
+	-mkdir -p $(OUTDIR)
+
+${EXEC}/${APP_NAME}: ${OBJS}
+	${LINK} ${PLATFORM_LIB_LINK_OPTIONS} ${OBJS} -o $@ ${LIBRARY_SEARCH_PATHS} ${LIBRARY_NAMES} ${EXTRA_LINK_OPTIONS}
+
+$(OUTDIR)/Collation.o:
+	${CC} ${INCLUDES} ${CMP} -o $(OUTDIR)/Collation.o ${SRCDIR}/Collation.cpp
+
+clean:
+	rm -f ${OBJS} ${EXEC}/${APP_NAME}
