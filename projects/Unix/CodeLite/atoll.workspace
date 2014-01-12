@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Workspace Name="atoll" Database="./atoll.tags">
+  <Project Name="atoll_plugin_xmlexec" Path="./atoll_plugin_xmlexec.project" Active="No"/>
+  <Project Name="atoll_engine" Path="./atoll_engine.project" Active="Yes"/>
+  <Project Name="atoll_console" Path="./atoll_console.project" Active="No"/>
+  <Project Name="atoll_plugin_xslt" Path="./atoll_plugin_xslt.project" Active="No"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="no">
+      <Project Name="atoll_plugin_xslt" ConfigName="Debug"/>
+      <Project Name="atoll_plugin_xmlexec" ConfigName="Debug"/>
+      <Project Name="atoll_engine" ConfigName="Debug"/>
+      <Project Name="atoll_console" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Project Name="atoll_plugin_xslt" ConfigName="Release"/>
+      <Project Name="atoll_plugin_xmlexec" ConfigName="Release"/>
+      <Project Name="atoll_engine" ConfigName="Release"/>
+      <Project Name="atoll_console" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

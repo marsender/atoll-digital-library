@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Project Name="atoll_engine">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
+    </Plugin>
+  </Plugins>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="common">
+    <File Name="../../../src/common/AppAssert.cpp"/>
+    <File Name="../../../src/common/AppAssert.hpp"/>
+    <File Name="../../../src/common/AppException.cpp"/>
+    <File Name="../../../src/common/AppException.hpp"/>
+    <File Name="../../../src/common/BinaryBuffer.cpp"/>
+    <File Name="../../../src/common/BinaryBuffer.hpp"/>
+    <File Name="../../../src/common/Containers.cpp"/>
+    <File Name="../../../src/common/Containers.hpp"/>
+    <File Name="../../../src/common/EnumString.hpp"/>
+    <File Name="../../../src/common/FileSystem.cpp"/>
+    <File Name="../../../src/common/FileSystem.hpp"/>
+    <File Name="../../../src/common/FileSystemWin32.hpp"/>
+    <File Name="../../../src/common/LibExport.hpp"/>
+    <File Name="../../../src/common/Logger.cpp"/>
+    <File Name="../../../src/common/Logger.hpp"/>
+    <File Name="../../../src/common/StdString.cpp"/>
+    <File Name="../../../src/common/StdString.hpp"/>
+    <File Name="../../../src/common/Trace.cpp"/>
+    <File Name="../../../src/common/Trace.hpp"/>
+    <File Name="../../../src/common/UnicodeUtil.cpp"/>
+    <File Name="../../../src/common/UnicodeUtil.hpp"/>
+    <File Name="../../../src/common/UnitTest.cpp"/>
+    <File Name="../../../src/common/UnitTest.hpp"/>
+    <File Name="../../../src/common/Util.cpp"/>
+    <File Name="../../../src/common/Util.hpp"/>
+    <File Name="../../../src/common/XercesBaseHandler.cpp"/>
+    <File Name="../../../src/common/XercesBaseHandler.hpp"/>
+    <File Name="../../../src/common/XercesCatalogResolver.cpp"/>
+    <File Name="../../../src/common/XercesCatalogResolver.hpp"/>
+    <File Name="../../../src/common/XercesEntityResolver.cpp"/>
+    <File Name="../../../src/common/XercesEntityResolver.hpp"/>
+    <File Name="../../../src/common/XercesNode.cpp"/>
+    <File Name="../../../src/common/XercesNode.hpp"/>
+    <File Name="../../../src/common/XercesParser.cpp"/>
+    <File Name="../../../src/common/XercesParser.hpp"/>
+    <File Name="../../../src/common/XercesString.cpp"/>
+    <File Name="../../../src/common/XercesString.hpp"/>
+    <File Name="../../../src/common/Zlib.cpp"/>
+    <File Name="../../../src/common/Zlib.hpp"/>
+    <File Name="../../../src/common/BufUtil.hpp"/>
+    <File Name="../../../src/common/Md5.cpp"/>
+    <File Name="../../../src/common/Md5.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="database">
+    <File Name="../../../src/database/DbColMeta.cpp"/>
+    <File Name="../../../src/database/DbColMeta.hpp"/>
+    <File Name="../../../src/database/DbCursor.cpp"/>
+    <File Name="../../../src/database/DbCursor.hpp"/>
+    <File Name="../../../src/database/DbDoc.cpp"/>
+    <File Name="../../../src/database/DbDoc.hpp"/>
+    <File Name="../../../src/database/DbDocMeta.cpp"/>
+    <File Name="../../../src/database/DbDocMeta.hpp"/>
+    <File Name="../../../src/database/DbFieldMeta.cpp"/>
+    <File Name="../../../src/database/DbFieldMeta.hpp"/>
+    <File Name="../../../src/database/DbManager.cpp"/>
+    <File Name="../../../src/database/DbManager.hpp"/>
+    <File Name="../../../src/database/DbMap.cpp"/>
+    <File Name="../../../src/database/DbMap.hpp"/>
+    <File Name="../../../src/database/DbNdx.cpp"/>
+    <File Name="../../../src/database/DbNdx.hpp"/>
+    <File Name="../../../src/database/DbUtil.cpp"/>
+    <File Name="../../../src/database/DbUtil.hpp"/>
+    <File Name="../../../src/database/DbWrapper.cpp"/>
+    <File Name="../../../src/database/DbWrapper.hpp"/>
+    <File Name="../../../src/database/DbSearchRecord.cpp"/>
+    <File Name="../../../src/database/DbSearchRecord.hpp"/>
+    <File Name="../../../src/database/DbBlob.cpp"/>
+    <File Name="../../../src/database/DbBlob.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="engine">
+    <File Name="../../../src/engine/App.cpp"/>
+    <File Name="../../../src/engine/App.hpp"/>
+    <File Name="../../../src/engine/EngineApi.cpp"/>
+    <File Name="../../../src/engine/EngineApi.hpp"/>
+    <File Name="../../../src/engine/EngineEnv.cpp"/>
+    <File Name="../../../src/engine/EngineEnv.hpp"/>
+    <File Name="../../../src/engine/EngineLib.cpp"/>
+    <File Name="../../../src/engine/EngineLib.hpp"/>
+    <File Name="../../../src/engine/InitStringDecl.cpp"/>
+    <File Name="../../../src/engine/InitStringDecl.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="indexer">
+    <File Name="../../../src/indexer/Indexer.cpp"/>
+    <File Name="../../../src/indexer/Indexer.hpp"/>
+    <File Name="../../../src/indexer/IndexerConfig.cpp"/>
+    <File Name="../../../src/indexer/IndexerConfig.hpp"/>
+    <File Name="../../../src/indexer/IndexerConfigNode.cpp"/>
+    <File Name="../../../src/indexer/IndexerConfigNode.hpp"/>
+    <File Name="../../../src/indexer/IndexerConfigParam.cpp"/>
+    <File Name="../../../src/indexer/IndexerConfigParam.hpp"/>
+    <File Name="../../../src/indexer/IndexerItem.cpp"/>
+    <File Name="../../../src/indexer/IndexerItem.hpp"/>
+    <File Name="../../../src/indexer/IndexerNode.cpp"/>
+    <File Name="../../../src/indexer/IndexerNode.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="parser">
+    <File Name="../../../src/parser/AdornerHandler.cpp"/>
+    <File Name="../../../src/parser/AdornerHandler.hpp"/>
+    <File Name="../../../src/parser/IndexerConfigHandler.cpp"/>
+    <File Name="../../../src/parser/IndexerConfigHandler.hpp"/>
+    <File Name="../../../src/parser/IndexerHandler.cpp"/>
+    <File Name="../../../src/parser/IndexerHandler.hpp"/>
+    <File Name="../../../src/parser/Parser.cpp"/>
+    <File Name="../../../src/parser/Parser.hpp"/>
+    <File Name="../../../src/parser/RecordBreakerConfigHandler.cpp"/>
+    <File Name="../../../src/parser/RecordBreakerConfigHandler.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="tokenizer">
+    <File Name="../../../src/tokenizer/Token.cpp"/>
+    <File Name="../../../src/tokenizer/Token.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="unittest">
+    <File Name="../../../src/unittest/AdornerDecoratorTest.cpp"/>
+    <File Name="../../../src/unittest/AdornerHandlerTest.cpp"/>
+    <File Name="../../../src/unittest/AdornerTest.cpp"/>
+    <File Name="../../../src/unittest/BasicTest.cpp"/>
+    <File Name="../../../src/unittest/CollectionTest.cpp"/>
+    <File Name="../../../src/unittest/ColManagerTest.cpp"/>
+    <File Name="../../../src/unittest/ColMetaTest.cpp"/>
+    <File Name="../../../src/unittest/DbColMetaTest.cpp"/>
+    <File Name="../../../src/unittest/DbDocMetaTest.cpp"/>
+    <File Name="../../../src/unittest/DbDocTest.cpp"/>
+    <File Name="../../../src/unittest/DbFieldMetaTest.cpp"/>
+    <File Name="../../../src/unittest/DbManagerTest.cpp"/>
+    <File Name="../../../src/unittest/DbMapTest.cpp"/>
+    <File Name="../../../src/unittest/DbNdxTest.cpp"/>
+    <File Name="../../../src/unittest/DocMetaTest.cpp"/>
+    <File Name="../../../src/unittest/DocRecordTest.cpp"/>
+    <File Name="../../../src/unittest/EntryTest.cpp"/>
+    <File Name="../../../src/unittest/EnumStringTest.cpp"/>
+    <File Name="../../../src/unittest/FileSystemTest.cpp"/>
+    <File Name="../../../src/unittest/IndexerHandlerTest.cpp"/>
+    <File Name="../../../src/unittest/IndexerItemTest.cpp"/>
+    <File Name="../../../src/unittest/IndexerTest.cpp"/>
+    <File Name="../../../src/unittest/ParserTest.cpp"/>
+    <File Name="../../../src/unittest/PluginXmlExecTest.cpp"/>
+    <File Name="../../../src/unittest/PluginXsltTest.cpp"/>
+    <File Name="../../../src/unittest/RecordBreakerTest.cpp"/>
+    <File Name="../../../src/unittest/StdStringTest.cpp"/>
+    <File Name="../../../src/unittest/UnicodeUtilTest.cpp"/>
+    <File Name="../../../src/unittest/UnitTestSuites.cpp"/>
+    <File Name="../../../src/unittest/XercesTest.cpp"/>
+    <File Name="../../../src/unittest/ZlibTest.cpp"/>
+    <File Name="../../../src/unittest/QueryParserTest.cpp"/>
+    <File Name="../../../src/unittest/SearcherTest.cpp"/>
+    <File Name="../../../src/unittest/DbSearchRecordTest.cpp"/>
+    <File Name="../../../src/unittest/Md5Test.cpp"/>
+    <File Name="../../../src/unittest/DbBlobTest.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="util">
+    <File Name="../../../src/util/ColMeta.cpp"/>
+    <File Name="../../../src/util/ColMeta.hpp"/>
+    <File Name="../../../src/util/DocMeta.cpp"/>
+    <File Name="../../../src/util/DocMeta.hpp"/>
+    <File Name="../../../src/util/DocRecord.cpp"/>
+    <File Name="../../../src/util/DocRecord.hpp"/>
+    <File Name="../../../src/util/Entry.cpp"/>
+    <File Name="../../../src/util/Entry.hpp"/>
+    <File Name="../../../src/util/FieldMeta.cpp"/>
+    <File Name="../../../src/util/FieldMeta.hpp"/>
+    <File Name="../../../src/util/SearchCrit.cpp"/>
+    <File Name="../../../src/util/SearchCrit.hpp"/>
+    <File Name="../../../src/util/WordEntries.cpp"/>
+    <File Name="../../../src/util/WordEntries.hpp"/>
+    <File Name="../../../src/util/WordEntry.cpp"/>
+    <File Name="../../../src/util/WordEntry.hpp"/>
+    <File Name="../../../src/util/WordInt.cpp"/>
+    <File Name="../../../src/util/WordInt.hpp"/>
+    <File Name="../../../src/util/SearchRecord.cpp"/>
+    <File Name="../../../src/util/SearchRecord.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="plugin">
+    <File Name="../../../src/plugin/Plugin.cpp"/>
+    <File Name="../../../src/plugin/Plugin.hpp"/>
+    <File Name="../../../src/plugin/PluginKernel.cpp"/>
+    <File Name="../../../src/plugin/PluginKernel.hpp"/>
+    <File Name="../../../src/plugin/PluginMessage.cpp"/>
+    <File Name="../../../src/plugin/PluginMessage.hpp"/>
+    <File Name="../../../src/plugin/PluginServer.cpp"/>
+    <File Name="../../../src/plugin/PluginServer.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="adorner">
+    <File Name="../../../src/adorner/Adorner.cpp"/>
+    <File Name="../../../src/adorner/Adorner.hpp"/>
+    <File Name="../../../src/adorner/AdornerConfig.cpp"/>
+    <File Name="../../../src/adorner/AdornerConfig.hpp"/>
+    <File Name="../../../src/adorner/AdornerDecorator.cpp"/>
+    <File Name="../../../src/adorner/AdornerDecorator.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="recordbreaker">
+    <File Name="../../../src/recordbreaker/RecordBreaker.cpp"/>
+    <File Name="../../../src/recordbreaker/RecordBreaker.hpp"/>
+    <File Name="../../../src/recordbreaker/RecordBreakerConfig.cpp"/>
+    <File Name="../../../src/recordbreaker/RecordBreakerConfig.hpp"/>
+    <File Name="../../../src/recordbreaker/RecordBreakerConfigParam.cpp"/>
+    <File Name="../../../src/recordbreaker/RecordBreakerConfigParam.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="collection">
+    <File Name="../../../src/collection/Collection.cpp"/>
+    <File Name="../../../src/collection/Collection.hpp"/>
+    <File Name="../../../src/collection/ColManager.cpp"/>
+    <File Name="../../../src/collection/ColManager.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="lucene">
+    <File Name="../../../src/lucene/Lucene.hpp"/>
+    <VirtualDirectory Name="analysis">
+      <File Name="../../../src/lucene/analysis/AnalysisHeader.cpp"/>
+      <File Name="../../../src/lucene/analysis/AnalysisHeader.hpp"/>
+      <File Name="../../../src/lucene/analysis/Analyzers.cpp"/>
+      <File Name="../../../src/lucene/analysis/Analyzers.hpp"/>
+      <File Name="../../../src/lucene/analysis/StandardAnalyzer.cpp"/>
+      <File Name="../../../src/lucene/analysis/StandardAnalyzer.hpp"/>
+      <File Name="../../../src/lucene/analysis/StandardFilter.cpp"/>
+      <File Name="../../../src/lucene/analysis/StandardFilter.hpp"/>
+      <File Name="../../../src/lucene/analysis/StandardTokenizer.cpp"/>
+      <File Name="../../../src/lucene/analysis/StandardTokenizer.hpp"/>
+      <File Name="../../../src/lucene/analysis/StandardTokenizerConstants.hpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="index">
+      <File Name="../../../src/lucene/index/SegmentTermEnum.cpp"/>
+      <File Name="../../../src/lucene/index/SegmentTermEnum.hpp"/>
+      <File Name="../../../src/lucene/index/Term.cpp"/>
+      <File Name="../../../src/lucene/index/Term.hpp"/>
+      <File Name="../../../src/lucene/index/Terms.cpp"/>
+      <File Name="../../../src/lucene/index/Terms.hpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="queryparser">
+      <File Name="../../../src/lucene/queryparser/Lexer.cpp"/>
+      <File Name="../../../src/lucene/queryparser/Lexer.hpp"/>
+      <File Name="../../../src/lucene/queryparser/QueryParser.cpp"/>
+      <File Name="../../../src/lucene/queryparser/QueryParser.hpp"/>
+      <File Name="../../../src/lucene/queryparser/QueryParserBase.cpp"/>
+      <File Name="../../../src/lucene/queryparser/QueryParserBase.hpp"/>
+      <File Name="../../../src/lucene/queryparser/QueryToken.cpp"/>
+      <File Name="../../../src/lucene/queryparser/QueryToken.hpp"/>
+      <File Name="../../../src/lucene/queryparser/TokenList.cpp"/>
+      <File Name="../../../src/lucene/queryparser/TokenList.hpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="search">
+      <File Name="../../../src/lucene/search/BooleanClause.cpp"/>
+      <File Name="../../../src/lucene/search/BooleanClause.hpp"/>
+      <File Name="../../../src/lucene/search/BooleanQuery.cpp"/>
+      <File Name="../../../src/lucene/search/BooleanQuery.hpp"/>
+      <File Name="../../../src/lucene/search/FilteredTermEnum.cpp"/>
+      <File Name="../../../src/lucene/search/FilteredTermEnum.hpp"/>
+      <File Name="../../../src/lucene/search/FuzzyQuery.cpp"/>
+      <File Name="../../../src/lucene/search/FuzzyQuery.hpp"/>
+      <File Name="../../../src/lucene/search/FuzzyTermEnum.cpp"/>
+      <File Name="../../../src/lucene/search/FuzzyTermEnum.hpp"/>
+      <File Name="../../../src/lucene/search/MultiTermQuery.cpp"/>
+      <File Name="../../../src/lucene/search/MultiTermQuery.hpp"/>
+      <File Name="../../../src/lucene/search/PhraseQuery.cpp"/>
+      <File Name="../../../src/lucene/search/PhraseQuery.hpp"/>
+      <File Name="../../../src/lucene/search/PrefixQuery.cpp"/>
+      <File Name="../../../src/lucene/search/PrefixQuery.hpp"/>
+      <File Name="../../../src/lucene/search/Query.cpp"/>
+      <File Name="../../../src/lucene/search/Query.hpp"/>
+      <File Name="../../../src/lucene/search/RangeQuery.cpp"/>
+      <File Name="../../../src/lucene/search/RangeQuery.hpp"/>
+      <File Name="../../../src/lucene/search/TermQuery.cpp"/>
+      <File Name="../../../src/lucene/search/TermQuery.hpp"/>
+      <File Name="../../../src/lucene/search/WildcardQuery.cpp"/>
+      <File Name="../../../src/lucene/search/WildcardQuery.hpp"/>
+      <File Name="../../../src/lucene/search/WildcardTermEnum.cpp"/>
+      <File Name="../../../src/lucene/search/WildcardTermEnum.hpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="util">
+      <File Name="../../../src/lucene/util/Array.hpp"/>
+      <File Name="../../../src/lucene/util/Arrays.hpp"/>
+      <File Name="../../../src/lucene/util/Equators.cpp"/>
+      <File Name="../../../src/lucene/util/Equators.hpp"/>
+      <File Name="../../../src/lucene/util/FastCharStream.cpp"/>
+      <File Name="../../../src/lucene/util/FastCharStream.hpp"/>
+      <File Name="../../../src/lucene/util/Misc.cpp"/>
+      <File Name="../../../src/lucene/util/Misc.hpp"/>
+      <File Name="../../../src/lucene/util/Reader.cpp"/>
+      <File Name="../../../src/lucene/util/Reader.hpp"/>
+      <File Name="../../../src/lucene/util/RefCount.hpp"/>
+      <File Name="../../../src/lucene/util/StreamBase.hpp"/>
+      <File Name="../../../src/lucene/util/StringBuffer.cpp"/>
+      <File Name="../../../src/lucene/util/StringBuffer.hpp"/>
+      <File Name="../../../src/lucene/util/StringReader.hpp"/>
+      <File Name="../../../src/lucene/util/VoidList.hpp"/>
+      <File Name="../../../src/lucene/util/VoidMap.hpp"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <VirtualDirectory Name="searcher">
+    <File Name="../../../src/searcher/QueryResolver.cpp"/>
+    <File Name="../../../src/searcher/QueryResolver.hpp"/>
+    <File Name="../../../src/searcher/Searcher.cpp"/>
+    <File Name="../../../src/searcher/Searcher.hpp"/>
+  </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
+  <Settings Type="Dynamic Library">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="" Assembler="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;-fpic;-Wall" C_Options="-g;-fpic;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <Preprocessor Value="XML_USE_PTHREADS"/>
+        <Preprocessor Value="DEF_EnableAsserts"/>
+      </Compiler>
+      <Linker Options="" Required="yes">
+        <Library Value="pthread"/>
+        <Library Value="z"/>
+        <Library Value="dl"/>
+        <Library Value="db_cxx"/>
+        <Library Value="cppunit"/>
+        <Library Value="icudata"/>
+        <Library Value="icui18n"/>
+        <Library Value="icuio"/>
+        <Library Value="icuuc"/>
+        <Library Value="xerces-c"/>
+      </Linker>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="./$(ConfigurationName)/lib$(ProjectName).so" IntermediateDirectory="./build/$(ProjectName)/$(ConfigurationName)" Command="./unix/$(ConfigurationName)/atoll_console" CommandArguments="-v -j test -l ./data_unittest/_atoll.log" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory=".." PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild>
+        <Command Enabled="no">#sudo cp ./$(ConfigurationName)/lib$(ProjectName).so /usr/local/lib/</Command>
+        <Command Enabled="no">#sudo ldconfig</Command>
+      </PostBuild>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-fpic;-Wall" C_Options="-fpic;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <Preprocessor Value="XML_USE_PTHREADS"/>
+      </Compiler>
+      <Linker Options="-O2" Required="yes">
+        <Library Value="z"/>
+        <Library Value="dl"/>
+        <Library Value="db_cxx"/>
+        <Library Value="cppunit"/>
+        <Library Value="icudata"/>
+        <Library Value="icui18n"/>
+        <Library Value="icuio"/>
+        <Library Value="icuuc"/>
+        <Library Value="xerces-c"/>
+      </Linker>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="./$(ConfigurationName)/lib$(ProjectName).so" IntermediateDirectory="./build/$(ProjectName)/$(ConfigurationName)" Command="./unix/$(ConfigurationName)/atoll_console" CommandArguments="-v -j test -l ./data_unittest/_atoll.log" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory=".." PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild>
+        <Command Enabled="yes">sudo cp ./$(ConfigurationName)/lib$(ProjectName).so /usr/local/lib/</Command>
+        <Command Enabled="yes">sudo apache2ctl stop; sleep 1; sudo ldconfig; sudo apache2ctl start</Command>
+      </PostBuild>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+</CodeLite_Project>
