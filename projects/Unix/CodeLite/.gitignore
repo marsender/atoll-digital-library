@@ -1,0 +1,8 @@
+build/
+Release/
+Makefile
+*.mk
+atoll_console.txt
+atoll_engine.txt
+atoll_plugin_xmlexec.txt
+atoll_plugin_xslt.txt
