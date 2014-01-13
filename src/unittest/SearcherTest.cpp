@@ -456,7 +456,6 @@ void SearcherTest::testSearcherPhraseSlop(void)
 	CPPUNIT_ASSERT(entrySet == *(mSearcher->GetEntrySet()));
 
 	// Add a new word and entry
-	//entrySet.clear();
 	e.Set(1, 1, 50);
 	word = "test4";
 	mDbNdx->AddWordEntry(word, e);
@@ -467,6 +466,14 @@ void SearcherTest::testSearcherPhraseSlop(void)
 	mSearcher->SetQuery(cStrField, uStr);
 	mSearcher->Compute();
 	CPPUNIT_ASSERT(entrySet == *(mSearcher->GetEntrySet()));
+
+	// Search the database
+	/*entrySet.clear();
+	strQuery = "\"test1 test2 test3 test4\"~3";
+	uStr = strQuery.getTerminatedBuffer();
+	mSearcher->SetQuery(cStrField, uStr);
+	mSearcher->Compute();
+	CPPUNIT_ASSERT(entrySet == *(mSearcher->GetEntrySet()));*/
 }
 //------------------------------------------------------------------------------
 

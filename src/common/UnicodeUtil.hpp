@@ -29,7 +29,7 @@ void Char2UnicodeString(UnicodeString &outStr, const char *inStr, int32_t inLeng
 //! Convert an unicode buffer to string. Cannot be used with accentuated strings !
 void UChar2String(std::string &outStr, const UChar *inStr, int32_t inLength = -1);
 
-//! Convert an unicode string to string. Cannot be used with accentuated strings !
+//! Convert an unicode string to string
 DEF_Export std::string UnicodeString2String(const UnicodeString &inStr);
 
 //! Scan an integer in an unicode buffer
