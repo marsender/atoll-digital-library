@@ -28,8 +28,8 @@ PREFIX = /usr/local
 INCLUDES= -I.
 LIBRARY_NAMES=-ldb_cxx
 
-OUTSAMPLES=../../../out_samples/berkeleydb
-SRCSAMPLES=	../../../src_samples/berkeleydb
+OUTSAMPLES= ./out/berkeleydb
+SRCSAMPLES=	../../../src/samples/berkeleydb
 
 ####################### PLATFORM DEPENDENCIES #####################
 CMP= -c ${CXXFLAGS}

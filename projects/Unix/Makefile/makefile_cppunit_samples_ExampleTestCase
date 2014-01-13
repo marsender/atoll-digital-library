@@ -27,8 +27,8 @@ INCLUDES= -I. -I/usr/local/include
 LIBRARY_NAMES=-lcppunit -ldl
 LIBRARY_SEARCH_PATHS=-L/usr/local/lib
 
-OUTSAMPLES=../../../out_samples/cppunit
-SRCSAMPLES=	../../../src_samples/cppunit
+OUTSAMPLES= ./out/cppunit
+SRCSAMPLES=	../../../src/samples/cppunit
 
 ####################### PLATFORM DEPENDENCIES #####################
 CMP= -c ${CXXFLAGS}

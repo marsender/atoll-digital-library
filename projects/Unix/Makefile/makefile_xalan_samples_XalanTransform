@@ -27,8 +27,8 @@ INCLUDES= -I. -I/usr/local/include
 LIBRARY_NAMES=-lxerces-c -lxalan-c
 LIBRARY_SEARCH_PATHS=-L/usr/local/lib
 
-OUTSAMPLES=../../../out_samples/xalan
-SRCSAMPLES= ../../../src_samples/xalan
+OUTSAMPLES= ./out/xalan
+SRCSAMPLES= ../../../src/samples/xalan
 
 ####################### PLATFORM DEPENDENCIES #####################
 CMP= -c ${CXXFLAGS}

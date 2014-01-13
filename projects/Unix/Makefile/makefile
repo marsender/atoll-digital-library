@@ -270,7 +270,7 @@ install:
 	sudo apache2ctl stop; sleep 1; sudo ldconfig; sudo apache2ctl start
 
 test:
-	cd ..; out/atoll/bin/atoll_console -j test -l ./data_unittest/_atoll.log
+	cd ../../..; ${BININSTALLDIR}/${CONSOLE_NAME} -j test -l ./data_unittest/_atoll.log
 
 clean:
 	rm -f ${ENGINE_OBJS} ${BINOUTDIR}/${ENGINE_LIBNAME}

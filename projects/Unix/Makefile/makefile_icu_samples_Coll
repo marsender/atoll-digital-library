@@ -27,8 +27,8 @@ INCLUDES= -I. -I/usr/local/include
 LIBRARY_NAMES=-licudata -licui18n -licuio -licuuc
 LIBRARY_SEARCH_PATHS=-L/usr/local/lib
 
-OUTSAMPLES=../../../out_samples/icu
-SRCSAMPLES=	../../../src_samples/icu
+OUTSAMPLES= ./out/icu
+SRCSAMPLES=	../../../src/samples/icu
 
 ####################### PLATFORM DEPENDENCIES #####################
 CMP= -c ${CXXFLAGS}

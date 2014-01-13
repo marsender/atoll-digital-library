@@ -27,8 +27,8 @@ INCLUDES= -I. -I/usr/local/include
 LIBRARY_NAMES=-lxerces-c
 LIBRARY_SEARCH_PATHS=-L/usr/local/lib
 
-OUTSAMPLES=../../../out_samples/xerces
-SRCSAMPLES= ../../../src_samples/xerces
+OUTSAMPLES= ./out/xerces
+SRCSAMPLES= ../../../src/samples/xerces
 
 ####################### PLATFORM DEPENDENCIES #####################
 CMP= -c ${CXXFLAGS}

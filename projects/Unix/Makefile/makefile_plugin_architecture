@@ -26,9 +26,10 @@ PREFIX = /usr/local
 INCLUDES= -I. -I/usr/local/include
 LIBRARY_NAMES=-ldl
 
-SRCDIR= ../../../src_samples/plugin_architecture
 INSTALLDIR= /usr/local/lib
-BINOUTDIR= ../../../out_samples/plugin_architecture/bin
+OUTSAMPLES= ./out/pluginarchitecture/bin
+SRCSAMPLES= ../../../src/samples/pluginarchitecture
+#LIBRARY_PATH=${OUTSAMPLES}
 
 ####################### PLATFORM DEPENDENCIES #####################
 CMP= -c ${CXXFLAGS}
@@ -44,33 +45,33 @@ endif
 ################## PROGRAM ##################
 
 APP_NAME=myapplication
-APP_OUTDIR= ${BINOUTDIR}/obj/${APP_NAME}
-APP_SRCDIR= ${SRCDIR}/${APP_NAME}
+APP_OUTDIR= ${OUTSAMPLES}/obj/${APP_NAME}
+APP_SRCDIR= ${SRCSAMPLES}/${APP_NAME}
 APP_OBJS= ${APP_OUTDIR}/myapplication.o
 
 ENGINE_NAME=myengine
 ENGINE_LIBNAME=lib${ENGINE_NAME}.so
-ENGINE_OUTDIR= ${BINOUTDIR}/obj/${ENGINE_NAME}
-ENGINE_SRCDIR= ${SRCDIR}/${ENGINE_NAME}
+ENGINE_OUTDIR= ${OUTSAMPLES}/obj/${ENGINE_NAME}
+ENGINE_SRCDIR= ${SRCSAMPLES}/${ENGINE_NAME}
 ENGINE_OBJS= \
 	${ENGINE_OUTDIR}/Engine.o \
 	${ENGINE_OUTDIR}/Plugin.o \
 	${ENGINE_OUTDIR}/PluginKernel.o \
 
-OPENGL_NAME=opengl_plugin
+OPENGL_NAME=openglplugin
 OPENGL_LIBNAME=lib${OPENGL_NAME}.so
-OPENGL_OUTDIR= ${BINOUTDIR}/obj/${OPENGL_NAME}
-OPENGL_SRCDIR= ${SRCDIR}/${OPENGL_NAME}
+OPENGL_OUTDIR= ${OUTSAMPLES}/obj/${OPENGL_NAME}
+OPENGL_SRCDIR= ${SRCSAMPLES}/${OPENGL_NAME}
 OPENGL_OBJS= \
-	${OPENGL_OUTDIR}/opengl_plugin.o \
+	${OPENGL_OUTDIR}/OpenglPlugin.o \
 
-ZIP_NAME=zip_plugin
+ZIP_NAME=zipplugin
 ZIP_LIBNAME=lib${ZIP_NAME}.so
-ZIP_OUTDIR= ${BINOUTDIR}/obj/${ZIP_NAME}
-ZIP_SRCDIR= ${SRCDIR}/${ZIP_NAME}
-ZIP_OBJS= ${ZIP_OUTDIR}/zip_plugin.o
+ZIP_OUTDIR= ${OUTSAMPLES}/obj/${ZIP_NAME}
+ZIP_SRCDIR= ${SRCSAMPLES}/${ZIP_NAME}
+ZIP_OBJS= ${ZIP_OUTDIR}/ZipPlugin.o
 
-all: makedir myengine myapplication opengl_plugin zip_plugin
+all: makedir myengine myapplication openglplugin zipplugin
 
 makedir:
 	-mkdir -p ${APP_OUTDIR}
@@ -78,33 +79,33 @@ makedir:
 	-mkdir -p ${OPENGL_OUTDIR}
 	-mkdir -p ${ZIP_OUTDIR}
 
-install: myengine opengl_plugin zip_plugin
+install: myengine openglplugin zipplugin
 	rm -f ${INSTALLDIR}/${ENGINE_LIBNAME}
-	cp ${BINOUTDIR}/${ENGINE_LIBNAME} ${INSTALLDIR}
+	cp ${OUTSAMPLES}/${ENGINE_LIBNAME} ${INSTALLDIR}
 	rm -f ${INSTALLDIR}/${OPENGL_LIBNAME}
-	cp ${BINOUTDIR}/${OPENGL_LIBNAME} ${INSTALLDIR}
+	cp ${OUTSAMPLES}/${OPENGL_LIBNAME} ${INSTALLDIR}
 	rm -f ${INSTALLDIR}/${ZIP_LIBNAME}
-	cp ${BINOUTDIR}/${ZIP_LIBNAME} ${INSTALLDIR}
+	cp ${OUTSAMPLES}/${ZIP_LIBNAME} ${INSTALLDIR}
 	ldconfig
 
 test:
-	${BINOUTDIR}/${APP_NAME}
+	${OUTSAMPLES}/${APP_NAME}
 
 # APP
 myapplication: ${APP_OBJS}
-	${LINK} ${PLATFORM_LIB_LINK_OPTIONS} ${APP_OBJS} -o ${BINOUTDIR}/$@ ${EXTRA_LINK_OPTIONS} -l${ENGINE_NAME}
+	${LINK} ${PLATFORM_LIB_LINK_OPTIONS} -L${OUTSAMPLES} ${APP_OBJS} -o ${OUTSAMPLES}/$@ ${EXTRA_LINK_OPTIONS} -l${ENGINE_NAME}
 
 # ENGINE
 myengine: ${ENGINE_OBJS}
-	${LINK} -shared ${PLATFORM_LIB_LINK_OPTIONS} ${ENGINE_OBJS} -o ${BINOUTDIR}/${ENGINE_LIBNAME} ${EXTRA_LINK_OPTIONS} ${LIBRARY_NAMES}
+	${LINK} ${PLATFORM_LIB_LINK_OPTIONS} -shared ${ENGINE_OBJS} -o ${OUTSAMPLES}/${ENGINE_LIBNAME} ${EXTRA_LINK_OPTIONS} ${LIBRARY_NAMES}
 
 # OPENGL
-opengl_plugin: ${OPENGL_OBJS}
-	${LINK} -shared ${PLATFORM_LIB_LINK_OPTIONS} ${OPENGL_OBJS} -o ${BINOUTDIR}/${OPENGL_LIBNAME} ${EXTRA_LINK_OPTIONS}
+openglplugin: ${OPENGL_OBJS}
+	${LINK} ${PLATFORM_LIB_LINK_OPTIONS} -shared ${OPENGL_OBJS} -o ${OUTSAMPLES}/${OPENGL_LIBNAME} ${EXTRA_LINK_OPTIONS}
 
 # ZIP
-zip_plugin: ${ZIP_OBJS}
-	${LINK} -shared ${PLATFORM_LIB_LINK_OPTIONS} ${ZIP_OBJS} -o ${BINOUTDIR}/${ZIP_LIBNAME} ${EXTRA_LINK_OPTIONS}
+zipplugin: ${ZIP_OBJS}
+	${LINK} ${PLATFORM_LIB_LINK_OPTIONS} -shared ${ZIP_OBJS} -o ${OUTSAMPLES}/${ZIP_LIBNAME} ${EXTRA_LINK_OPTIONS}
 
 # myapplication
 ${APP_OUTDIR}/myapplication.o:
@@ -118,16 +119,16 @@ ${ENGINE_OUTDIR}/Plugin.o:
 ${ENGINE_OUTDIR}/PluginKernel.o:
 	${CC} ${INCLUDES} ${CMP} -o ${ENGINE_OUTDIR}/PluginKernel.o ${ENGINE_SRCDIR}/PluginKernel.cpp
 
-# opengl_plugin
-${OPENGL_OUTDIR}/opengl_plugin.o:
-	${CC} ${INCLUDES} ${CMP} -o ${OPENGL_OUTDIR}/opengl_plugin.o ${OPENGL_SRCDIR}/opengl_plugin.cpp
+# openglplugin
+${OPENGL_OUTDIR}/OpenglPlugin.o:
+	${CC} ${INCLUDES} ${CMP} -o ${OPENGL_OUTDIR}/OpenglPlugin.o ${OPENGL_SRCDIR}/OpenglPlugin.cpp
 
-# zip_plugin
-${ZIP_OUTDIR}/zip_plugin.o:
-	${CC} ${INCLUDES} ${CMP} -o ${ZIP_OUTDIR}/zip_plugin.o ${ZIP_SRCDIR}/zip_plugin.cpp
+# zipplugin
+${ZIP_OUTDIR}/ZipPlugin.o:
+	${CC} ${INCLUDES} ${CMP} -o ${ZIP_OUTDIR}/ZipPlugin.o ${ZIP_SRCDIR}/ZipPlugin.cpp
 
 clean:
-	rm -f ${APP_OBJS} ${BINOUTDIR}/${APP_NAME}
-	rm -f ${ENGINE_OBJS} ${BINOUTDIR}/${ENGINE_LIBNAME}
-	rm -f ${OPENGL_OBJS} ${BINOUTDIR}/${OPENGL_LIBNAME}
-	rm -f ${ZIP_OBJS} ${BINOUTDIR}/${ZIP_LIBNAME}
+	rm -f ${APP_OBJS} ${OUTSAMPLES}/${APP_NAME}
+	rm -f ${ENGINE_OBJS} ${OUTSAMPLES}/${ENGINE_LIBNAME}
+	rm -f ${OPENGL_OBJS} ${OUTSAMPLES}/${OPENGL_LIBNAME}
+	rm -f ${ZIP_OBJS} ${OUTSAMPLES}/${ZIP_LIBNAME}
