@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "atoll_console", "atoll_console\atoll_console.vcxproj", "{7E491E17-12C3-4276-BF10-61C4CC8249F6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "atoll_engine", "atoll_engine\atoll_engine.vcxproj", "{725EC715-83F4-43AD-BA4E-68FA593B0103}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "atoll_plugin_xmlexec", "atoll_plugin_xmlexec\atoll_plugin_xmlexec.vcxproj", "{671262E8-0796-401D-BAB5-6D2CB8F6E3EF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "atoll_plugin_xslt", "atoll_plugin_xslt\atoll_plugin_xslt.vcxproj", "{C69589F0-16B4-4B11-9A0D-046A5C953822}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E491E17-12C3-4276-BF10-61C4CC8249F6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7E491E17-12C3-4276-BF10-61C4CC8249F6}.Debug|Win32.Build.0 = Debug|Win32
+		{7E491E17-12C3-4276-BF10-61C4CC8249F6}.Release|Win32.ActiveCfg = Release|Win32
+		{7E491E17-12C3-4276-BF10-61C4CC8249F6}.Release|Win32.Build.0 = Release|Win32
+		{725EC715-83F4-43AD-BA4E-68FA593B0103}.Debug|Win32.ActiveCfg = Debug|Win32
+		{725EC715-83F4-43AD-BA4E-68FA593B0103}.Debug|Win32.Build.0 = Debug|Win32
+		{725EC715-83F4-43AD-BA4E-68FA593B0103}.Release|Win32.ActiveCfg = Release|Win32
+		{725EC715-83F4-43AD-BA4E-68FA593B0103}.Release|Win32.Build.0 = Release|Win32
+		{671262E8-0796-401D-BAB5-6D2CB8F6E3EF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{671262E8-0796-401D-BAB5-6D2CB8F6E3EF}.Debug|Win32.Build.0 = Debug|Win32
+		{671262E8-0796-401D-BAB5-6D2CB8F6E3EF}.Release|Win32.ActiveCfg = Release|Win32
+		{671262E8-0796-401D-BAB5-6D2CB8F6E3EF}.Release|Win32.Build.0 = Release|Win32
+		{C69589F0-16B4-4B11-9A0D-046A5C953822}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C69589F0-16B4-4B11-9A0D-046A5C953822}.Debug|Win32.Build.0 = Debug|Win32
+		{C69589F0-16B4-4B11-9A0D-046A5C953822}.Release|Win32.ActiveCfg = Release|Win32
+		{C69589F0-16B4-4B11-9A0D-046A5C953822}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{725EC715-83F4-43AD-BA4E-68FA593B0103}</ProjectGuid>
+    <RootNamespace>atoll_engine</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PostBuildEventUseInBuild>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(RepDev)/lib/vld/include;$(BERKELEYDBROOT)/build_windows;$(CPPUNITROOT)/include;$(ICUROOT)/include;$(XERCESCROOT)/src;$(XALANCROOT)/src;$(RepDev)/lib/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;DEF_EnableAsserts;DEF_LibExport;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>libdb53d.lib;icuuc.lib;icuin.lib;icuio.lib;cppunitd.lib;xerces-c_3.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(RepDev)/lib/vld/lib;$(BERKELEYDBROOT)/build_windows/Win32/Release;$(CPPUNITROOT)/lib;$(ICUROOT)/lib;$(XERCESCROOT)/lib;$(RepDev)/lib/zlib/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>MSVCRT</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Message>UnitTest...</Message>
+      <Command>$(SolutionDir)\make UnitTest $(Configuration)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(RepDev)/lib/vld/include;$(BERKELEYDBROOT)/build_windows;$(CPPUNITROOT)/include;$(ICUROOT)/include;$(XERCESCROOT)/src;$(XALANCROOT)/src;$(RepDev)/lib/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;DEF_EnableAsserts;DEF_LibExport;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>libdb53.lib;icuuc.lib;icuin.lib;icuio.lib;cppunit.lib;xerces-c_3.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(RepDev)/lib/vld/lib;$(BERKELEYDBROOT)/build_windows/Win32/Release;$(CPPUNITROOT)/lib;$(ICUROOT)/lib;$(XERCESCROOT)/lib;$(RepDev)/lib/zlib/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\common\AppAssert.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\AppException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\BinaryBuffer.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\Containers.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\FileSystem.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\Logger.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\Md5.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\StdString.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\Trace.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\UnicodeUtil.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\UnitTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\Util.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\XercesBaseHandler.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\XercesCatalogResolver.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\XercesEntityResolver.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\XercesNode.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\XercesParser.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\common\XercesString.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\Zlib.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbBlob.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbColMeta.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbCursor.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbDoc.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbDocMeta.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbFieldMeta.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbManager.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbMap.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbNdx.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbSearchRecord.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbUtil.cpp" />
+    <ClCompile Include="..\..\..\..\src\database\DbWrapper.cpp" />
+    <ClCompile Include="..\..\..\..\src\engine\App.cpp" />
+    <ClCompile Include="..\..\..\..\src\engine\EngineApi.cpp" />
+    <ClCompile Include="..\..\..\..\src\engine\EngineEnv.cpp" />
+    <ClCompile Include="..\..\..\..\src\engine\EngineLib.cpp" />
+    <ClCompile Include="..\..\..\..\src\engine\InitStringDecl.cpp" />
+    <ClCompile Include="..\..\..\..\src\indexer\Indexer.cpp" />
+    <ClCompile Include="..\..\..\..\src\indexer\IndexerConfig.cpp" />
+    <ClCompile Include="..\..\..\..\src\indexer\IndexerConfigNode.cpp" />
+    <ClCompile Include="..\..\..\..\src\indexer\IndexerConfigParam.cpp" />
+    <ClCompile Include="..\..\..\..\src\indexer\IndexerItem.cpp" />
+    <ClCompile Include="..\..\..\..\src\indexer\IndexerNode.cpp" />
+    <ClCompile Include="..\..\..\..\src\parser\AdornerHandler.cpp" />
+    <ClCompile Include="..\..\..\..\src\parser\IndexerConfigHandler.cpp" />
+    <ClCompile Include="..\..\..\..\src\parser\IndexerHandler.cpp" />
+    <ClCompile Include="..\..\..\..\src\parser\Parser.cpp" />
+    <ClCompile Include="..\..\..\..\src\parser\RecordBreakerConfigHandler.cpp" />
+    <ClCompile Include="..\..\..\..\src\tokenizer\Token.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\AdornerDecoratorTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\AdornerHandlerTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\AdornerTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\BasicTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\CollectionTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\ColManagerTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\ColMetaTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\DbColMetaTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\DbDocMetaTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\DbDocTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\DbFieldMetaTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\DbManagerTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\DbMapTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\DbNdxTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\DbSearchRecordTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\DocMetaTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\DocRecordTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\EntryTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\EnumStringTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\FileSystemTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\IndexerHandlerTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\IndexerItemTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\IndexerTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\ParserTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\PluginXmlExecTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\PluginXsltTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\QueryParserTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\RecordBreakerTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\SearcherTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\StdStringTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\UnicodeUtilTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\UnitTestSuites.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\XercesTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\unittest\ZlibTest.cpp" />
+    <ClCompile Include="..\..\..\..\src\util\ColMeta.cpp" />
+    <ClCompile Include="..\..\..\..\src\util\DocMeta.cpp" />
+    <ClCompile Include="..\..\..\..\src\util\DocRecord.cpp" />
+    <ClCompile Include="..\..\..\..\src\util\Entry.cpp" />
+    <ClCompile Include="..\..\..\..\src\util\FieldMeta.cpp" />
+    <ClCompile Include="..\..\..\..\src\util\SearchCrit.cpp" />
+    <ClCompile Include="..\..\..\..\src\util\SearchRecord.cpp" />
+    <ClCompile Include="..\..\..\..\src\util\WordEntries.cpp" />
+    <ClCompile Include="..\..\..\..\src\util\WordEntry.cpp" />
+    <ClCompile Include="..\..\..\..\src\util\WordInt.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\Plugin.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\PluginKernel.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\PluginMessage.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\PluginServer.cpp" />
+    <ClCompile Include="..\..\..\..\src\adorner\Adorner.cpp" />
+    <ClCompile Include="..\..\..\..\src\adorner\AdornerConfig.cpp" />
+    <ClCompile Include="..\..\..\..\src\adorner\AdornerDecorator.cpp" />
+    <ClCompile Include="..\..\..\..\src\recordbreaker\RecordBreaker.cpp" />
+    <ClCompile Include="..\..\..\..\src\recordbreaker\RecordBreakerConfig.cpp" />
+    <ClCompile Include="..\..\..\..\src\recordbreaker\RecordBreakerConfigParam.cpp" />
+    <ClCompile Include="..\..\..\..\src\collection\Collection.cpp" />
+    <ClCompile Include="..\..\..\..\src\collection\ColManager.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\queryparser\Lexer.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\queryparser\QueryParser.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\queryparser\QueryParserBase.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\queryparser\QueryToken.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\queryparser\TokenList.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\analysis\AnalysisHeader.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\analysis\Analyzers.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\analysis\StandardAnalyzer.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\analysis\StandardFilter.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\analysis\StandardTokenizer.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\BooleanClause.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\BooleanQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\FilteredTermEnum.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\FuzzyQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\FuzzyTermEnum.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\MultiTermQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\PhraseQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\PrefixQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\Query.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\RangeQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\TermQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\WildcardQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\search\WildcardTermEnum.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\util\Equators.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\util\FastCharStream.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\util\Misc.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\util\Reader.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\util\StringBuffer.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\index\SegmentTermEnum.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\index\Term.cpp" />
+    <ClCompile Include="..\..\..\..\src\lucene\index\Terms.cpp" />
+    <ClCompile Include="..\..\..\..\src\searcher\QueryResolver.cpp" />
+    <ClCompile Include="..\..\..\..\src\searcher\Searcher.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\common\AppAssert.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\AppException.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\BinaryBuffer.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\BufUtil.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\Containers.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\EnumString.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\FileSystem.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\FileSystemWin32.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\LibExport.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\Logger.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\Md5.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\StdString.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\Trace.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\UnicodeUtil.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\UnitTest.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\Util.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\XercesBaseHandler.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\XercesCatalogResolver.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\XercesEntityResolver.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\XercesNode.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\XercesParser.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\XercesString.hpp" />
+    <ClInclude Include="..\..\..\..\src\common\Zlib.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbBlob.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbColMeta.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbCursor.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbDoc.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbDocMeta.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbFieldMeta.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbManager.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbMap.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbNdx.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbSearchRecord.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbUtil.hpp" />
+    <ClInclude Include="..\..\..\..\src\database\DbWrapper.hpp" />
+    <ClInclude Include="..\..\..\..\src\engine\App.hpp" />
+    <ClInclude Include="..\..\..\..\src\engine\EngineApi.hpp" />
+    <ClInclude Include="..\..\..\..\src\engine\EngineEnv.hpp" />
+    <ClInclude Include="..\..\..\..\src\engine\EngineLib.hpp" />
+    <ClInclude Include="..\..\..\..\src\engine\InitStringDecl.hpp" />
+    <ClInclude Include="..\..\..\..\src\indexer\Indexer.hpp" />
+    <ClInclude Include="..\..\..\..\src\indexer\IndexerConfig.hpp" />
+    <ClInclude Include="..\..\..\..\src\indexer\IndexerConfigNode.hpp" />
+    <ClInclude Include="..\..\..\..\src\indexer\IndexerConfigParam.hpp" />
+    <ClInclude Include="..\..\..\..\src\indexer\IndexerItem.hpp" />
+    <ClInclude Include="..\..\..\..\src\indexer\IndexerNode.hpp" />
+    <ClInclude Include="..\..\..\..\src\parser\AdornerHandler.hpp" />
+    <ClInclude Include="..\..\..\..\src\parser\IndexerConfigHandler.hpp" />
+    <ClInclude Include="..\..\..\..\src\parser\IndexerHandler.hpp" />
+    <ClInclude Include="..\..\..\..\src\parser\Parser.hpp" />
+    <ClInclude Include="..\..\..\..\src\parser\RecordBreakerConfigHandler.hpp" />
+    <ClInclude Include="..\..\..\..\src\tokenizer\Token.hpp" />
+    <ClInclude Include="..\..\..\..\src\util\ColMeta.hpp" />
+    <ClInclude Include="..\..\..\..\src\util\DocMeta.hpp" />
+    <ClInclude Include="..\..\..\..\src\util\DocRecord.hpp" />
+    <ClInclude Include="..\..\..\..\src\util\Entry.hpp" />
+    <ClInclude Include="..\..\..\..\src\util\FieldMeta.hpp" />
+    <ClInclude Include="..\..\..\..\src\util\SearchCrit.hpp" />
+    <ClInclude Include="..\..\..\..\src\util\SearchRecord.hpp" />
+    <ClInclude Include="..\..\..\..\src\util\WordEntries.hpp" />
+    <ClInclude Include="..\..\..\..\src\util\WordEntry.hpp" />
+    <ClInclude Include="..\..\..\..\src\util\WordInt.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\Plugin.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\PluginKernel.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\PluginMessage.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\PluginServer.hpp" />
+    <ClInclude Include="..\..\..\..\src\adorner\Adorner.hpp" />
+    <ClInclude Include="..\..\..\..\src\adorner\AdornerConfig.hpp" />
+    <ClInclude Include="..\..\..\..\src\adorner\AdornerDecorator.hpp" />
+    <ClInclude Include="..\..\..\..\src\recordbreaker\RecordBreaker.hpp" />
+    <ClInclude Include="..\..\..\..\src\recordbreaker\RecordBreakerConfig.hpp" />
+    <ClInclude Include="..\..\..\..\src\recordbreaker\RecordBreakerConfigParam.hpp" />
+    <ClInclude Include="..\..\..\..\src\collection\Collection.hpp" />
+    <ClInclude Include="..\..\..\..\src\collection\ColManager.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\Lucene.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\queryparser\Lexer.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\queryparser\QueryParser.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\queryparser\QueryParserBase.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\queryparser\QueryToken.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\queryparser\TokenList.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\analysis\AnalysisHeader.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\analysis\Analyzers.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\analysis\StandardAnalyzer.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\analysis\StandardFilter.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\analysis\StandardTokenizer.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\analysis\StandardTokenizerConstants.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\BooleanClause.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\BooleanQuery.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\FilteredTermEnum.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\FuzzyQuery.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\FuzzyTermEnum.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\MultiTermQuery.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\PhraseQuery.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\PrefixQuery.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\Query.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\RangeQuery.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\TermQuery.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\WildcardQuery.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\search\WildcardTermEnum.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\Array.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\Arrays.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\Equators.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\FastCharStream.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\Misc.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\Reader.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\RefCount.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\StreamBase.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\StringBuffer.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\StringReader.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\VoidList.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\util\VoidMap.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\index\SegmentTermEnum.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\index\Term.hpp" />
+    <ClInclude Include="..\..\..\..\src\lucene\index\Terms.hpp" />
+    <ClInclude Include="..\..\..\..\src\searcher\QueryResolver.hpp" />
+    <ClInclude Include="..\..\..\..\src\searcher\Searcher.hpp" />
+    <ClInclude Include="..\..\..\..\src\Portability.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

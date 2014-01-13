@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{671262E8-0796-401D-BAB5-6D2CB8F6E3EF}</ProjectGuid>
+    <RootNamespace>atoll_plugin_xmlexec</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(RepDev)/lib/vld/include;$(CPPUNITROOT)/include;$(ICUROOT)/include;$(XERCESCROOT)/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;DEF_LibExport;DEF_EnableAsserts;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>icuuc.lib;icuin.lib;icuio.lib;cppunitd.lib;xerces-c_3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(RepDev)/lib/vld/lib;$(CPPUNITROOT)/lib;$(ICUROOT)/lib;$(XERCESCROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(RepDev)/lib/vld/include;$(CPPUNITROOT)/include;$(ICUROOT)/include;$(XERCESCROOT)/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;DEF_LibExport;DEF_EnableAsserts;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>icuuc.lib;icuin.lib;icuio.lib;cppunit.lib;xerces-c_3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(RepDev)/lib/vld/lib;$(CPPUNITROOT)/lib;$(ICUROOT)/lib;$(XERCESCROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\PluginXmlExec.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\XmlExecCmd.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\XmlExecHandler.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\XmlExecParser.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\XmlExecRunner.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\core\XmlReq.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqCol.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqDb.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqDoc.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqIndex.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqInfo.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqInit.cpp" />
+    <ClCompile Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqSearch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\XmlExecCmd.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\XmlExecHandler.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\XmlExecParser.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\XmlExecRunner.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\core\XmlReq.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqCol.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqDb.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqDoc.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqIndex.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqInfo.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqInit.hpp" />
+    <ClInclude Include="..\..\..\..\src\plugin\xmlexec\core\XmlReqSearch.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\atoll_engine\atoll_engine.vcxproj">
+      <Project>{725ec715-83f4-43ad-ba4e-68fa593b0103}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
