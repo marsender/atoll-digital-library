@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Project Name="atoll_console">
   <Plugins>
+    <Plugin Name="CMakePlugin">
+      <![CDATA[[{
+		"name":	"Release",
+		"enabled":	false,
+		"buildDirectory":	"build",
+		"sourceDirectory":	"$(ProjectPath)",
+		"generator":	"",
+		"buildType":	"",
+		"arguments":	[],
+		"parentProject":	""
+	}]]]>
+    </Plugin>
     <Plugin Name="qmake">
       <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
     </Plugin>
@@ -36,7 +48,7 @@
         <Library Value="atoll_engine"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="./$(ConfigurationName)/$(ProjectName)" IntermediateDirectory="./build/$(ProjectName)/$(ConfigurationName)" Command="./unix/$(ConfigurationName)/$(ProjectName)" CommandArguments="-V" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory=".." PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="./$(ConfigurationName)/$(ProjectName)" IntermediateDirectory="./build/$(ProjectName)/$(ConfigurationName)" Command="./unix/$(ConfigurationName)/$(ProjectName)" CommandArguments="-V" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory=".." PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -76,7 +88,7 @@
         <Library Value="atoll_engine"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="./$(ConfigurationName)/$(ProjectName)" IntermediateDirectory="./build/$(ProjectName)/$(ConfigurationName)" Command="./unix/$(ConfigurationName)/$(ProjectName)" CommandArguments="-V" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory=".." PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="./$(ConfigurationName)/$(ProjectName)" IntermediateDirectory="./build/$(ProjectName)/$(ConfigurationName)" Command="./unix/$(ConfigurationName)/$(ProjectName)" CommandArguments="-V" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory=".." PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>

@@ -37,6 +37,7 @@ public:
 	UnicodeString mDocTitle;           //!< Document title
 	UnicodeString mUuid;               //!< Document unique id
 	UnicodeString mXsltCode;           //!< Document stylesheet code
+	std::string mSource;               //!< Document source (file name)
 	std::string mFileName;             //!< Document file name
 	std::string mDcMetadata;           //!< Document Dublin Core metadata file name
 	std::string mIndexerConfig;        //!< Indexer configuration file name

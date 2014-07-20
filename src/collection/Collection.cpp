@@ -480,6 +480,7 @@ bool Collection::SetDocumentMeta(const DocMeta &inDocMeta)
 		gLog.log(eTypLogError, "Err > SetDocumentMeta: Empty doc title");
 		docMeta.mDocTitle = "No title";
 	}
+	docMeta.mSource = inDocMeta.mSource;
 	docMeta.mUuid = inDocMeta.mUuid;
 	docMeta.mXsltCode = inDocMeta.mXsltCode;
 	docMeta.mDcMetadata = inDocMeta.mDcMetadata;

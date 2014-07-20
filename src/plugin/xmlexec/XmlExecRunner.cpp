@@ -311,6 +311,9 @@ void XmlExecRunner::StartNode(const std::string &inElem, const StringToUnicodeSt
 				if (attrName == gXmlTok(eDocNum)) {
 					mDocMeta->mDocNum = UnicodeStringScanULong(it->second);
 				}
+				else if (attrName == gXmlTok(eSource)) {
+					ConvertUnicodeString2String(mDocMeta->mSource, it->second);
+				}
 				else if (attrName == gXmlTok(eCountPge)) {
 					mDocMeta->mCountPge = UnicodeStringScanULong(it->second);
 				}

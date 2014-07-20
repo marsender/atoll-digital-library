@@ -56,7 +56,9 @@ void XmlReqCol::OutputDocMeta(const Atoll::DocMeta &inDocMeta, eXmlCmd inCmd, bo
 		Printf("%s%s<%s %s=\"%u\" %s=\"%lu\" %s=\"", inCmd == eDoc ? DEF_Tab : "", DEF_Tab, gXmlTok(inCmd),
 			gXmlTok(eDocNum), inDocMeta.mDocNum,
 			gXmlTok(eCountPge), inDocMeta.mCountPge,
-			gXmlTok(eFileName));
+			gXmlTok(eSource));
+		OutputStr(inDocMeta.mSource.c_str());
+		Printf("\" %s=\"", gXmlTok(eFileName));
 		OutputStr(inDocMeta.mFileName.c_str());
 		Printf("\" %s=\"", gXmlTok(eDcMetadata));
 		OutputStr(inDocMeta.mDcMetadata.c_str());

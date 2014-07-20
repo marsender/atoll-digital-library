@@ -110,6 +110,7 @@ XmlExecCmd::AssocMap &XmlExecCmd::StaticGetMap()
 	mStaticMap["ColSalt"] = eColSalt;
 	//mStaticMap["DocName"] = eDocName;
 	mStaticMap["DocNum"] = eDocNum;
+	mStaticMap["Source"] = eSource;
 	mStaticMap["CountPge"] = eCountPge;
 	mStaticMap["FileName"] = eFileName;
 	mStaticMap["DcMetadata"] = eDcMetadata;

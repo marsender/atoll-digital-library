@@ -54,6 +54,7 @@ void DocMetaTest::testSerialise(void)
 	UnicodeString title("Document title");
 	UnicodeString uuid("urn:uuid:6A5CF297-6BF9-1014-8A5B-C107EBBCBEE4");
 	UnicodeString xsltCode("docbook-xsl-ns");
+	std::string source("./test.epub");
 	std::string fileName("./test.xml");
 
 	std::string dcMetadata = mPath + "dublincore_test.xml";
@@ -63,6 +64,7 @@ void DocMetaTest::testSerialise(void)
 	// Init record
 	DocMeta dm;
 	dm.mDocNum = num;
+	dm.mSource = source;
 	dm.mCountPge = countPge;
 	dm.mXmlValidation = xmlValidation;
 	dm.mIsIndexed = isIndexed;
@@ -80,6 +82,7 @@ void DocMetaTest::testSerialise(void)
 	dm.FromBinaryBuffer(binaryBuffer);
 
 	CPPUNIT_ASSERT(dm.mDocNum == num);
+	CPPUNIT_ASSERT(dm.mSource == source);
 	CPPUNIT_ASSERT(dm.mCountPge == countPge);
 	CPPUNIT_ASSERT(dm.mXmlValidation == xmlValidation);
 	CPPUNIT_ASSERT(dm.mIsIndexed == isIndexed);

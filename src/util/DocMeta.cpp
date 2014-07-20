@@ -41,6 +41,7 @@ DocMeta::DocMeta(unsigned int inDocNum /*= 0*/)
 void DocMeta::Clear()
 {
 	mDocNum = 0;
+	mSource.clear();
 	mCountPge = 0;
 	mXmlValidation = false;
 	mIsIndexed = false;
@@ -103,6 +104,11 @@ void DocMeta::ToBinaryBuffer(BinaryBuffer &outBuffer) const
 	SetLgBuf(buf, length);
 	binaryBuffer->write(buf, DEF_SizeOfLong);
 	binaryBuffer->write(str.c_str(), length);
+
+	length = (unsigned long)mSource.length();
+	SetLgBuf(buf, length);
+	binaryBuffer->write(buf, DEF_SizeOfLong);
+	binaryBuffer->write(mSource.c_str(), length);
 
 	length = (unsigned long)mFileName.length();
 	SetLgBuf(buf, length);
@@ -186,6 +192,11 @@ void DocMeta::FromBinaryCharBuffer(const char *inBuffer, size_t inSize)
 	length = GetLgBuf(pos);
 	pos += DEF_SizeOfLong;
 	ConvertString2UnicodeString(mXsltCode, pos, length);
+	pos += length;
+
+	length = GetLgBuf(pos);
+	pos += DEF_SizeOfLong;
+	mSource.assign(pos, length);
 	pos += length;
 
 	length = GetLgBuf(pos);

@@ -102,6 +102,7 @@ enum eXmlCmd {
 	eColSalt,
   //eDocName,
   eDocNum,
+  eSource,
   eCountPge,
   eFileName,
 	eDcMetadata,
