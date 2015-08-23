@@ -41,13 +41,13 @@ DocMeta::DocMeta(unsigned int inDocNum /*= 0*/)
 void DocMeta::Clear()
 {
 	mDocNum = 0;
-	mSource.clear();
 	mCountPge = 0;
 	mXmlValidation = false;
 	mIsIndexed = false;
 	mDocTitle.remove();
 	mUuid.remove();
 	mXsltCode.remove();
+	mSource.clear();
 	mFileName.clear();
 	mDcMetadata.clear();
 	mIndexerConfig.clear();

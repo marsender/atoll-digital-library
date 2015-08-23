@@ -1259,8 +1259,8 @@ bool Atoll::EngineApiComputeIndex(const EngineEnv &inEngineEnv, WordIntVector &o
 	// Set the index size
 	outCount = dbNdx->Count();
 	// Reduce min to max
-	if (ioMin > outCount) {
-		ioMin = outCount;
+	if (ioMin >= outCount) {
+		ioMin = outCount - 1;
 	}
 	// Set nb according to max
 	if (ioMin + ioNb > outCount)
