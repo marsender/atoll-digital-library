@@ -76,7 +76,7 @@ private:
 	void CloseColManager();
 
 	//! Check the container sizes
-	bool CheckSizes();
+	bool CheckSizes(const char *inLogInfo);
 };
 //------------------------------------------------------------------------------
 

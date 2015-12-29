@@ -149,17 +149,17 @@ void Collection::CloseCollection()
 }
 //------------------------------------------------------------------------------
 
-bool Collection::CheckSizes()
+bool Collection::CheckSizes(const char *inLogInfo)
 {
 	bool isOk = true;
 
 	unsigned long count = (unsigned long)mDocMap->size();
-	if (!mDbDocMap->Count() == count) {
-		DEF_Log("Db map size error");
+	if (!(mDbDocMap->Count() == count)) {
+		gLog.log(eTypLogError, "Err > Collection: Db map size error in '%s' (DbDocMap=%lu != DocMap=%lu)", inLogInfo, mDbDocMap->Count(), count);
 		isOk = false;
 	}
-	if (!(unsigned long)mIntToDocMap->size() == count) {
-		DEF_Log("Doc number map size error");
+	if (!((unsigned long)mIntToDocMap->size() == count)) {
+		gLog.log(eTypLogError, "Err > Collection: Doc number map size error in '%s' (DbDocMap=%lu != DocMap=%lu)", inLogInfo, mDbDocMap->Count(), count);
 		isOk = false;
 	}
 
@@ -209,7 +209,7 @@ bool Collection::ClearCollection()
 	mDbNdxMap->clear();
 
 	// Check the container sizes
-	isOk = CheckSizes();
+	isOk = CheckSizes("ClearCollection");
 
 	return isOk;
 }
@@ -341,7 +341,7 @@ bool Collection::AddDocument(unsigned int &outDocNum, const DocMeta &inDocMeta, 
 	outDocNum = docNum;
 
 	// Check the container sizes
-	if (!CheckSizes())
+	if (!CheckSizes("AddDocument"))
 		return false;
 
 	if (inWantIndex) {
@@ -383,7 +383,7 @@ bool Collection::RemoveDocument(unsigned int inDocNum)
 	mDbDocMap->DelElement(fileName);
 
 	// Check the container sizes
-	isOk &= CheckSizes();
+	isOk &= CheckSizes("RemoveDocument");
 
 	return isOk;
 }
@@ -467,10 +467,10 @@ bool Collection::SetDocumentMeta(const DocMeta &inDocMeta)
 		mDocMap->erase(it1);
 		(*mDocMap)[fileName] = docMeta.mDocNum;
 		(*mIntToDocMap)[docMeta.mDocNum] = fileName;
-		mDbDocMap->DelElement(fileName);
+		mDbDocMap->DelElement(oldFileName);
 		mDbDocMap->AddElement(fileName, docMeta.mDocNum);
 		// Check the container sizes
-		isOk &= CheckSizes();
+		isOk &= CheckSizes("SetDocumentMeta");
 	}
 
 	// Set new meta (not the reserved fields mDocNum, mCountPge, mFileName and mIsIndexed)

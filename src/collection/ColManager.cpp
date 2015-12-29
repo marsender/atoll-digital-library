@@ -89,17 +89,17 @@ void ColManager::CloseColManager()
 }
 //------------------------------------------------------------------------------
 
-bool ColManager::CheckSizes()
+bool ColManager::CheckSizes(const char *inLogInfo)
 {
 	bool isOk = true;
 
 	unsigned long count = (unsigned long)mColMap->size();
-	if (!mDbColMetaMap->Count() == count) {
-		DEF_Log("Db collection map size error");
+	if (!(mDbColMetaMap->Count() == count)) {
+		gLog.log(eTypLogError, "Err > ColManager: Db collection map size error in '%s' (DbColMetaMap=%lu != ColMap=%lu)", inLogInfo, mDbColMetaMap->Count(), count);
 		isOk = false;
 	}
-	if (!mDbColMeta->Count() == count) {
-		DEF_Log("Db collection meta size error");
+	if (!(mDbColMeta->Count() == count)) {
+		gLog.log(eTypLogError, "Err > ColManager: Db collection meta size error in '%s' (DbColMetaMap=%lu != ColMap=%lu)", inLogInfo, mDbColMetaMap->Count(), count);
 		isOk = false;
 	}
 
@@ -132,7 +132,7 @@ bool ColManager::ClearColManager()
 	mDbColMetaMap->clear();
 
 	// Check the container sizes
-	isOk = CheckSizes();
+	isOk = CheckSizes("ClearColManager");
 
 	if (!isOk) {
 		DEF_Log("Clear error");
@@ -205,7 +205,7 @@ bool ColManager::AddCollection(UnicodeString &outColId, const ColMeta &inColMeta
 	(*mColMap)[colMeta.mColId] = colNum;
 
 	// Check the container sizes
-	isOk = CheckSizes();
+	isOk = CheckSizes("AddCollection");
 
 	return isOk;
 }
@@ -256,7 +256,7 @@ bool ColManager::RemoveCollection(const UnicodeString &inColId)
 	mDbColMetaMap->DelElement(inColId);
 
 	// Check the container sizes
-	isOk = CheckSizes();
+	isOk = CheckSizes("RemoveCollection");
 
 	return isOk;
 }

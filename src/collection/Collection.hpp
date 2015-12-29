@@ -131,7 +131,7 @@ private:
 	void CloseCollection();
 
 	//! Check the container sizes
-	bool CheckSizes();
+	bool CheckSizes(const char *inLogInfo);
 
 	//! Open the document indexer
 	void OpenIndexer(const std::string &inIndexerConfigFileName,
