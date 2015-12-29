@@ -47,8 +47,6 @@ enum eTypDynSort {
   eDynSortEnd
 };
 
-//! Get atoll library and dependencies versions
-DEF_Export const char *GetFullVersion();
 //! Get atoll library name
 DEF_Export const char *GetLibName();
 //! Get atoll library dot version. Eg: 1.3
@@ -61,6 +59,8 @@ DEF_Export const char *GetDbVersion();
 DEF_Export const char *GetXercesVersion();
 //! Get Xalan library dot version. Eg: 1.11.0
 DEF_Export const char *GetXalanVersion();
+//! Get atoll library and dependencies versions
+DEF_Export const char *GetFullVersion();
 //! Make sure we're loaded with the right version of the DB library
 DEF_Export void CheckDbVersion();
 //! Make sure we're loaded with the right version of zlib
