@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CodeLite_Workspace Name="atoll" Database="./atoll.tags">
+<CodeLite_Workspace Name="atoll" Database="./atoll.tags" SWTLW="No">
   <Project Name="atoll_plugin_xmlexec" Path="./atoll_plugin_xmlexec.project" Active="No"/>
   <Project Name="atoll_engine" Path="./atoll_engine.project" Active="Yes"/>
   <Project Name="atoll_console" Path="./atoll_console.project" Active="No"/>
