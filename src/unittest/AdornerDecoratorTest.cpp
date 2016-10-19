@@ -47,7 +47,7 @@ void AdornerDecoratorTest::testDecorator(void)
 {
 	UnicodeString str;
 	//const UChar *sDebug;
-	std::auto_ptr<AdornerDecorator> decorator(new AdornerDecorator());
+	std::unique_ptr<AdornerDecorator> decorator(new AdornerDecorator());
 	UnicodeString &decoratorString = decorator->GetDecoratorString();
 	decorator->EnableDecoratorString(true);
 

@@ -21,3 +21,10 @@ PluginMessage::PluginMessage()
 	mIsOk = false;
 }
 //------------------------------------------------------------------------------
+
+PluginMessage::~PluginMessage()
+{
+	// Desctructor is useless but allows to trace when object is deleted
+	mIsOk = false;
+}
+//------------------------------------------------------------------------------

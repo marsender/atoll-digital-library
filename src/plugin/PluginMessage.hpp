@@ -28,6 +28,7 @@ public:
 	UnicodeString mError;
 
 	PluginMessage();
+	~PluginMessage();
 };
 
 } // namespace AtollPlugin

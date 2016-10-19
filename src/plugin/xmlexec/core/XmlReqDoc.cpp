@@ -45,10 +45,18 @@ void XmlReqDoc::Clear()
 	XmlReq::Clear();
 	mAction = eXmlCmdNone;
 	mName = "";
+	mUuid = "";
 	mLnkTagSearch = "";
 	mIsTabmat = false;
 	mToolBar = "";
 	//mCtObject->Clear();
+}
+//------------------------------------------------------------------------------
+
+void XmlReqDoc::SetUuid(const UnicodeString &inUuid)
+{
+	mName = "";
+	mUuid = inUuid;
 }
 //------------------------------------------------------------------------------
 
@@ -60,18 +68,26 @@ bool XmlReqDoc::Execute()
 
   switch (mAction) {
   case eDocPagPos:
+		break;
+  case eFile:
+		if (mUuid.isEmpty()) {
+			mLog.log(eTypLogError, "Err > XmlReqDoc: Incorrect file uuid");
+			return false;
+		}
+		{
+			DocMeta docMeta;
+			docMeta.mUuid = mUuid;
+			// Get the document number from uuid
+			if (EngineApiGetDocument(mEngineEnv, docMeta))
+				mDoc = docMeta.mDocNum;
+			// Get the page number from min
+			mPge = mMin;
+		}
     break;
 	default:
 		mLog.log(eTypLogError, "Err > XmlReqDoc: Incorrect action %d", mAction);
 		return false;
 	}
-
-	if (mDoc == DEF_IntMax || mPge == DEF_LongMax) {
-		mLog.log(eTypLogError, "Err > XmlReqDoc: Incorrect document/page");
-		return false;
-	}
-
-	OutputHeader();
 
 	// Load the search request if given, and init the hilight vector
 	IntVector hilightVector;
@@ -94,6 +110,14 @@ bool XmlReqDoc::Execute()
 			hilightVector.push_back(e.mUlEntPos);
 		}
 	}
+
+	// Check doc
+	if (mDoc == DEF_IntMax || mPge == DEF_LongMax) {
+		mLog.log(eTypLogError, "Err > XmlReqDoc: Incorrect document/page");
+		return false;
+	}
+
+	OutputHeader();
 
 	// Get the document page
 	Entry e(mDoc, mPge, mPos);

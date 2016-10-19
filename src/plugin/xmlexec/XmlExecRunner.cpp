@@ -215,10 +215,32 @@ void XmlExecRunner::StartNode(const std::string &inElem, const StringToUnicodeSt
 	case eVersion:
 	case eNewSearch:
 	case eTypeRes:
-	case ePage:
-	case ePos:
 	case eNbMot:
 		// Nothing to do
+		break;
+	case eDoc:
+	case ePage:
+	case ePos:
+		{
+			eTypResRech typResRech = eResRechNone;
+			switch (xmlCmd) {
+			case eDoc:
+				typResRech = eResRechDoc;
+				break;
+			case ePage:
+				typResRech = eResRechPge;
+				break;
+			case ePos:
+				typResRech = eResRechPos;
+				break;
+			default:
+				break;
+			}
+			mXmlReq->SetTypResRech(typResRech);
+		}
+		break;
+	case eCompact:
+		mXmlReq->SetStyleResRech(eStyleResRechCompact);
 		break;
 	case ePlage:
 		mXmlReq->mMin = 0;
@@ -388,6 +410,7 @@ void XmlExecRunner::StartNode(const std::string &inElem, const StringToUnicodeSt
 	case eMin:
 	case eMot:
 	case eNb:
+	case eUuid:
 		mWantInputBuffer = true;
 		mInputBuffer.remove();
 		break;
@@ -399,6 +422,11 @@ void XmlExecRunner::StartNode(const std::string &inElem, const StringToUnicodeSt
 			(static_cast<XmlReqIndex *>(xmlReq))->mTypIndex = (xmlCmd == eTypeIndex) ? eXmlCmdNone : xmlCmd;
 		}
 		else {
+			mLog.log(eTypLogWarning, "Wrn > Incorrect xml command <%s>", gXmlTok(xmlCmd));
+		}
+		break;
+	case eFile:
+		if (!IsParentToken(eReqDoc)) {
 			mLog.log(eTypLogWarning, "Wrn > Incorrect xml command <%s>", gXmlTok(xmlCmd));
 		}
 		break;
@@ -446,6 +474,7 @@ void XmlExecRunner::EndNode()
 	case eTypeRes:
 	case ePage:
 	case ePos:
+	case eCompact:
 	case eNbMot:
 	case eTypeIndex:
   case eIndex:
@@ -598,15 +627,15 @@ void XmlExecRunner::EndNode()
 				mInfo->mPluginMessage->mIsOk = false;
 			break;
 		case eDelDoc:
-			if (!(static_cast<XmlReqCol *>(xmlReq))->DelDoc(mDocMeta->mDocNum))
+			if (!(static_cast<XmlReqCol *>(xmlReq))->DelDoc(mDocMeta->mDocNum, mDocMeta->mUuid))
 				mInfo->mPluginMessage->mIsOk = false;
 			break;
 		case eIndexDoc:
-			if (!(static_cast<XmlReqCol *>(xmlReq))->IndexDoc(mDocMeta->mDocNum))
+			if (!(static_cast<XmlReqCol *>(xmlReq))->IndexDoc(mDocMeta->mDocNum, mDocMeta->mUuid))
 				mInfo->mPluginMessage->mIsOk = false;
 			break;
 		case eDelDocIndex:
-			if (!(static_cast<XmlReqCol *>(xmlReq))->DelDocIndex(mDocMeta->mDocNum))
+			if (!(static_cast<XmlReqCol *>(xmlReq))->DelDocIndex(mDocMeta->mDocNum, mDocMeta->mUuid))
 				mInfo->mPluginMessage->mIsOk = false;
 			break;
 		default:
@@ -693,6 +722,10 @@ void XmlExecRunner::EndNode()
 			break;
 		}
 		break;
+	case eFile:
+		// Set the action to perform
+		(static_cast<XmlReqDoc *>(xmlReq))->mAction = xmlCmd;
+		break;
 	case eIdCrit:
 		{
 			//UTrace("Set IdCrit", mInputBuffer.getTerminatedBuffer());
@@ -718,6 +751,11 @@ void XmlExecRunner::EndNode()
 	case eMot:
 		if (IsParentToken(eReqIndex)) {
 			(static_cast<XmlReqIndex *>(xmlReq))->mWord = mInputBuffer;
+		}
+		break;
+	case eUuid:
+		if (IsParentToken(eReqDoc)) {
+			(static_cast<XmlReqDoc *>(xmlReq))->SetUuid(mInputBuffer);
 		}
 		break;
 	case eNb:

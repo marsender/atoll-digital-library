@@ -24,7 +24,6 @@ class XmlReqSearch : public XmlReq
 {
 public:
 	eXmlCmd mAction;
-	short mTypResRech; //!< Result type (Document, page or position)
 	int mNbMotPrev, mNbMotNext;
 	long mCorpusNum;
 	UnicodeString mCorpusName;

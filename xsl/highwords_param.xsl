@@ -6,7 +6,7 @@
 
 <!--
 	highwords_param.xsl
-	// 19/08/10 Version 1.0 Begining of implementation
+	// 19/08/2010 Version 1.0 Begining of implementation
 -->
 
 <xsl:output

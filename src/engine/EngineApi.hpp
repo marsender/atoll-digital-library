@@ -24,7 +24,7 @@ EngineApi.hpp
 #include "unicode/unistr.h"
 #include <set>
 #include <string>
-#include <memory> // for std::auto_ptr
+#include <memory> // for std::unique_ptr
 //------------------------------------------------------------------------------
 
 namespace AtollPlugin
@@ -83,17 +83,17 @@ void CreatePluginKernel();
 void DeletePluginKernel();
 
 //! Execute an xmlexec unicode buffer
-DEF_Export std::auto_ptr<AtollPlugin::PluginMessage> XmlExecBuffer(const UChar *inStr, int32_t inLength);
+DEF_Export std::unique_ptr<AtollPlugin::PluginMessage> XmlExecBuffer(const UChar *inStr, int32_t inLength);
 //! Execute an xmlexec unicode string buffer
-DEF_Export std::auto_ptr<AtollPlugin::PluginMessage> XmlExecBuffer(const UnicodeString &inStr);
+DEF_Export std::unique_ptr<AtollPlugin::PluginMessage> XmlExecBuffer(const UnicodeString &inStr);
 //! Execute an xmlexec file
-DEF_Export std::auto_ptr<AtollPlugin::PluginMessage> XmlExecFile(const std::string &inFileName);
+DEF_Export std::unique_ptr<AtollPlugin::PluginMessage> XmlExecFile(const std::string &inFileName);
 //! Execute an xslt with an xml buffer and a stylesheet buffer
-DEF_Export std::auto_ptr<AtollPlugin::PluginMessage> XsltBuffer(const UChar *inStr, int32_t inLength, const UChar *inXsl, int32_t inLengthXsl, const Common::StringToUnicodeStringMap &inStylesheetParamMap);
+DEF_Export std::unique_ptr<AtollPlugin::PluginMessage> XsltBuffer(const UChar *inStr, int32_t inLength, const UChar *inXsl, int32_t inLengthXsl, const Common::StringToUnicodeStringMap &inStylesheetParamMap);
 //! Execute an xslt with an unicode xml string and an unicode stylesheet
-DEF_Export std::auto_ptr<AtollPlugin::PluginMessage> XsltBuffer(const UnicodeString &inStr, const UnicodeString &inXsl, const Common::StringToUnicodeStringMap &inStylesheetParamMap);
+DEF_Export std::unique_ptr<AtollPlugin::PluginMessage> XsltBuffer(const UnicodeString &inStr, const UnicodeString &inXsl, const Common::StringToUnicodeStringMap &inStylesheetParamMap);
 //! Execute an xslt with an unicode xml string and a named precompiled stylesheet
-DEF_Export std::auto_ptr<AtollPlugin::PluginMessage> XsltCompiled(const UnicodeString &inStr, const UnicodeString &inXsltName, const Common::StringToUnicodeStringMap &inStylesheetParamMap);
+DEF_Export std::unique_ptr<AtollPlugin::PluginMessage> XsltCompiled(const UnicodeString &inStr, const UnicodeString &inXsltName, const Common::StringToUnicodeStringMap &inStylesheetParamMap);
 
 //! Get the list of all collection records of a database
 DEF_Export bool EngineApiGetColMetaVector(const EngineEnv &inEngineEnv, ColMetaVector &outVector);
@@ -110,7 +110,9 @@ DEF_Export bool EngineApiDelCollection(const EngineEnv &inEngineEnv, const Unico
 DEF_Export bool EngineApiGetDocMetaVector(const EngineEnv &inEngineEnv, DocMetaVector &outVector);
 //! Add a document metadata in a collection. The document file name must be set. Returns the new document number
 DEF_Export bool EngineApiAddDocument(unsigned int &outDocNum, const EngineEnv &inEngineEnv, const DocMeta &inDocMeta, bool inWantIndex);
-//! Get a document metadata record in a collection
+//! Get a document id from it's uuid
+DEF_Export unsigned int EngineApiGetDocumentIdByUuid(const EngineEnv &inEngineEnv, const UnicodeString &inUuid);
+//! Get a document metadata record in a collection. The metadata field docnum or uuid must be set
 DEF_Export bool EngineApiGetDocument(const EngineEnv &inEngineEnv, DocMeta &ioDocMeta);
 //! Set a document metadata record in a collection
 DEF_Export bool EngineApiSetDocument(const EngineEnv &inEngineEnv, const DocMeta &inDocMeta);
@@ -137,7 +139,7 @@ DEF_Export bool EngineApiDelField(const EngineEnv &inEngineEnv, const FieldMeta 
 //! Search the database for a criteria
 DEF_Export bool EngineApiComputeCrit(const EngineEnv &inEngineEnv, SearchRecord &ioSearchRecord);
 //! Extract a search result from a set of positions (only the first position of consecutives positions is kept)
-DEF_Export void EngineApiGetSearchResult(EntrySet &outEntrySet, const EntrySet &inEntrySet, unsigned long inMin, unsigned long &ioNb, unsigned long &outCount);
+DEF_Export void EngineApiGetSearchResult(EntrySet &outEntrySet, const EntrySet &inEntrySet, unsigned long inMin, unsigned long &ioNb, unsigned long &outCount, bool inDocOnly, bool inDocPageOnly);
 //! Search the database for an index content
 DEF_Export bool EngineApiComputeIndex(const EngineEnv &inEngineEnv, WordIntVector &outWordIntVector, const SearchRecord &ioSearchRecord, const UnicodeString &inNdxName, unsigned long &ioMin, const UnicodeString &inWord, unsigned long &ioNb, unsigned long &outCount);
 //! Get the map of all index

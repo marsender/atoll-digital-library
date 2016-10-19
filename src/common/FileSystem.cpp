@@ -12,6 +12,7 @@ FileSystem.cpp
 #include "FileSystem.hpp"
 #include "Logger.hpp"
 #ifdef WIN32
+	#include <io.h> // For access
 	#include <direct.h>
 	#include "FileSystemWin32.hpp"	// Dirent Interface for Microsoft C/C++
 #else
@@ -184,9 +185,17 @@ bool FileSystem::CreateEmptyFile(const std::string &inFileName)
 bool FileSystem::FileExists(const std::string &inPath)
 {
 #ifdef WIN32
-	DWORD ret = ::GetFileAttributesA(inPath.c_str());
-	if ((ret != (DWORD)-1) && !(ret & FILE_ATTRIBUTE_DIRECTORY))
+	// Check modes:
+	//   0 Existence only
+	//   2 Write permission
+	//   4 Read permission
+	//   6 Read and write permission 
+	if (_access(inPath.c_str(), 0) != -1) {
 		return true;
+	}
+	//DWORD ret = ::GetFileAttributesA(inPath.c_str());
+	//if ((ret != (DWORD)-1) && !(ret & FILE_ATTRIBUTE_DIRECTORY))
+	//	return true;
 #else
   struct stat path_stat;
 	if (::stat(inPath.c_str(), &path_stat) != 0)
@@ -233,7 +242,7 @@ bool FileSystem::BinaryCompareFiles(const std::string &inFullFileName1, const st
 			fclose(f2);
 		return false;
 	}
-	
+
 	buffer1 = new char[size];
 	buffer2 = new char[size];
 	while (true) {
@@ -281,7 +290,7 @@ bool FileSystem::TextCompareFiles(const std::string &inFullFileName1, const std:
 			fclose(f2);
 		return false;
 	}
-	
+
 	buffer1 = new char[size];
 	buffer2 = new char[size];
 	while (true) {
@@ -429,7 +438,7 @@ bool FileSystem::PatternMatch(const char *inStr, const char *inMsk, bool inIsCas
 std::string FileSystem::GetPath(const std::string &inFullFileName)
 {
 	const char *s, *sSep;
-	
+
 	s = inFullFileName.c_str();
 	sSep = strrchr(s, DEF_DirectorySeparator);
 	if (!sSep)
@@ -446,7 +455,7 @@ std::string FileSystem::GetPath(const std::string &inFullFileName)
 std::string FileSystem::GetFileName(const std::string &inFullFileName)
 {
 	const char *s, *sSep;
-	
+
 	s = inFullFileName.c_str();
 	sSep = strrchr(s, DEF_DirectorySeparator);
 
@@ -458,7 +467,7 @@ std::string FileSystem::GetFileNameWithoutExt(const std::string &inFullFileName)
 {
 	const char *s, *sSep;
 	char buf[MAX_PATH + 1], *sExt;
-	
+
 	// Get the filename
 	s = inFullFileName.c_str();
 	sSep = strrchr(s, DEF_DirectorySeparator);
@@ -479,7 +488,7 @@ std::string FileSystem::GetFileNameWithoutExt(const std::string &inFullFileName)
 std::string FileSystem::GetExtension(const std::string &inFullFileName)
 {
 	const char *s, *sExt;
-	
+
 	s = inFullFileName.c_str();
 	sExt = strrchr(s, '.');
 	// The extension separator '.' must be after the last directory separator
@@ -494,7 +503,7 @@ std::string FileSystem::SetExtension(const std::string &inFullFileName, const st
 {
 	char buf[MAX_PATH + 1], *sExt;
 	const char *sNewExt;
-	
+
 	strcpy(buf, inFullFileName.c_str());
 
 	// Remove the extension

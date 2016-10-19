@@ -16,7 +16,7 @@ IndexerConfig.cpp
 #include "../parser/Parser.hpp"
 #include "../parser/IndexerConfigHandler.hpp"
 #include <sstream> // For std::ostringstream
-#include <memory> // for std::auto_ptr
+#include <memory> // for std::unique_ptr
 //------------------------------------------------------------------------------
 
 using namespace Atoll;
@@ -167,7 +167,7 @@ void IndexerConfig::LoadFromFile(const std::string &inFileName)
 
 	// Create the parser
 	const std::string &catalogFile = XercesParser::StaticGetDefaultCatalogFile();
-	std::auto_ptr<Parser> xercesParser(new Parser(SAX2XMLReader::Val_Auto, catalogFile, eTypHandlerIndexerConfig));
+	std::unique_ptr<Parser> xercesParser(new Parser(SAX2XMLReader::Val_Auto, catalogFile, eTypHandlerIndexerConfig));
 	// Get the handler
 	IndexerConfigHandler *handler = static_cast<IndexerConfigHandler *>(xercesParser->GetHandler());
 	handler->SetIndexerConfig(this);

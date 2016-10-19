@@ -402,6 +402,35 @@ bool Collection::DocumentExist(unsigned int inDocNum)
 
 bool Collection::GetDocumentMeta(DocMeta &ioDocMeta)
 {
+	// Set docnum if not given
+	if (ioDocMeta.mDocNum == 0) {
+		short method = 0;
+		if (!ioDocMeta.mUuid.isEmpty()) {
+			method = 1;
+		}
+		// Get the vector of all documents metadata records
+		DocMetaVector vector;
+		bool isOk = GetDocMetaVector(vector);
+		// Iterate the vector test documents metadata
+		if (isOk) {
+			DocMetaVector::const_iterator it = vector.begin();
+			DocMetaVector::const_iterator itEnd = vector.end();
+			for (; it != itEnd; ++it) {
+				const DocMeta &docMeta = (*it);
+				switch (method) {
+				case 1:
+					if (docMeta.mUuid == ioDocMeta.mUuid) {
+						ioDocMeta.mDocNum = docMeta.mDocNum;
+					}
+					break;
+				}
+				// Quit if docnum is found
+				if (ioDocMeta.mDocNum)
+					break;
+			}
+		}
+	}
+
 	// Search in the doc map if the document exists
 	if (!DocumentExist(ioDocMeta.mDocNum)) {
 		gLog.log(eTypLogError, "Err > GetDocumentMeta: Unknown document: %u", ioDocMeta.mDocNum);

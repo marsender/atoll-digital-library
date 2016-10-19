@@ -95,6 +95,28 @@ void XmlReq::SetSearchId(const std::string &inSearchId)
 }
 //------------------------------------------------------------------------------
 
+void XmlReq::SetTypResRech(short inTypResRech)
+{
+	if (inTypResRech <= eResRechNone || inTypResRech >= eResRechEnd) {
+		mLog.log(eTypLogError, "Err > XmlReq: Incorrect search result type");
+		return;
+	}
+
+	mTypResRech = inTypResRech;
+}
+//------------------------------------------------------------------------------
+
+void XmlReq::SetStyleResRech(short inStyleResRech)
+{
+	if (inStyleResRech <= eStyleResRechNone || inStyleResRech >= eStyleResRechEnd) {
+		mLog.log(eTypLogError, "Err > XmlReq: Incorrect search result type");
+		return;
+	}
+
+	mStyleResRech = inStyleResRech;
+}
+//------------------------------------------------------------------------------
+
 void XmlReq::Printf(const char *inStr, ...)
 {
 	va_list ap;

@@ -15,7 +15,7 @@ XmlReq.hpp
 
 #include "../XmlExecCmd.hpp"
 #include "unicode/unistr.h"
-#include <memory> // for std::auto_ptr
+#include <memory> // for std::unique_ptr
 //------------------------------------------------------------------------------
 
 namespace Atoll
@@ -32,6 +32,23 @@ class PluginMessage;
 
 namespace AtollPluginXmlExec
 {
+
+// Types de resultats de recherche
+enum eTypResRech {
+  eResRechNone,
+  eResRechDoc,
+  eResRechPge,
+  eResRechPos,
+  eResRechEnd
+};
+
+// Styles de resultats de recherche
+enum eStyleResRech {
+	eStyleResRechNone,
+	eStyleResRechNormal,
+	eStyleResRechCompact,
+	eStyleResRechEnd
+};
 
 //! XmlExec base class for any xml query
 class XmlReq
@@ -56,6 +73,10 @@ public:
 	void ClearSearchCrit();
 	void AddSearchCrit(const Atoll::SearchCrit &inSearchCrit);
 	void SetSearchId(const std::string &inSearchId);
+	//! Set the result type (Document, page or position)
+	void SetTypResRech(short inTypResRech);
+	//! Set the result style (Normal or compact)
+	void SetStyleResRech(short inStyleResRech);
 
 	void Printf(const char *inStr, ...);
 	void OutputStr(const char *inStr);
@@ -83,6 +104,8 @@ protected:
 	Common::Logger &mLog;
 	Atoll::EngineEnv &mEngineEnv;
 	eXmlCmd mCmdReq, mCmdRes;
+	short mTypResRech; //!< Result type (Document, page or position)
+	short mStyleResRech; //!< Result style (Normal or compact)
 
 private:
 	char *mBuf; //!< Printf output buffer

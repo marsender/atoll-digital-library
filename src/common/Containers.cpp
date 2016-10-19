@@ -22,6 +22,7 @@ Containers.cpp
  Eg for 2014: http://www.fileformat.info/info/unicode/char/2014/index.htm
  0x0060 GRAVE ACCENT
  0x00A0 NO-BREAK SPACE
+ 0x202F NARROW NO-BREAK SPACE
  0x00A9 COPYRIGHT SIGN
  0x00AB LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
  0x00B4 ACUTE ACCENT
@@ -35,7 +36,7 @@ Containers.cpp
 */
 static const UChar cSpaceChar[] = { ' ', '\t', '\r', '\n', 0 };
 static const UChar cSepChar[] = { '\'', 0x00AD, 0x2019, 0x2014, '-', '.', ',', ';', ':', '!', '?', '*', '/', 0 };
-static const UChar cFioChar[] = { 0x00A0, '"', 0x00AB, 0x00BB, 0x2018, 0x00B4, 0x0060, 0x201C, 0x201D, 0x0301,
+static const UChar cFioChar[] = { 0x00A0, 0x202F, '"', 0x00AB, 0x00BB, 0x2018, 0x00B4, 0x0060, 0x201C, 0x201D, 0x0301,
 	'<', '>', '+', '=', 0x00A9, '%', '~', '|', '#', '\\', '{', '}', '[', ']', '(', ')', 0 }; // '¶' '' '§'
 //------------------------------------------------------------------------------
 

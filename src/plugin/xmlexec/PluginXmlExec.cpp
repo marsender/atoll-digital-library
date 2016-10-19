@@ -16,7 +16,7 @@ PluginXmlExec.cpp
 #include "unicode/ustring.h"
 #ifdef _WIN32
 	#include "vld.h" // Visual Leak Detector (Memory leak detection)
-#endif 
+#endif
 //------------------------------------------------------------------------------
 
 namespace AtollPluginXmlExec
@@ -39,13 +39,13 @@ public:
 	bool CanRunXsltBuffer();
 
 	//! Run the plugin with an xml file
-	std::auto_ptr<AtollPlugin::PluginMessage> PluginRunXmlExecFile(const std::string &inFileName);
+	std::unique_ptr<AtollPlugin::PluginMessage> PluginRunXmlExecFile(const std::string &inFileName);
 	//! Run the plugin with an xml buffer
-	std::auto_ptr<AtollPlugin::PluginMessage> PluginRunXmlExecBuffer(const UChar *inStr, int32_t inLength);
+	std::unique_ptr<AtollPlugin::PluginMessage> PluginRunXmlExecBuffer(const UChar *inStr, int32_t inLength);
 	//! Run the xslt with an xml buffer and a stylesheet buffer
-	std::auto_ptr<AtollPlugin::PluginMessage> PluginRunXsltBuffer(const UChar *inStr, int32_t inLength, const UChar *inXsl, int32_t inLengthXsl, const Common::StringToUnicodeStringMap &inStylesheetParamMap);
+	std::unique_ptr<AtollPlugin::PluginMessage> PluginRunXsltBuffer(const UChar *inStr, int32_t inLength, const UChar *inXsl, int32_t inLengthXsl, const Common::StringToUnicodeStringMap &inStylesheetParamMap);
 	//! Run the xslt with an xml buffer and a named precompiled stylesheet
-	std::auto_ptr<AtollPlugin::PluginMessage> PluginRunXsltCompiled(const UChar *inStr, int32_t inLength, const UnicodeString &inXsltName, const Common::StringToUnicodeStringMap &inStylesheetParamMap);
+	std::unique_ptr<AtollPlugin::PluginMessage> PluginRunXsltCompiled(const UChar *inStr, int32_t inLength, const UnicodeString &inXsltName, const Common::StringToUnicodeStringMap &inStylesheetParamMap);
 };
 } // namespace Atoll
 //------------------------------------------------------------------------------
@@ -67,10 +67,10 @@ extern "C" DEF_Export int GetEngineExpectedVersion()
 extern "C" DEF_Export void RegisterPlugin(PluginKernel &inPluginKernel)
 {
 	PluginXmlExec *pluginXmlExec;
-	std::auto_ptr<PluginServer::PluginXml> pluginXml;
-	
+	PluginServer::PluginXml *pluginXml;
+
 	pluginXmlExec = new PluginXmlExec(inPluginKernel.GetLogger());
-	pluginXml.reset(pluginXmlExec);
+	pluginXml = static_cast<PluginServer::PluginXml *>(pluginXmlExec);
 
 	inPluginKernel.GetPluginServer().AddPluginXml(pluginXml);
 }
@@ -107,9 +107,9 @@ bool PluginXmlExec::CanRunXsltBuffer()
 }
 //------------------------------------------------------------------------------
 
-std::auto_ptr<PluginMessage> PluginXmlExec::PluginRunXmlExecFile(const string &inFileName)
+std::unique_ptr<PluginMessage> PluginXmlExec::PluginRunXmlExecFile(const string &inFileName)
 {
-	std::auto_ptr<PluginMessage> pluginMessage(new PluginMessage());
+	std::unique_ptr<PluginMessage> pluginMessage(new PluginMessage());
 	pluginMessage->mIsOk = false;
 
 	if (!CanRunXmlExecFile(inFileName)) {
@@ -119,7 +119,7 @@ std::auto_ptr<PluginMessage> PluginXmlExec::PluginRunXmlExecFile(const string &i
 
 	try {
 		// Create the parser
-		std::auto_ptr<XmlExecParser> xercesParser;
+		std::unique_ptr<XmlExecParser> xercesParser;
 		const std::string &catalogFile = XercesParser::StaticGetDefaultCatalogFile();
 		xercesParser.reset(new XmlExecParser(SAX2XMLReader::Val_Auto, catalogFile,
 			pluginMessage.get(), eTypHandlerXmlExecReq, mLog));
@@ -137,9 +137,9 @@ std::auto_ptr<PluginMessage> PluginXmlExec::PluginRunXmlExecFile(const string &i
 }
 //------------------------------------------------------------------------------
 
-std::auto_ptr<PluginMessage> PluginXmlExec::PluginRunXmlExecBuffer(const UChar *inStr, int32_t inLength)
+std::unique_ptr<PluginMessage> PluginXmlExec::PluginRunXmlExecBuffer(const UChar *inStr, int32_t inLength)
 {
-	std::auto_ptr<PluginMessage> pluginMessage(new PluginMessage());
+	std::unique_ptr<PluginMessage> pluginMessage(new PluginMessage());
 	pluginMessage->mIsOk = false;
 
 	if (!CanRunXmlExecBuffer()) {
@@ -149,7 +149,7 @@ std::auto_ptr<PluginMessage> PluginXmlExec::PluginRunXmlExecBuffer(const UChar *
 
 	try {
 		// Create the parser
-		std::auto_ptr<XmlExecParser> xercesParser;
+		std::unique_ptr<XmlExecParser> xercesParser;
 		const std::string &catalogFile = XercesParser::StaticGetDefaultCatalogFile();
 		xercesParser.reset(new XmlExecParser(SAX2XMLReader::Val_Auto, catalogFile,
 			pluginMessage.get(), eTypHandlerXmlExecReq, mLog));
@@ -167,20 +167,20 @@ std::auto_ptr<PluginMessage> PluginXmlExec::PluginRunXmlExecBuffer(const UChar *
 }
 //------------------------------------------------------------------------------
 
-std::auto_ptr<PluginMessage> PluginXmlExec::PluginRunXsltBuffer(const UChar *inStr, int32_t inLength,
+std::unique_ptr<PluginMessage> PluginXmlExec::PluginRunXsltBuffer(const UChar *inStr, int32_t inLength,
 	const UChar *inXsl, int32_t inLengthXsl, const Common::StringToUnicodeStringMap &inStylesheetParamMap)
 {
-	std::auto_ptr<PluginMessage> pluginMessage(new PluginMessage());
+	std::unique_ptr<PluginMessage> pluginMessage(new PluginMessage());
 	pluginMessage->mIsOk = false;
 
 	return pluginMessage;
 }
 //------------------------------------------------------------------------------
 
-std::auto_ptr<PluginMessage> PluginXmlExec::PluginRunXsltCompiled(const UChar *inStr, int32_t inLength,
+std::unique_ptr<PluginMessage> PluginXmlExec::PluginRunXsltCompiled(const UChar *inStr, int32_t inLength,
 	const UnicodeString &inXsltName, const Common::StringToUnicodeStringMap &inStylesheetParamMap)
 {
-	std::auto_ptr<PluginMessage> pluginMessage(new PluginMessage());
+	std::unique_ptr<PluginMessage> pluginMessage(new PluginMessage());
 	pluginMessage->mIsOk = false;
 
 	return pluginMessage;

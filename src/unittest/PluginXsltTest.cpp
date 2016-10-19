@@ -70,7 +70,7 @@ void PluginXsltTest::testXsltBuffer(void)
 
 	// Xslt plugin execution
 	StringToUnicodeStringMap stylesheetParamMap;
-	std::auto_ptr<AtollPlugin::PluginMessage> pluginMessage;
+	std::unique_ptr<AtollPlugin::PluginMessage> pluginMessage;
 	pluginMessage = XsltBuffer(uStr, uXsl, stylesheetParamMap);
 	CPPUNIT_ASSERT_MESSAGE("XsltBuffer error", pluginMessage->mIsOk);
 
@@ -137,7 +137,7 @@ void PluginXsltTest::runXsltCompiled(const char *inXsltName)
 	stylesheetParamMap[paramKey] = paramValue;
 
 	// Xslt plugin execution
-	std::auto_ptr<AtollPlugin::PluginMessage> pluginMessage;
+	std::unique_ptr<AtollPlugin::PluginMessage> pluginMessage;
 	pluginMessage = XsltCompiled(uStr, uXsl, stylesheetParamMap);
 	error = "XsltCompiled error for ";
 	error += inXsltName;

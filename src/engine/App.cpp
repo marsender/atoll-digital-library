@@ -273,7 +273,7 @@ bool App::ParseDataAdorner()
 
 	// Create the parser
 	const std::string &catalogFile = XercesParser::StaticGetDefaultCatalogFile();
-	std::auto_ptr<Parser> xercesParser(new Parser(SAX2XMLReader::Val_Auto, catalogFile, eTypHandlerAdorner));
+	std::unique_ptr<Parser> xercesParser(new Parser(SAX2XMLReader::Val_Auto, catalogFile, eTypHandlerAdorner));
 	// Get the handler
 	AdornerHandler *adornerHandler = static_cast<AdornerHandler *>(xercesParser->GetHandler());
 
@@ -336,19 +336,19 @@ bool App::ParseDataIndexer()
 
 	// Create the main dababase environment
 	//FileSystem::ClearDirectoryContent(mAppDbDir, "__db.*");
-	std::auto_ptr<EngineEnv> engineEnv(new EngineEnv());
+	std::unique_ptr<EngineEnv> engineEnv(new EngineEnv());
 	if (!engineEnv->CreateDbEnv(mAppDbDir))
 		return false;
 	engineEnv->SetColId("ColApp");
 
 	// Create the database manager
-	std::auto_ptr<DbManager> dbMgr(new DbManager(engineEnv->GetDbEnv(), engineEnv->GetColId()));
+	std::unique_ptr<DbManager> dbMgr(new DbManager(engineEnv->GetDbEnv(), engineEnv->GetColId()));
 	//dbMgr->SetClearOnOpen();
 	//dbMgr->SetRemoveOnClose(true);
 
 	// Create the parser
 	const std::string &catalogFile = XercesParser::StaticGetDefaultCatalogFile();
-	std::auto_ptr<Parser> xercesParser(new Parser(SAX2XMLReader::Val_Auto, catalogFile, eTypHandlerIndexer));
+	std::unique_ptr<Parser> xercesParser(new Parser(SAX2XMLReader::Val_Auto, catalogFile, eTypHandlerIndexer));
 	// Get the handler
 	IndexerHandler *indexerHandler = static_cast<IndexerHandler *>(xercesParser->GetHandler());
 
@@ -411,9 +411,14 @@ int App::RunUnitTest()
 {
 	AppAssert(mIsValid);
 
+	// Clear log levels if not in debug mode
+	bool clearLogLevel = !(gLog.isInLogLevel(eTypLogAction) || gLog.isInLogLevel(eTypLogDebug));
+
 	std::set<int> logLevelsBak = gLog.getLogLevels();
-	gLog.clearLogLevels(); // Raz log levels
-	gLog.setVerbose(1); // Show only errors
+	if (clearLogLevel) {
+		gLog.clearLogLevels(); // Raz log levels
+		gLog.setVerbose(1); // Show only errors
+	}
 
 	int returnValue = Common::RunUnitTest();
 
@@ -432,7 +437,10 @@ int App::RunUnitTest()
 	if (returnValue)
 		gLog.log(eTypLogError, "Err > UnitTest failure");
 
-	gLog.setLogLevels(logLevelsBak);
+	if (clearLogLevel) {
+		gLog.clearLogLevels(); // Raz log levels
+		gLog.setLogLevels(logLevelsBak);
+	}
 
 	return returnValue;
 }
@@ -519,7 +527,7 @@ int App::RunXmlFile(const std::string &inFileName)
 		// Display execution start
 		gLog.log(eTypLogAction, "Act > Start application xmlexec");
 
-		std::auto_ptr<AtollPlugin::PluginMessage> pluginMessage;
+		std::unique_ptr<AtollPlugin::PluginMessage> pluginMessage;
 		pluginMessage = XmlExecFile(inFileName);
 
 		// Display execution stop

@@ -28,6 +28,7 @@ public:
 	eXmlCmd mAction;
 	bool mIsTabmat;
 	UnicodeString mName;
+	UnicodeString mUuid;
 	UnicodeString mLnkTagSearch;
 	UnicodeString mToolBar;
 	//Conteneur < UnicodeString > *mCtObject;
@@ -35,7 +36,10 @@ public:
 	XmlReqDoc(Common::Logger &inLog, AtollPlugin::PluginMessage &inPluginMessage,
 		Atoll::EngineEnv &inEngineEnv);
 	virtual ~XmlReqDoc();
+
 	virtual void Clear();
+	void SetUuid(const UnicodeString &inUuid); //!< Set the uuid
+
 	virtual bool Execute();
 };
 //------------------------------------------------------------------------------

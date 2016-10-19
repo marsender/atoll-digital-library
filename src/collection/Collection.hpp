@@ -59,8 +59,8 @@ public:
 	bool AddDocument(unsigned int &outDocNum, const DocMeta &inDocMeta, bool inWantIndex = true);
 	//! Remove a document
 	bool RemoveDocument(unsigned int inDocNum);
-	//! Get the metadata record for a document. The metadata field document number must be set.
-	bool GetDocumentMeta(DocMeta &outDocMeta);
+	//! Get the metadata record for a document. The metadata field docnum or uuid must be set
+	bool GetDocumentMeta(DocMeta &ioDocMeta);
 	//! Set a document metadata record
 	bool SetDocumentMeta(const DocMeta &inDocMeta);
 

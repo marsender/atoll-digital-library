@@ -38,6 +38,7 @@ PluginXmlExecTest::~PluginXmlExecTest()
 
 void PluginXmlExecTest::setUp(void)
 {
+	//gLog.log(eTypLogAction, "Act > UnitTest PluginXmlExec");
 }
 //------------------------------------------------------------------------------
 
@@ -52,7 +53,7 @@ void PluginXmlExecTest::testXmlExecBuffer(void)
 
 	const char *xmlReq = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><atoll-plugin-xmlexec version=\"1.0\"><ReqAll><ReqInfo><Version/></ReqInfo></ReqAll></atoll-plugin-xmlexec>";
 	UnicodeString uStr(xmlReq);
-	std::auto_ptr<AtollPlugin::PluginMessage> pluginMessage;
+	std::unique_ptr<AtollPlugin::PluginMessage> pluginMessage;
 
 	// XmlExec plugin execution
 	pluginMessage = XmlExecBuffer(uStr);

@@ -152,7 +152,7 @@ char *DEF_Export AtollXmlExec(const char *inStr)
 	}
 
 	// Execute the request
-	std::auto_ptr<AtollPlugin::PluginMessage> pluginMessage;
+	std::unique_ptr<AtollPlugin::PluginMessage> pluginMessage;
 	pluginMessage = XmlExecBuffer(uTarget, len);
 	if (!pluginMessage->mIsOk) {
 		pluginMessage->mMessage = pluginMessage->mError;

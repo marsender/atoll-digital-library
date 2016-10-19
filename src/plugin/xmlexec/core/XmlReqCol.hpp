@@ -43,9 +43,9 @@ public:
 	bool AddDocMeta(const Atoll::DocMeta &inDocMeta);
 	bool GetDocMeta(Atoll::DocMeta &ioDocMeta);
 	bool SetDocMeta(const Atoll::DocMeta &inDocMeta);
-	bool DelDoc(unsigned int inDocNum);
-	bool IndexDoc(unsigned int inDocNum);
-	bool DelDocIndex(unsigned int inDocNum);
+	bool DelDoc(unsigned int inDocNum, const UnicodeString &inUuid);
+	bool IndexDoc(unsigned int inDocNum, const UnicodeString &inUuid);
+	bool DelDocIndex(unsigned int inDocNum, const UnicodeString &inUuid);
 
 	bool ListField(unsigned int inTypField);
 	bool AddFieldMeta(const Atoll::FieldMeta &inFieldMeta);

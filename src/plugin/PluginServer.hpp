@@ -19,7 +19,7 @@ PluginServer.hpp
 #include "unicode/ustring.h"
 #include <vector>
 #include <string>
-#include <memory> // for std::auto_ptr
+#include <memory> // for std::unique_ptr
 //------------------------------------------------------------------------------
 
 namespace Common
@@ -57,26 +57,26 @@ public:
 		virtual bool CanRunXsltBuffer() = 0;
 
 		//! Run the plugin with an xml file
-		virtual std::auto_ptr<PluginMessage> PluginRunXmlExecFile(const std::string &inFileName) = 0;
+		virtual std::unique_ptr<PluginMessage> PluginRunXmlExecFile(const std::string &inFileName) = 0;
 		//! Run the plugin with an xml buffer
-		virtual std::auto_ptr<PluginMessage> PluginRunXmlExecBuffer(const UChar *inStr, int32_t inLength) = 0;
+		virtual std::unique_ptr<PluginMessage> PluginRunXmlExecBuffer(const UChar *inStr, int32_t inLength) = 0;
 		//! Run the xslt with an xml buffer and a stylesheet buffer
-		virtual std::auto_ptr<PluginMessage> PluginRunXsltBuffer(const UChar *inStr, int32_t inLength, const UChar *inXsl, int32_t inLengthXsl, const Common::StringToUnicodeStringMap &inStylesheetParamMap) = 0;
+		virtual std::unique_ptr<PluginMessage> PluginRunXsltBuffer(const UChar *inStr, int32_t inLength, const UChar *inXsl, int32_t inLengthXsl, const Common::StringToUnicodeStringMap &inStylesheetParamMap) = 0;
 		//! Run the xslt with an xml buffer and a named precompiled stylesheet
-		virtual std::auto_ptr<AtollPlugin::PluginMessage> PluginRunXsltCompiled(const UChar *inStr, int32_t inLength, const UnicodeString &inXsltName, const Common::StringToUnicodeStringMap &inStylesheetParamMap) = 0;
+		virtual std::unique_ptr<AtollPlugin::PluginMessage> PluginRunXsltCompiled(const UChar *inStr, int32_t inLength, const UnicodeString &inXsltName, const Common::StringToUnicodeStringMap &inStylesheetParamMap) = 0;
 	};
 
 	DEF_Export PluginServer(Common::Logger &inLog);
 	DEF_Export ~PluginServer();
 
 	//! Allows plugins to add themselves
-	DEF_Export void AddPluginXml(std::auto_ptr<PluginXml> AR);
+	DEF_Export void AddPluginXml(PluginXml *inPlugin);
 	//! Delete all registred plugins
 	DEF_Export void DeletePlugins();
 
 	//! Run xml by searching for a matching xml reader
 	/*
-	DEF_Export std::auto_ptr<PluginMessage> RunXmlFile(const std::string &inFileName) {
+	DEF_Export std::unique_ptr<PluginMessage> RunXmlFile(const std::string &inFileName) {
 		for (PluginXmlVector::iterator It = mPluginXmlVector.begin();
 		     It != mPluginXmlVector.end(); ++It) {
 			if ((*It)->CanRunXmlExecFile(inFileName))

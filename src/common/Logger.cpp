@@ -333,7 +333,7 @@ void Logger::setVerbose(int inVerbose)
 		break;
 	default:
 		// Highest verbosity 'vvvv' => All
-		addLogRange(eTypLogNone + 1, eTypLogEnd - 1); // 'vvv'
+		addLogRange(eTypLogNone + 1, eTypLogEnd - 1);
 		break;
 	}
 }

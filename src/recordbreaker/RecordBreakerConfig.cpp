@@ -15,7 +15,7 @@ RecordBreakerConfig.cpp
 #include "../parser/Parser.hpp"
 #include "../parser/RecordBreakerConfigHandler.hpp"
 #include <sstream> // For std::ostringstream
-#include <memory> // for std::auto_ptr
+#include <memory> // for std::unique_ptr
 //------------------------------------------------------------------------------
 
 using namespace Atoll;
@@ -73,7 +73,7 @@ void RecordBreakerConfig::LoadFromFile(const std::string &inFileName)
 
 	// Create the parser
 	const std::string &catalogFile = XercesParser::StaticGetDefaultCatalogFile();
-	std::auto_ptr<Parser> xercesParser(new Parser(SAX2XMLReader::Val_Auto, catalogFile, eTypHandlerRecordBreakerConfig));
+	std::unique_ptr<Parser> xercesParser(new Parser(SAX2XMLReader::Val_Auto, catalogFile, eTypHandlerRecordBreakerConfig));
 	// Get the handler
 	RecordBreakerConfigHandler *handler = static_cast<RecordBreakerConfigHandler *>(xercesParser->GetHandler());
 	handler->SetRecordBreakerConfig(this);
@@ -331,7 +331,8 @@ eTypBreaker RecordBreakerConfig::GetNodeTypBreaker(const std::string &inElem,
 	}
 
 	// Look for an attribute breaker
-	if (mIsConfigParamAttr && &inAttrMap != NULL && inAttrMap.size()) {
+	const Common::StringToUnicodeStringMap *attrMap = &inAttrMap;
+	if (mIsConfigParamAttr && attrMap != NULL && inAttrMap.size()) {
 		std::string emptyStr;
 		std::string value;
 		UnicodeString uStr;

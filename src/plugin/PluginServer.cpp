@@ -35,9 +35,9 @@ PluginServer::~PluginServer()
 }
 //------------------------------------------------------------------------------
 
-void PluginServer::AddPluginXml(std::auto_ptr<PluginXml> AR)
+void PluginServer::AddPluginXml(PluginXml *inPlugin)
 {
-	mPluginXmlVector.push_back(AR.release());
+	mPluginXmlVector.push_back(inPlugin);
 }
 //------------------------------------------------------------------------------
 
@@ -69,7 +69,7 @@ PluginServer::PluginXml *PluginServer::GetPluginXmlExecBuffer()
 	mLog.log(eTypLogError, "Err > Invalid or unsupported xml buffer");
 	throw Common::AppException(Common::AppException::InternalError, "Invalid or unsupported xml buffer");
 	*/
-	
+
 	return NULL;
 }
 //------------------------------------------------------------------------------

@@ -209,18 +209,22 @@ bool XmlReqCol::SetDocMeta(const Atoll::DocMeta &inDocMeta)
 }
 //------------------------------------------------------------------------------
 
-bool XmlReqCol::DelDoc(unsigned int inDocNum)
+bool XmlReqCol::DelDoc(unsigned int inDocNum, const UnicodeString &inUuid)
 {
-	bool isOk;
+	bool isOk = false;
+	unsigned int docNum = inDocNum;
+
+	if (docNum == 0 && !inUuid.isEmpty())
+		docNum = EngineApiGetDocumentIdByUuid(mEngineEnv, inUuid);
 
 	// Remove the document
-	isOk = EngineApiDelDocument(mEngineEnv, inDocNum);
+	isOk = EngineApiDelDocument(mEngineEnv, docNum);
 
 	if (isOk) {
-		Printf("%s<%s %s=\"%u\" />\n", DEF_Tab, gXmlTok(eDelDoc), gXmlTok(eDocNum), inDocNum);
+		Printf("%s<%s %s=\"%u\" />\n", DEF_Tab, gXmlTok(eDelDoc), gXmlTok(eDocNum), docNum);
 	}
 	else {
-		Printf("%s<!-- %s error: [%u] -->\n", DEF_Tab, gXmlTok(eDelDoc), inDocNum);
+		Printf("%s<!-- %s error: [%u] -->\n", DEF_Tab, gXmlTok(eDelDoc), docNum);
 	}
 
 	return isOk;
@@ -312,36 +316,46 @@ bool XmlReqCol::DelFieldMeta(const Atoll::FieldMeta &inFieldMeta)
 }
 //------------------------------------------------------------------------------
 
-bool XmlReqCol::IndexDoc(unsigned int inDocNum)
+bool XmlReqCol::IndexDoc(unsigned int inDocNum, const UnicodeString &inUuid)
 {
-	bool isOk;
+	bool isOk = false;
+	unsigned int docNum = inDocNum;
+
+	if (docNum == 0 && !inUuid.isEmpty())
+		docNum = EngineApiGetDocumentIdByUuid(mEngineEnv, inUuid);
 
 	// Index the document and store it's content
-	isOk = EngineApiIndexDocument(mEngineEnv, inDocNum);
+	if (docNum)
+		isOk = EngineApiIndexDocument(mEngineEnv, docNum);
 
 	if (isOk) {
-		Printf("%s<%s %s=\"%u\" />\n", DEF_Tab, gXmlTok(eIndexDoc), gXmlTok(eDocNum), inDocNum);
+		Printf("%s<%s %s=\"%u\" />\n", DEF_Tab, gXmlTok(eIndexDoc), gXmlTok(eDocNum), docNum);
 	}
 	else {
-		Printf("%s<!-- %s error: [%u] -->\n", DEF_Tab, gXmlTok(eIndexDoc), inDocNum);
+		Printf("%s<!-- %s error: [%u] -->\n", DEF_Tab, gXmlTok(eIndexDoc), docNum);
 	}
 
 	return isOk;
 }
 //------------------------------------------------------------------------------
 
-bool XmlReqCol::DelDocIndex(unsigned int inDocNum)
+bool XmlReqCol::DelDocIndex(unsigned int inDocNum, const UnicodeString &inUuid)
 {
-	bool isOk;
+	bool isOk = false;
+	unsigned int docNum = inDocNum;
+
+	if (docNum == 0 && !inUuid.isEmpty())
+		docNum = EngineApiGetDocumentIdByUuid(mEngineEnv, inUuid);
 
 	// Remove the document index and storage content
-	isOk = EngineApiDelDocumentIndex(mEngineEnv, inDocNum);
+	if (docNum)
+		isOk = EngineApiDelDocumentIndex(mEngineEnv, docNum);
 
 	if (isOk) {
-		Printf("%s<%s %s=\"%u\" />\n", DEF_Tab, gXmlTok(eDelDocIndex), gXmlTok(eDocNum), inDocNum);
+		Printf("%s<%s %s=\"%u\" />\n", DEF_Tab, gXmlTok(eDelDocIndex), gXmlTok(eDocNum), docNum);
 	}
 	else {
-		Printf("%s<!-- %s error: [%u] -->\n", DEF_Tab, gXmlTok(eDelDocIndex), inDocNum);
+		Printf("%s<!-- %s error: [%u] -->\n", DEF_Tab, gXmlTok(eDelDocIndex), docNum);
 	}
 
 	return isOk;

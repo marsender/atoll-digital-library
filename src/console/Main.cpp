@@ -17,13 +17,13 @@ Logic:
 
 #include "../Portability.hpp"
 #include "../engine/App.hpp"
-#include <memory> // for std::auto_ptr
+#include <memory> // for std::unique_ptr
 #ifndef _WIN32
 	#include <unistd.h> // getopt
 #endif
 #ifdef _WIN32
 	#include "vld.h" // Visual Leak Detector (Memory leak detection)
-#endif 
+#endif
 //------------------------------------------------------------------------------
 
 // Application version
@@ -234,7 +234,7 @@ int main(int argc, char *argv[])
 	}
 
 	// Create the application
-	std::auto_ptr<Atoll::App> app(new Atoll::App());
+	std::unique_ptr<Atoll::App> app(new Atoll::App());
 
 	// Get the application logger
 	Common::Logger &logger = app->GetEngineLogger();

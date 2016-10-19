@@ -207,6 +207,7 @@ XmlExecCmd::AssocMap &XmlExecCmd::StaticGetMap()
 	mStaticMap["NumDecr"] = eNumDecr;
 	mStaticMap["Para"] = ePara;
 	mStaticMap["Phrase"] = ePhrase;
+	mStaticMap["Compact"] = eCompact;
 	mStaticMap["NbMot"] = eNbMot;
 	mStaticMap["File"] = eFile;
 	mStaticMap["Tabmat"] = eTabmat;

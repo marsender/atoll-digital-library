@@ -61,7 +61,7 @@ void AdornerTest::testAdornContent(void)
 	std::string testFileName = mPath + "test_adorner.xml";
 	std::string outFileName = mPath + "test_adorner_temp.xml";
 
-	std::auto_ptr<Adorner> adorner(new Adorner());
+	std::unique_ptr<Adorner> adorner(new Adorner());
 	adorner->EnableAdornerString(true);
 	adorner->SetAdornerDocRef(numDoc);
 	if (wantOutputFile)

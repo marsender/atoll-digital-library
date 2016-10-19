@@ -16,7 +16,7 @@ XmlExecRunner.hpp
 #include "XmlExecCmd.hpp"
 #include "../../common/XercesNode.hpp"
 #include "unicode/ustdio.h"
-#include <memory> // for std::auto_ptr
+#include <memory> // for std::unique_ptr
 //------------------------------------------------------------------------------
 
 namespace Common
@@ -104,7 +104,7 @@ private:
 	Atoll::DocMeta *mDocMeta;
 	Atoll::FieldMeta *mFieldMeta;
 	Atoll::SearchCrit *mSearchCrit;
-	std::auto_ptr<XmlReq> mXmlReq;
+	std::unique_ptr<XmlReq> mXmlReq;
 
 	//! Set the input file that is parsed
 	//void SetInputFile(const std::string &inFileNeme);

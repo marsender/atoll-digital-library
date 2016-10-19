@@ -199,6 +199,7 @@ enum eXmlCmd {
 	eNumDecr,
   ePara,
   ePhrase,
+  eCompact,
   eNbMot,
   eFile,
   eTabmat,

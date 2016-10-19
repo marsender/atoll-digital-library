@@ -289,9 +289,9 @@ void Atoll::DeletePluginKernel()
 }
 //------------------------------------------------------------------------------
 
-std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XmlExecBuffer(const UChar *inStr, int32_t inLength)
+std::unique_ptr<AtollPlugin::PluginMessage> Atoll::XmlExecBuffer(const UChar *inStr, int32_t inLength)
 {
-	std::auto_ptr<AtollPlugin::PluginMessage> pluginMessage(new AtollPlugin::PluginMessage());
+	std::unique_ptr<AtollPlugin::PluginMessage> pluginMessage(new AtollPlugin::PluginMessage());
 	pluginMessage->mIsOk = false;
 
 	try {
@@ -344,7 +344,7 @@ std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XmlExecBuffer(const UChar *inSt
 }
 //------------------------------------------------------------------------------
 
-std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XmlExecBuffer(const UnicodeString &inStr)
+std::unique_ptr<AtollPlugin::PluginMessage> Atoll::XmlExecBuffer(const UnicodeString &inStr)
 {
 	const UChar *str = inStr.getBuffer();
 	int32_t length = inStr.length();
@@ -353,9 +353,9 @@ std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XmlExecBuffer(const UnicodeStri
 }
 //------------------------------------------------------------------------------
 
-std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XmlExecFile(const std::string &inFileName)
+std::unique_ptr<AtollPlugin::PluginMessage> Atoll::XmlExecFile(const std::string &inFileName)
 {
-	std::auto_ptr<AtollPlugin::PluginMessage> pluginMessage(new AtollPlugin::PluginMessage());
+	std::unique_ptr<AtollPlugin::PluginMessage> pluginMessage(new AtollPlugin::PluginMessage());
 	pluginMessage->mIsOk = false;
 
 	try {
@@ -409,10 +409,10 @@ std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XmlExecFile(const std::string &
 }
 //------------------------------------------------------------------------------
 
-std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XsltBuffer(const UChar *inStr, int32_t inLength,
+std::unique_ptr<AtollPlugin::PluginMessage> Atoll::XsltBuffer(const UChar *inStr, int32_t inLength,
 	const UChar *inXsl, int32_t inLengthXsl, const StringToUnicodeStringMap &inStylesheetParamMap)
 {
-	std::auto_ptr<AtollPlugin::PluginMessage> pluginMessage(new AtollPlugin::PluginMessage());
+	std::unique_ptr<AtollPlugin::PluginMessage> pluginMessage(new AtollPlugin::PluginMessage());
 	pluginMessage->mIsOk = false;
 
 	try {
@@ -465,7 +465,7 @@ std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XsltBuffer(const UChar *inStr, 
 }
 //------------------------------------------------------------------------------
 
-std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XsltBuffer(const UnicodeString &inStr,
+std::unique_ptr<AtollPlugin::PluginMessage> Atoll::XsltBuffer(const UnicodeString &inStr,
 	const UnicodeString &inXsl, const StringToUnicodeStringMap &inStylesheetParamMap)
 {
 	const UChar *str = inStr.getBuffer();
@@ -475,10 +475,10 @@ std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XsltBuffer(const UnicodeString 
 }
 //------------------------------------------------------------------------------
 
-std::auto_ptr<AtollPlugin::PluginMessage> Atoll::XsltCompiled(const UnicodeString &inStr,
+std::unique_ptr<AtollPlugin::PluginMessage> Atoll::XsltCompiled(const UnicodeString &inStr,
 	const UnicodeString &inXsltName, const StringToUnicodeStringMap &inStylesheetParamMap)
 {
-	std::auto_ptr<AtollPlugin::PluginMessage> pluginMessage(new AtollPlugin::PluginMessage());
+	std::unique_ptr<AtollPlugin::PluginMessage> pluginMessage(new AtollPlugin::PluginMessage());
 	pluginMessage->mIsOk = false;
 
 	try {
@@ -657,6 +657,20 @@ bool Atoll::EngineApiAddDocument(unsigned int &outDocNum, const EngineEnv &inEng
 	delete colManager;
 
 	return isOk;
+}
+//------------------------------------------------------------------------------
+
+DEF_Export unsigned int Atoll::EngineApiGetDocumentIdByUuid(const EngineEnv &inEngineEnv, const UnicodeString &inUuid)
+{
+	unsigned int docNum = 0;
+
+	DocMeta docMeta;
+	docMeta.mUuid = inUuid;
+	// Get the document number from uuid
+	if (EngineApiGetDocument(inEngineEnv, docMeta))
+		docNum = docMeta.mDocNum;
+
+	return docNum;
 }
 //------------------------------------------------------------------------------
 
@@ -874,7 +888,7 @@ bool Atoll::EngineApiGetDocumentContent(const EngineEnv &inEngineEnv, UnicodeStr
 	}
 	else {
 		// Xslt plugin execution
-		std::auto_ptr<AtollPlugin::PluginMessage> pluginMessage;
+		std::unique_ptr<AtollPlugin::PluginMessage> pluginMessage;
 		pluginMessage = XsltCompiled(dr.mTexte, xsltName, stylesheetParamMap);
 		isOk = pluginMessage->mIsOk;
 		if (isOk) {
@@ -1165,17 +1179,52 @@ bool Atoll::EngineApiComputeCrit(const EngineEnv &inEngineEnv, SearchRecord &ioS
 }
 //------------------------------------------------------------------------------
 
-void Atoll::EngineApiGetSearchResult(EntrySet &outEntrySet, const EntrySet &inEntrySet, unsigned long inMin, unsigned long &ioNb, unsigned long &outCount)
+void Atoll::EngineApiGetSearchResult(EntrySet &outEntrySet, const EntrySet &inEntrySet, unsigned long inMin, unsigned long &ioNb, unsigned long &outCount, bool inDocOnly, bool inDocPageOnly)
 {
 	outCount = 0;
 	outEntrySet.clear();
 
 	// Consecutives entries must be counted as one search result only
-	bool wantAllEntries = false;
-	unsigned long nb = 0, pos;
+	Entry lastEntry;
+	//bool wantAllEntries = false;
+	//unsigned long pos;
+	unsigned long nb = 0;
 	EntrySet::const_iterator it, itEnd;
 	it = inEntrySet.begin();
 	itEnd = inEntrySet.end();
+	while (it != itEnd) {
+		const Entry &e = *it;
+		if (inDocOnly) {
+			if (lastEntry.mUiEntDoc == e.mUiEntDoc) {
+				it++;
+				continue;
+			}
+			lastEntry.mUiEntDoc = e.mUiEntDoc;
+		}
+		else if (inDocPageOnly) {
+			if (lastEntry.mUiEntDoc == e.mUiEntDoc && lastEntry.mUlEntPge == e.mUlEntPge) {
+				it++;
+				continue;
+			}
+			lastEntry.mUiEntDoc = e.mUiEntDoc;
+			lastEntry.mUlEntPge = e.mUlEntPge;
+		}
+		else {
+			if (lastEntry.mUiEntDoc == e.mUiEntDoc && lastEntry.mUlEntPos + 1 == e.mUlEntPos) {
+				it++;
+				continue;
+			}
+			lastEntry.mUiEntDoc = e.mUiEntDoc;
+			lastEntry.mUlEntPos = e.mUlEntPos;
+		}
+		if (outCount >= inMin && outCount < inMin + ioNb) {
+			outEntrySet.insert(e);
+			nb++;
+		}
+		outCount++; // Total number of search results
+		it++;
+	}
+	/*
 	while (it != itEnd) {
 		const Entry &e = *it;
 		if (outCount >= inMin && outCount < inMin + ioNb) {
@@ -1196,6 +1245,7 @@ void Atoll::EngineApiGetSearchResult(EntrySet &outEntrySet, const EntrySet &inEn
 		}
 		outCount++; // Total number of search results
 	}
+	*/
 	ioNb = nb;
 
 	//ioNb = outEntrySet.size();

@@ -44,7 +44,8 @@ void XmlReqSearch::Clear()
 {
 	XmlReq::Clear();
 	mAction = eXmlCmdNone;
-	mTypResRech = 0;
+	mTypResRech = eResRechPos;
+	mStyleResRech = eStyleResRechNormal;
 	mNbMotPrev = mNbMotNext = DEF_IntMax;
 	mCorpusNum = 0;
 	mCorpusName = "";
@@ -76,12 +77,12 @@ bool XmlReqSearch::Execute()
 	}
 	*/
 
-	// Compute the search a criteria or reload the search id
+	// Compute the search criteria or reload the search id
 	isOk &= EngineApiComputeCrit(mEngineEnv, *mSearchRecord);
 
 	EntrySet entrySet;
 	if (isOk)
-		EngineApiGetSearchResult(entrySet, mSearchRecord->mEntrySet, mMin, mNb, mMax);
+		EngineApiGetSearchResult(entrySet, mSearchRecord->mEntrySet, mMin, mNb, mMax, mTypResRech == eResRechDoc, mTypResRech == eResRechPge);
 
 	// Output the result
 	if (isOk) {
@@ -98,15 +99,17 @@ bool XmlReqSearch::Execute()
 			const Entry &e = (*it);
 			e.ToStringDocPagePos(bufEntry);
 			//isOk &= EngineApiGetDocumentContext(mEngineEnv, content, e);
-			content = bufEntry; // Should be the context in the document
-			content += " search result context";
 			Printf("%s%s<%s>\n", DEF_Tab, DEF_Tab, gXmlTok(eDocTexte));
 			Printf("%s%s%s<%s>", DEF_Tab, DEF_Tab, DEF_Tab, gXmlTok(eDocPagPos));
 			OutputStr(bufEntry);
 			Printf("</%s>\n", gXmlTok(eDocPagPos));
-			Printf("%s%s%s<%s>", DEF_Tab, DEF_Tab, DEF_Tab, gXmlTok(eTexte));
-			OutputXml(content);
-			Printf("</%s>\n", gXmlTok(eTexte));
+			if (mStyleResRech != eStyleResRechCompact) {
+				content = bufEntry; // Should be the context in the document
+				content += " search result context";
+				Printf("%s%s%s<%s>", DEF_Tab, DEF_Tab, DEF_Tab, gXmlTok(eTexte));
+				OutputXml(content);
+				Printf("</%s>\n", gXmlTok(eTexte));
+			}
 			Printf("%s%s</%s>\n", DEF_Tab, DEF_Tab, gXmlTok(eDocTexte));
 		}
 		Printf("%s</%s>\n", DEF_Tab, gXmlTok(eListDocTexte));

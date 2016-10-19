@@ -6,7 +6,7 @@
 
 <!--
 	identity_param.xsl
-	// 19/08/10 Version 1.0 Begining of implementation
+	// 19/08/2010 Version 1.0 Begining of implementation
 -->
 
 <xsl:output
@@ -30,7 +30,7 @@
 <xsl:template match="html:w|w">
 	<xsl:apply-templates/>
 </xsl:template>
-
+<!--
 <xsl:template match="html:a|a">
   <xsl:choose>
 		<xsl:when test="@rel='external'">
@@ -41,5 +41,5 @@
 		</xsl:otherwise>
   </xsl:choose>
 </xsl:template>
-
+-->
 </xsl:stylesheet>

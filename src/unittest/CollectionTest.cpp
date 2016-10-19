@@ -75,6 +75,7 @@ void CollectionTest::testDocMap(void)
 	UnicodeString fieldId = "text";
 	UnicodeString fieldTitle = "Full text";
 	UnicodeString docTitle = "The document title";
+	UnicodeString uuid = "doc uuid";
 
 	std::string dcMetadata = mPath + "dublincore_test.xml"; // We could set a different file for each doc
 	std::string indexerConfig = mPath + "indexer_config_test.xml";
@@ -90,6 +91,7 @@ void CollectionTest::testDocMap(void)
 	docMeta1.mIndexerConfig = indexerConfig;
 	docMeta1.mRecordBreakerConfig = recordBreakerConfig;
 	docMeta1.mDocTitle = docTitle; // Not mandatory
+	docMeta1.mUuid = uuid; // Not mandatory
 	isOk = mCollection->AddDocument(docNum, docMeta1);
 	CPPUNIT_ASSERT_MESSAGE("Add document error", isOk);
 	CPPUNIT_ASSERT(docNum == docNum1);
@@ -101,6 +103,7 @@ void CollectionTest::testDocMap(void)
 	docMeta2.mIndexerConfig = indexerConfig;
 	docMeta2.mRecordBreakerConfig = recordBreakerConfig;
 	docMeta2.mDocTitle = docTitle; // Not mandatory
+	docMeta2.mUuid = uuid; // Not mandatory
 	isOk = mCollection->AddDocument(docNum, docMeta2);
 	CPPUNIT_ASSERT_MESSAGE("Add document error", isOk);
 	CPPUNIT_ASSERT(docNum == docNum2);
@@ -108,9 +111,15 @@ void CollectionTest::testDocMap(void)
 	// Check if the first document metadata indexed flag is true
 	docMeta.mDocNum = docNum1;
 	isOk = mCollection->GetDocumentMeta(docMeta);
-	CPPUNIT_ASSERT_MESSAGE("Get document meta error", isOk);
+	CPPUNIT_ASSERT_MESSAGE("Get document meta by docnum error", isOk);
 	CPPUNIT_ASSERT_MESSAGE("Non indexed document error", docMeta.mIsIndexed);
 	CPPUNIT_ASSERT_MESSAGE("Document without pages error", docMeta.mCountPge);
+
+	// Check if we can get the document by it's uuid
+	docMeta.Clear();
+	docMeta.mUuid = uuid;
+	isOk = mCollection->GetDocumentMeta(docMeta);
+	CPPUNIT_ASSERT_MESSAGE("Get document meta by uuid error", isOk);
 
 	// Add an already existing document
 	isLogError = gLog.isInLogLevel(eTypLogError);
@@ -209,6 +218,7 @@ void CollectionTest::testDublinCoreDoc(void)
 	unsigned int docNum;
 	unsigned int docNum1 = 1;
 	UnicodeString docTitle = "The document title";
+	UnicodeString uuid = "doc uuid";
 
 	std::string indexerConfig = mPath + "dublincore_indexer_config.xml";
 	std::string recordBreakerConfig = mPath + "dublincore_recordbreaker_config.xml";
@@ -221,6 +231,7 @@ void CollectionTest::testDublinCoreDoc(void)
 	docMeta1.mIndexerConfig = indexerConfig;
 	docMeta1.mRecordBreakerConfig = recordBreakerConfig;
 	docMeta1.mDocTitle = docTitle; // Not mandatory
+	docMeta1.mUuid = uuid; // Not mandatory
 	isOk = mCollection->AddDocument(docNum, docMeta1);
 	CPPUNIT_ASSERT_MESSAGE("Add document error", isOk);
 	CPPUNIT_ASSERT(docNum == docNum1);
