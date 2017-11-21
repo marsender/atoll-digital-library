@@ -45,6 +45,7 @@ PluginXsltTest::~PluginXsltTest()
 
 void PluginXsltTest::setUp(void)
 {
+	//gLog.log(eTypLogAction, "Act > UnitTest PluginXslt");
 }
 //------------------------------------------------------------------------------
 

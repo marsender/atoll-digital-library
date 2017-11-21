@@ -10,10 +10,12 @@
 #
 # CXXFLAGS and CFLAGS may have -DDEF_EnableAsserts
 # zlib link: -lz
+# 
+# For gdb debugging, add -g to CXXFLAGS and CFLAGS
 #
 
 PLATFORM = LINUX
-COMPILER = g++
+COMPILER = g++ -std=c++0x
 CXXVER =
 GCC = yes
 GXX = yes

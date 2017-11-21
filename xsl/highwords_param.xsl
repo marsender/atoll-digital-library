@@ -38,7 +38,7 @@
 		</xsl:otherwise>
   </xsl:choose>
 </xsl:template>
-
+<!--
 <xsl:template match="html:a|a">
   <xsl:choose>
 		<xsl:when test="@rel='external'">
@@ -49,5 +49,5 @@
 		</xsl:otherwise>
   </xsl:choose>
 </xsl:template>
-
+-->
 </xsl:stylesheet>

@@ -37,7 +37,8 @@ EngineApi.cpp
 //------------------------------------------------------------------------------
 
 // Library version
-#define DEF_AtollVersion "1.6"
+#define DEF_AtollVersion "1.7"
+// 01/10/16 1.7 Remove auto_ptr pointers
 // 01/10/13 1.6 Add unique id to docmeta
 // 01/08/13 1.5 Indexation optimisation
 // 27/04/13 1.4 Doc metadata refactoring
@@ -767,7 +768,7 @@ bool Atoll::EngineApiIndexDocument(const EngineEnv &inEngineEnv, unsigned int in
 
 	delete colManager;
 
-	gLog.log(eTypLogAction, "Act > Stop document index %u: %2.2f ms", inDocNum, timer.getElapsedTime());
+	gLog.log(eTypLogAction, "Act > Stop document index %u: %2.2f s", inDocNum, timer.getElapsedTime());
 
 	return isOk;
 }

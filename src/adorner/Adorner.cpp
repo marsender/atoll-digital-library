@@ -315,8 +315,8 @@ void Adorner::EndNode()
 	// Use record breaker
 	if (mRecordBreaker) {
 		const std::string &elem = xercesNode->GetElem();
-		StringToUnicodeStringMap *attrMap = NULL;
-		eTypBreaker typBreaker = mRecordBreaker->ComputeNodeTypBreaker(elem, *attrMap, false);
+		StringToUnicodeStringMap attrMap;
+		eTypBreaker typBreaker = mRecordBreaker->ComputeNodeTypBreaker(elem, attrMap, false);
 		if (typBreaker == eTypBreakerClose)
 			BreakRecord();
 	}

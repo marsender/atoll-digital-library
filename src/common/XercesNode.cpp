@@ -64,7 +64,7 @@ bool XercesNode::IsAttr() const
 bool XercesNode::IsAttr(const std::string &inAttr, const UnicodeString &inAttrValue) const
 {
 	bool isAttr;
-	
+
 	isAttr = mAttrs.indexOf(inAttrValue) != -1;
 	if (!isAttr)
 		return false;

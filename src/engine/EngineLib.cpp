@@ -122,6 +122,9 @@ char *DEF_Export AtollXmlExec(const char *inStr)
 	if (!inStr || *inStr == 0)
 		return NULL;
 
+	// Debug
+	//gLog.log(eTypLogFatal, inStr);
+	
 	gLog.log(eTypLogAction, "Act > AtollXmlExec start");
 
 	// Set up the converter

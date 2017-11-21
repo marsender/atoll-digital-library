@@ -29,36 +29,38 @@ extern "C" {
 // Long integer between 0 and 0xFFFFFFFF = DEF_LongMax = 4 294 967 295
 inline unsigned long GetLgBuf(const char *inBuf)
 {
-	return (((unsigned char)inBuf[0] << 24) & 0xFF000000) |
-         (((unsigned char)inBuf[1] << 16) & 0xFF0000) |
-         (((unsigned char)inBuf[2] << 8) & 0xFF00) |
-         (((unsigned char)inBuf[3]) & 0xFF);
+  return
+		((((unsigned char)inBuf[0] << 24)) & 0xFF000000) |
+		((((unsigned char)inBuf[1] << 16)) & 0x00FF0000) |
+		((((unsigned char)inBuf[2] << 8))  & 0x0000FF00) |
+		((((unsigned char)inBuf[3]))       & 0x000000FF);
 }
 //------------------------------------------------------------------------------
 
 // Long integer between 0 and 0xFFFFFFFF = DEF_LongMax = 4 294 967 295
 inline void SetLgBuf(char *outBuf, unsigned long inUl)
 {
-  outBuf[0] = (unsigned char)(inUl >> 24);
-  outBuf[1] = (unsigned char)(inUl >> 16);
-  outBuf[2] = (unsigned char)(inUl >> 8);
-  outBuf[3] = (unsigned char)inUl;
+  outBuf[0] = (unsigned char)(inUl >> 24) & 0xFF;
+  outBuf[1] = (unsigned char)(inUl >> 16) & 0xFF;
+  outBuf[2] = (unsigned char)(inUl >> 8) & 0xFF;
+  outBuf[3] = (unsigned char)inUl & 0xFF;
 }
 //------------------------------------------------------------------------------
 
 // Integer between 0 and 0xFFFF = 65535
 inline unsigned int GetShBuf(const char *inBuf)
 {
-  return (((unsigned char)inBuf[0] << 8) & 0xFF00) |
-         (((unsigned char)inBuf[1]) & 0xFF);
+  return
+		((((unsigned char)inBuf[0] << 8))  & 0x0000FF00) |
+		((((unsigned char)inBuf[1]))       & 0x000000FF);
 }
 //------------------------------------------------------------------------------
 
 // Integer between 0 and 0xFFFF = 65535
 inline void SetShBuf(char *outBuf, unsigned int inUi)
 {
-  outBuf[0] = (unsigned char)(inUi >> 8);
-  outBuf[1] = (unsigned char)inUi;
+  outBuf[0] = (unsigned char)(inUi >> 8) & 0xFF;
+  outBuf[1] = (unsigned char)inUi & 0xFF;
 }
 //------------------------------------------------------------------------------
 

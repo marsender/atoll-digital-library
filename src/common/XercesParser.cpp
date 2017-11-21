@@ -16,7 +16,7 @@ XercesParser.cpp
 #include "XercesBaseHandler.hpp" // in common directory
 #include "XercesEntityResolver.hpp"
 #include "XercesString.hpp" // in common directory
-#include <sstream> // For std::ostringstream 
+#include <sstream> // For std::ostringstream
 #include <xercesc/util/PlatformUtils.hpp>
 //#include <xercesc/sax2/DefaultHandler.hpp>
 #include <xercesc/sax2/XMLReaderFactory.hpp>
@@ -89,7 +89,7 @@ void XercesParser::InitXercesParser()
 	bool schemaFullChecking = false;
 	bool identityConstraintChecking = true;
 	bool namespacePrefixes = false;
-	
+
 	// Init du type de validation
 	switch (mValScheme) {
 	case SAX2XMLReader::Val_Never:

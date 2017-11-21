@@ -63,62 +63,68 @@ DbEnv *DbUtil::StaticCreateEnvironment(const char *inPrefix, const char *inHome,
 	int ret;
 	DbEnv *dbenv;
 
-	// Create an environment and initialize it for additional error reporting.
-	dbenv = new DbEnv(0);
+	try {
+		// Create an environment and initialize it for additional error reporting.
+		dbenv = new DbEnv(0);
 
-	// Error
-	dbenv->set_errfile(stderr);
-	//dbEnv->set_error_stream(&cerr);
-	if (inPrefix)
-		dbenv->set_errpfx(inPrefix);
+		// Error
+		dbenv->set_errfile(stderr);
+		//dbEnv->set_error_stream(&cerr);
+		if (inPrefix)
+			dbenv->set_errpfx(inPrefix);
 
-	// Specify the shared memory buffer pool cachesize
-	// The size of the cache is set to gbytes gigabytes plus bytes
-	// The ncache parameter is the number of caches to create
-	u_int32_t gbytes = 0;
-	u_int32_t bytes = DEF_NbCacheSizeMB * 1024 * 1024;
-	int ncache = 1;
-	dbenv->set_cachesize(gbytes, bytes, ncache);
+		// Specify the shared memory buffer pool cachesize
+		// The size of the cache is set to gbytes gigabytes plus bytes
+		// The ncache parameter is the number of caches to create
+		u_int32_t gbytes = 0;
+		u_int32_t bytes = DEF_NbCacheSizeMB * 1024 * 1024;
+		int ncache = 1;
+		dbenv->set_cachesize(gbytes, bytes, ncache);
 
-	// Boost some default resource sizes
-	// (locks only work at environment creation time)
-	dbenv->set_lk_max_lockers(4096);
-	dbenv->set_lk_max_locks(20000);
-	dbenv->set_lk_max_objects(2048);
+		// Boost some default resource sizes
+		// (locks only work at environment creation time)
+		dbenv->set_lk_max_lockers(4096);
+		dbenv->set_lk_max_locks(20000);
+		dbenv->set_lk_max_objects(2048);
 
-	// Databases are in a subdirectory.
-	if (inDataDir)
-		dbenv->set_data_dir(inDataDir);
+		// Databases are in a subdirectory.
+		if (inDataDir)
+			dbenv->set_data_dir(inDataDir);
 
-	// Env open flags
-	//   dbxml/dbxml/docs/gsg_xml/cxx/dbandcontainer.html#environment
-	/*
-		DB_CREATE     |  // Create the environment if it does not exist
-		DB_RECOVER    |  // Run normal recovery.
-		DB_INIT_LOCK  |  // Initialize the locking subsystem
-		DB_INIT_LOG   |  // Initialize the logging subsystem
-		DB_INIT_TXN   |  // Initialize the transactional subsystem. This also turns on logging.
-		DB_INIT_MPOOL |  // Initialize the memory pool (in-memory cache)
-		DB_THREAD;       // Cause the environment to be free-threaded
-	*/
-	bool wantTxn = false; // Utilisation des transactions ?
-	u_int32_t envFlags = DB_CREATE | DB_INIT_MPOOL | DB_THREAD;
-	if (wantTxn) {
-		envFlags |= DB_INIT_LOCK // Initialize the locking subsystem
-							| DB_INIT_LOG // Initialize the logging subsystem
-							| DB_INIT_TXN; // Initialize transactions
-							// DB_TXN_NOSYNC | DB_TXN_WRITE_NOSYNC
-							// DB_RECOVER ?
+		// Env open flags
+		//   dbxml/dbxml/docs/gsg_xml/cxx/dbandcontainer.html#environment
+		/*
+			DB_CREATE     |  // Create the environment if it does not exist
+			DB_RECOVER    |  // Run normal recovery.
+			DB_INIT_LOCK  |  // Initialize the locking subsystem
+			DB_INIT_LOG   |  // Initialize the logging subsystem
+			DB_INIT_TXN   |  // Initialize the transactional subsystem. This also turns on logging.
+			DB_INIT_MPOOL |  // Initialize the memory pool (in-memory cache)
+			DB_THREAD;       // Cause the environment to be free-threaded
+		*/
+		bool wantTxn = false; // Utilisation des transactions ?
+		u_int32_t envFlags = DB_CREATE | DB_INIT_MPOOL | DB_THREAD;
+		if (wantTxn) {
+			envFlags |= DB_INIT_LOCK // Initialize the locking subsystem
+								| DB_INIT_LOG // Initialize the logging subsystem
+								| DB_INIT_TXN; // Initialize transactions
+								// DB_TXN_NOSYNC | DB_TXN_WRITE_NOSYNC
+								// DB_RECOVER ?
+		}
+
+		// Open the environment
+		if ((ret = dbenv->open(inHome, envFlags, 0)) != 0) {
+			dbenv->close(0);
+			delete dbenv;
+			dbenv = NULL;
+			std::string msg = "Environment open error: ";
+			msg += inHome;
+			DEF_Exception(AppException::BerkeleyDbError, msg);
+		}
 	}
-
-	// Open the environment
-	if ((ret = dbenv->open(inHome, envFlags, 0)) != 0) {
-		dbenv->close(0);
-		delete dbenv;
-		dbenv = NULL;
-		std::string msg = "Environment open error: ";
-		msg += inHome;
-		DEF_Exception(AppException::BerkeleyDbError, msg);
+	catch (AppException &e) {
+		gLog.log(eTypLogError, "Err > Db static create environment exception: %s", e.what());
+		return NULL;
 	}
 
 	return dbenv;

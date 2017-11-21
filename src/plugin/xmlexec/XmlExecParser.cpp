@@ -144,7 +144,7 @@ bool XmlExecParser::XercesParse(const UChar *inStr, int32_t inLength /*= -1*/)
 		return false;
 
 	const char *memBufId = "XmlExecParseAtollId"; // Unused id
-  int32_t len = inLength == -1 ? u_strlen(inStr) : inLength;
+	int32_t len = inLength == -1 ? u_strlen(inStr) : inLength;
 	XMLCh encoding[] = { 'U', 'T', 'F', '-', '1', '6', 'L', 'E', 0 }; // "UTF-16LE"
 	const XMLByte *xmlBytes = reinterpret_cast<const XMLByte *>(inStr);
 	MemBufInputSource* memBufIS = new MemBufInputSource(xmlBytes, len * sizeof(XMLCh), memBufId, false);

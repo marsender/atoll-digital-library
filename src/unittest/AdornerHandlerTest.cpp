@@ -44,6 +44,8 @@ AdornerHandlerTest::~AdornerHandlerTest()
 
 void AdornerHandlerTest::setUp(void)
 {
+	//gLog.log(eTypLogAction, "Act > UnitTest AdornerHandler");
+
 	// Create the parser
 	const std::string &catalogFile = XercesParser::StaticGetDefaultCatalogFile();
 	mParser = new Parser(SAX2XMLReader::Val_Never, catalogFile, eTypHandlerAdorner);

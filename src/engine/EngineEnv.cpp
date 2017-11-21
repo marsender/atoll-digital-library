@@ -70,7 +70,7 @@ bool EngineEnv::CreateDbEnv(const std::string &inDbHome)
 	const char *databasePrefix = GetLibName();
 	mDbEnv = DbUtil::StaticCreateEnvironment(databasePrefix, inDbHome.c_str(), NULL);
 
-	return true;
+	return (mDbEnv == NULL) ? false : true;
 }
 //------------------------------------------------------------------------------
 

@@ -9,7 +9,7 @@ App.cpp
 
 Project settings | Debug
 	Command:
-		$(OutDir)\atoll_console.exe
+		$(OutDir)\atoll_console
 	Program arguments:
 		UnitTest:
 			-v -j test -l ./data_unittest/_atoll.log
@@ -17,10 +17,11 @@ Project settings | Debug
 			-vv -l ./data_unittest/_atoll.log -x ./data_unittest/xmlexec_req.xml
 			-v -l ./data_unittest/_atoll.log -x ./data_unittest/xmlexec_test.xml
 		Xml plugin release execution:
-		  sudo rm /opt/trace/atoll_res.xml ./data_xmlexec/_atoll_trace.log
+			sudo rm -f /opt/trace/atoll_res.xml ./data_xmlexec/_atoll_trace.log
 			sudo rm -f /opt/atoll/data_db/demo/__db.* /opt/atoll/data_db/demo/db*
 			-vv -l ./data_xmlexec/_atoll.log -x ./data_xmlexec/ReqCreateDb_demo.xml
 			-vv -l ./data_xmlexec/_atoll.log -x ./data_xmlexec/ReqAdmin.xml
+			-vv -l ./data_xmlexec/_atoll.log -x ./data_xmlexec/ReqEgine.xml
 		Adorner:
 			-v -j adorner -l ./data/_atoll.log -h ./data_db/ -s ./data/ -d ./data_dst/
 		Indexer:

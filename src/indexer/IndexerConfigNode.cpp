@@ -73,7 +73,7 @@ IndexerItemVector *IndexerConfigNode::CreateIndexerItemVector(const std::string 
 	const Common::StringToUnicodeStringMap &inAttrMap) const
 {
 	size_t size;
-	
+
 	size = mConfigMultiMap.size();
 	if (size == 0)
 		return NULL;

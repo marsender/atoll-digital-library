@@ -315,7 +315,7 @@ eTypBreaker RecordBreakerConfig::GetNodeTypBreaker(const std::string &inElem,
 
 	/* Done once only in begin document
 	if (mConfigParamMap.size() == 0) {
-		gLog.log(eTypLogError, "Err > RecordBreakerConfig::GetNodeTypBreaker: Empty record breaker config");
+		gLog.log(eTypLogError, "Err > RecordBreakerConfig: Empty record breaker config");
 		return eTypBreakerNone;
 	}
 	*/
@@ -331,8 +331,7 @@ eTypBreaker RecordBreakerConfig::GetNodeTypBreaker(const std::string &inElem,
 	}
 
 	// Look for an attribute breaker
-	const Common::StringToUnicodeStringMap *attrMap = &inAttrMap;
-	if (mIsConfigParamAttr && attrMap != NULL && inAttrMap.size()) {
+	if (mIsConfigParamAttr && inAttrMap.size()) {
 		std::string emptyStr;
 		std::string value;
 		UnicodeString uStr;
