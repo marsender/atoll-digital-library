@@ -15,6 +15,8 @@ Containers.cpp
 #include "UnicodeUtil.hpp" // In common directory
 #include "unicode/ustring.h"
 #include "unicode/coll.h"
+using icu::UnicodeString;
+using icu::Collator;
 //------------------------------------------------------------------------------
 
 /**

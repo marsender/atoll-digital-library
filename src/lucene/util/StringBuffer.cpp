@@ -10,6 +10,7 @@
 #include "unicode/unistr.h"
 #include "unicode/ustring.h"
 //#include "Misc.h"
+using icu::UnicodeString;
 
 // Formerly, StringBuffer used 1024 as the default size of its internal buffer.
 // However, StringBuffer is used primarily for token- and term-oriented

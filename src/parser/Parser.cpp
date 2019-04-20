@@ -105,7 +105,7 @@ bool Parser::XercesParse(const std::string &inFileName)
 	bool isOk = true;
 	unsigned long duration = 0;
 
-	gLog.log(eTypLogDebug, "Deb > Parse: %s", inFileName.c_str());
+	gLog.log(eTypLogDebug, "Deb > Parse file: %s", inFileName.c_str());
 
 	// Initialize the handler
 	if (!XercesInitHandler())
@@ -119,35 +119,39 @@ bool Parser::XercesParse(const std::string &inFileName)
 		duration = endMillis - startMillis;
 	}
 	catch (const AppException &e) {
-		gLog.log(eTypLogError, "Err > Application exception during parsing - %s", e.what());
+		gLog.log(eTypLogError, "Err > Application exception during parse file - %s", e.what());
 		isOk = false;
 	}
 	catch (const OutOfMemoryException &) {
-		gLog.log(eTypLogError, "Err > Xerces out of memory exception during parsing");
+		gLog.log(eTypLogError, "Err > Xerces out of memory exception during parse file");
 		isOk = false;
 	}
 	catch (const XMLException &e) {
 		XercesString message(e.getMessage());
-		gLog.log(eTypLogError, "Err > Xerces exception during parsing: %s", message.localForm());
+		gLog.log(eTypLogError, "Err > Xerces exception during parse file: %s", message.localForm());
 		isOk = false;
 	}
 	catch (std::exception &e) {
-		gLog.log(eTypLogError, "Err > Unknown exception during parsing - %s", e.what());
+		gLog.log(eTypLogError, "Err > Unknown exception during parse file - %s", e.what());
 		isOk = false;
 	}
 
 	// Close the document
 	mHandler->EndDocument(!isOk);
 
-	// Check if there are parsing errors
-	unsigned long nbErrFile = mHandler->GetNbError();
-	if (nbErrFile)
-		isOk = false;
-
-	if (isOk)
-		gLog.log(eTypLogDebug, "Deb > Parse: %s in %lu ms", inFileName.c_str(), duration);
+	if (isOk) {
+		// Check handler errors
+		unsigned long nbErr = mHandler->GetNbError();
+		if (nbErr) {
+			gLog.log(eTypLogError, "Err > Parse file handler got %lu error(s)", nbErr);
+			isOk = false;
+		}
+		else {
+			gLog.log(eTypLogDebug, "Deb > Parse file: %s in %lu ms", inFileName.c_str(), duration);
+		}
+	}
 	else
-		gLog.log(eTypLogError, "Err > Parse error: %s", inFileName.c_str());
+		gLog.log(eTypLogError, "Err > Parse file error: %s", inFileName.c_str());
 
 	return isOk;
 }
@@ -182,20 +186,20 @@ bool Parser::XercesParse(const UChar *inStr, int32_t inLength /*= -1*/)
 		duration = endMillis - startMillis;
 	}
 	catch (const AppException &e) {
-		gLog.log(eTypLogError, "Err > Application exception during parsing - %s", e.what());
+		gLog.log(eTypLogError, "Err > Application exception during parse string - %s", e.what());
 		isOk = false;
 	}
 	catch (const OutOfMemoryException &) {
-		gLog.log(eTypLogError, "Err > Xerces out of memory exception during parsing");
+		gLog.log(eTypLogError, "Err > Xerces out of memory exception during parse string");
 		isOk = false;
 	}
 	catch (const XMLException &e) {
 		XercesString message(e.getMessage());
-		gLog.log(eTypLogError, "Err > Xerces exception during parsing: %s", message.localForm());
+		gLog.log(eTypLogError, "Err > Xerces exception during parse string: %s", message.localForm());
 		isOk = false;
 	}
 	catch (std::exception &e) {
-		gLog.log(eTypLogError, "Err > Unknown exception during parsing - %s", e.what());
+		gLog.log(eTypLogError, "Err > Unknown exception during parse string - %s", e.what());
 		isOk = false;
 	}
 
@@ -204,15 +208,19 @@ bool Parser::XercesParse(const UChar *inStr, int32_t inLength /*= -1*/)
 	// Close the document
 	mHandler->EndDocument(!isOk);
 
-	// Check if there are parsing errors
-	unsigned long nbErrFile = mHandler->GetNbError();
-	if (nbErrFile)
-		isOk = false;
-
-	if (isOk)
-		gLog.log(eTypLogDebug, "Deb > Parse string in %lu ms", duration);
+	if (isOk) {
+		// Check handler errors
+		unsigned long nbErr = mHandler->GetNbError();
+		if (nbErr) {
+			gLog.log(eTypLogError, "Err > Parse string handler got %lu error(s)", nbErr);
+			isOk = false;
+		}
+		else {
+			gLog.log(eTypLogDebug, "Deb > Parse string in %lu ms", duration);
+		}
+	}
 	else
-		gLog.log(eTypLogError, "Err > Parse error");
+		gLog.log(eTypLogError, "Err > Parse string error");
 
 	return isOk;
 }

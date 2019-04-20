@@ -15,6 +15,7 @@ FieldMeta.hpp
 
 #include "unicode/unistr.h"
 #include <vector>
+using icu::UnicodeString;
 //------------------------------------------------------------------------------
 
 namespace Common

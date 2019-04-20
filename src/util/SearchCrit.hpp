@@ -15,6 +15,7 @@ SearchCrit.hpp
 
 #include "unicode/unistr.h"
 #include <vector>
+using icu::UnicodeString;
 //------------------------------------------------------------------------------
 
 // Common::BinaryBuffer declaration

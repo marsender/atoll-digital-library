@@ -61,7 +61,7 @@ void XmlExecHandler::EndDocument(bool inIsException)
 	mRunner->EndDocument(inIsException);
 
 	// Add runner errors
-	mNbError += mRunner->GetNbError();
+	AddNbError(mRunner->GetNbError());
 
 	// Call the parent
 	XercesBaseHandler::EndDocument(inIsException);

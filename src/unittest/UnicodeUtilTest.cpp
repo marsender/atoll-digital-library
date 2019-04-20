@@ -18,6 +18,7 @@ UnicodeUtilTest.cpp
 #ifndef WIN32
 	#include <unistd.h>
 #endif
+
 //------------------------------------------------------------------------------
 
 static bool gInitString = false;

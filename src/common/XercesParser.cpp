@@ -49,7 +49,7 @@ XercesParser::XercesParser(SAX2XMLReader::ValSchemes inValScheme,
 	if (mValScheme == SAX2XMLReader::Val_Auto && mCatalogFile.empty()) {
 		mValScheme = SAX2XMLReader::Val_Never;
 	}
-
+	
 	gLog.log(eTypLogDebug, "Deb > XercesParser create - CatalogFile [%s] - ValSheme %d", inCatalogFile.c_str(), mValScheme);
 
 	InitXercesParser();
@@ -132,6 +132,8 @@ void XercesParser::InitXercesParser()
 	mParser->setFeature(XMLUni::fgXercesIdentityConstraintChecking, identityConstraintChecking);
 	mParser->setFeature(XMLUni::fgSAX2CoreNameSpacePrefixes, namespacePrefixes);
 
+	//mValScheme = SAX2XMLReader::Val_Never;
+	//mParser->setFeature(XMLUni::fgXercesLoadExternalDTD, false);
 	switch (mValScheme) {
 	case SAX2XMLReader::Val_Never:
 		mParser->setFeature(XMLUni::fgSAX2CoreValidation, false);

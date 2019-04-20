@@ -16,6 +16,7 @@ XsltManager.hpp
 #include <map>
 #include "unicode/unistr.h"
 #include <xalanc/XalanTransformer/XalanTransformer.hpp>
+using icu::UnicodeString;
 //------------------------------------------------------------------------------
 
 namespace AtollPluginXslt

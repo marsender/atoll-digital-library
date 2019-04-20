@@ -126,9 +126,9 @@ private:
 	DbMap *mDbNdxMap; //!< Database of the index map
 
 	//! Open the collection
-	bool OpenCollection();
+	bool Open();
 	//! Close the collection
-	void CloseCollection();
+	void Close();
 
 	//! Check the container sizes
 	bool CheckSizes(const char *inLogInfo);

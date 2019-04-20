@@ -27,9 +27,16 @@
 	</xsl:copy>
 </xsl:template>
 
+<!-- Remove word positions -->
 <xsl:template match="html:w|w">
 	<xsl:apply-templates/>
 </xsl:template>
+
+<!-- Remove ocr positions -->
+<xsl:template match="html:wd|wd">
+	<xsl:apply-templates/>
+</xsl:template>
+
 <!--
 <xsl:template match="html:a|a">
   <xsl:choose>

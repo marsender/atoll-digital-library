@@ -28,6 +28,7 @@
 	</xsl:copy>
 </xsl:template>
 
+<!-- Remove word positions and add highlight -->
 <xsl:template match="html:w|w">
   <xsl:choose>
 		<xsl:when test="contains($atoll.highwords, concat(' ', @pos, ' '))">
@@ -38,6 +39,12 @@
 		</xsl:otherwise>
   </xsl:choose>
 </xsl:template>
+
+<!-- Remove ocr positions -->
+<xsl:template match="html:wd|wd">
+	<xsl:apply-templates/>
+</xsl:template>
+
 <!--
 <xsl:template match="html:a|a">
   <xsl:choose>

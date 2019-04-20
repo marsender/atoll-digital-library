@@ -65,7 +65,7 @@ void IndexerConfigHandler::EndDocument(bool inIsException)
 	mIndexerConfig->EndDocument(inIsException);
 
 	// Add indexer errors
-	mNbError += mIndexerConfig->GetNbError();
+	AddNbError(mIndexerConfig->GetNbError());
 
 	// Call the parent
 	XercesBaseHandler::EndDocument(inIsException);

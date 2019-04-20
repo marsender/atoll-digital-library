@@ -19,6 +19,8 @@ DbNdx.cpp
 #include <fstream> // for LoadFwb
 #include "unicode/coll.h"
 #include "unicode/ustring.h"
+using icu::UnicodeString;
+using icu::Collator;
 //------------------------------------------------------------------------------
 
 #define DEF_Log(x) { gLog.log(eTypLogError, "Err > Database %s: %s", getFullDbName().c_str(), x); }

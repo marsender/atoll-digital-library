@@ -34,6 +34,8 @@ EngineApi.cpp
 #include <zlib.h>
 #include <xercesc/util/XercesVersion.hpp>
 #include <xalanc/Include/XalanVersion.hpp>
+using icu::UnicodeString;
+using icu::Collator;
 //------------------------------------------------------------------------------
 
 // Library version
@@ -484,7 +486,7 @@ std::unique_ptr<AtollPlugin::PluginMessage> Atoll::XsltCompiled(const UnicodeStr
 
 	try {
 		// Display execution start
-		gLog.log(eTypLogAction, "Act > Start xslt buffer");
+		gLog.log(eTypLogAction, "Act > Start xslt compiled");
 
 		AtollPlugin::PluginServer &pluginServer = gPluginKernel->GetPluginServer();
 
@@ -492,7 +494,7 @@ std::unique_ptr<AtollPlugin::PluginMessage> Atoll::XsltCompiled(const UnicodeStr
 		AtollPlugin::PluginServer::PluginXml *pluginXml;
 		pluginXml = pluginServer.GetPluginXsltBuffer();
 		if (pluginXml == NULL) {
-			std::string error("No xslt buffer plugin available");
+			std::string error("No xslt compiled plugin available");
 			gLog.log(eTypLogError, "Err > %s", error.c_str());
 			pluginMessage->mError = error.c_str();
 			return pluginMessage;
@@ -502,23 +504,23 @@ std::unique_ptr<AtollPlugin::PluginMessage> Atoll::XsltCompiled(const UnicodeStr
 		int32_t length = inStr.length();
 		pluginMessage = pluginXml->PluginRunXsltCompiled(str, length, inXsltName, inStylesheetParamMap);
 		if (!pluginMessage->mIsOk) {
-			std::string error("Xslt buffer plugin parsing error");
+			std::string error("Xslt compiled plugin parsing error");
 			gLog.log(eTypLogError, "Err > %s", error.c_str());
 			if (pluginMessage->mError.isEmpty())
 				pluginMessage->mError = error.c_str();
 		}
 
 		// Display execution stop
-		gLog.log(eTypLogAction, "Act > Stop xslt buffer");
+		gLog.log(eTypLogAction, "Act > Stop xslt compiled");
 	}
 	catch (AppException &e) {
-		std::string error("Application exception during xslt buffer plugin execution");
+		std::string error("Application exception during xslt compiled plugin execution");
 		gLog.log(eTypLogError, "Err > %s: %s", error.c_str(), e.what());
 		pluginMessage->mError = error.c_str();
 		//returnValue = e.getExceptionCode();
 	}
 	catch (std::exception &e) {
-		std::string error("Unknown exception during xslt buffer plugin execution");
+		std::string error("Unknown exception during xslt compiled plugin execution");
 		gLog.log(eTypLogError, "Err > %s: %s", error.c_str(), e.what());
 		pluginMessage->mError = error.c_str();
 		//returnValue = -1;

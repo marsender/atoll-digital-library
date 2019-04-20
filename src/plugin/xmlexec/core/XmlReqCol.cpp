@@ -11,6 +11,7 @@ XmlReqCol.cpp
 
 #include "../../../Portability.hpp"
 #include "XmlReqCol.hpp"
+#include "../../../common/UnicodeUtil.hpp"
 #include "../../../engine/EngineApi.hpp"
 #include "../../../engine/EngineEnv.hpp"
 #include "../../../plugin/PluginMessage.hpp"
@@ -75,6 +76,13 @@ void XmlReqCol::OutputDocMeta(const Atoll::DocMeta &inDocMeta, eXmlCmd inCmd, bo
 		OutputStr("\">");
 		OutputXml(inDocMeta.mDocTitle);
 		Printf("</%s>\n", gXmlTok(inCmd));
+		break;
+	case eAddDoc:
+		{
+			std::string str;
+			ConvertUnicodeString2String(str, inDocMeta.mUuid);
+			Printf("%s<%s %s=\"%u\" %s=\"%s\" />\n", DEF_Tab, gXmlTok(inCmd), gXmlTok(eDocNum), inDocMeta.mDocNum, gXmlTok(eUuid), str.c_str());
+		}
 		break;
 	default:
 		Printf("%s<%s %s=\"%u\" />\n", DEF_Tab, gXmlTok(inCmd), gXmlTok(eDocNum), inDocMeta.mDocNum);
@@ -167,8 +175,9 @@ bool XmlReqCol::AddDocMeta(const DocMeta &inDocMeta)
 	// Send the response
 	if (isOk) {
 		DocMeta docMeta;
-		docMeta = inDocMeta;
+		//docMeta = inDocMeta;
 		docMeta.mDocNum = docNum;
+		docMeta.mUuid = inDocMeta.mUuid;
 		OutputDocMeta(docMeta, eAddDoc, true);
 	}
 	else {

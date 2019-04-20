@@ -35,6 +35,8 @@ class XercesString;
 class XercesBaseHandler : public DefaultHandler
 {
 private:
+	bool mTraceError; //! Trace errors in the document ?
+	unsigned long mNbError;	//!< Number of errors in the document
 	unsigned int mDepth;
 	unsigned int mAttrCount;
 	unsigned int mCharacterCount;
@@ -49,12 +51,12 @@ private:
 		eTypParseErrorEnd
 	};
 
+	void OutputError(const SAXParseException &e, eTypParseError inTypError);
+
 protected:
 	Common::XercesString *mCnv;
 	std::string mElem;
 	Common::StringToUnicodeStringMap mAttrMap;
-	bool mTraceError; //! Trace errors in the document ?
-	unsigned long mNbError;	//!< Number of errors in the document
 
 public:
 	DEF_Export XercesBaseHandler();
@@ -72,11 +74,10 @@ public:
 	DEF_Export unsigned int GetSpaceCount() const { return mSpaceCount; }
 
 	DEF_Export unsigned long GetNbError() const { return mNbError; }
+	DEF_Export void AddNbError(unsigned long inNbError) { mNbError += inNbError; }
 
 	DEF_Export bool GetTraceError() const { return mTraceError; }
 	DEF_Export void SetTraceError(bool inTraceError) { mTraceError = inTraceError; }
-
-	DEF_Export void OutputError(const SAXParseException &e, eTypParseError inTypError);
 
   DEF_Export virtual void BeginDocument();
   DEF_Export virtual void EndDocument(bool inIsException);

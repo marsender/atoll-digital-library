@@ -13,6 +13,7 @@ the GNU Lesser General Public License, as specified in the LICENSE file.
 #include "../util/StringBuffer.hpp"
 #include "unicode/unistr.h"
 #include "unicode/ustring.h"
+using icu::UnicodeString;
 //------------------------------------------------------------------------------
 
 CL_NS_USE(util)
@@ -240,122 +241,122 @@ bool ISOLatin1AccentFilter::next(Token* token)
 //			unsigned char c = chars[j];
 //#endif
 			switch (c) {
-			case 0xC0 : // ¿
-			case 0xC1 : // ¡
-			case 0xC2 : // ¬
-			case 0xC3 : // √
-			case 0xC4 : // ƒ
-			case 0xC5 : // ≈
+			case 0xC0 : // √Ä
+			case 0xC1 : // √Å
+			case 0xC2 : // √Ç
+			case 0xC3 : // √É
+			case 0xC4 : // √Ñ
+			case 0xC5 : // √Ö
 				output.appendChar('A');
 				break;
-			case 0xC6 : // ∆
+			case 0xC6 : // √Ü
 				output.append(_T("AE"));
 				break;
-			case 0xC7 : // «
+			case 0xC7 : // √á
 				output.appendChar('C');
 				break;
-			case 0xC8 : // »
-			case 0xC9 : // …
-			case 0xCA : //  
-			case 0xCB : // À
+			case 0xC8 : // √à
+			case 0xC9 : // √â
+			case 0xCA : // √ä
+			case 0xCB : // √ã
 				output.appendChar('E');
 				break;
-			case 0xCC : // Ã
-			case 0xCD : // Õ
-			case 0xCE : // Œ
-			case 0xCF : // œ
+			case 0xCC : // √å
+			case 0xCD : // √ç
+			case 0xCE : // √é
+			case 0xCF : // √è
 				output.appendChar('I');
 				break;
-			case 0xD0 : // –
+			case 0xD0 : // √ê
 				output.appendChar('D');
 				break;
-			case 0xD1 : // —
+			case 0xD1 : // √ë
 				output.appendChar('N');
 				break;
-			case 0xD2 : // “
-			case 0xD3 : // ”
-			case 0xD4 : // ‘
-			case 0xD5 : // ’
-			case 0xD6 : // ÷
-			case 0xD8 : // ÿ
+			case 0xD2 : // √í
+			case 0xD3 : // √ì
+			case 0xD4 : // √î
+			case 0xD5 : // √ï
+			case 0xD6 : // √ñ
+			case 0xD8 : // √ò
 				output.appendChar('O');
 				break;
-			case 0xDE : // ﬁ
+			case 0xDE : // √û
 				output.append(_T("TH"));
 				break;
-			case 0xD9 : // Ÿ
-			case 0xDA : // ⁄
-			case 0xDB : // €
-			case 0xDC : // ‹
+			case 0xD9 : // √ô
+			case 0xDA : // √ö
+			case 0xDB : // √õ
+			case 0xDC : // √ú
 				output.appendChar('U');
 				break;
-			case 0xDD : // ›
+			case 0xDD : // √ù
 				output.appendChar('Y');
 				break;
-			case 0xE0 : // ‡
-			case 0xE1 : // ·
-			case 0xE2 : // ‚
-			case 0xE3 : // „
-			case 0xE4 : // ‰
-			case 0xE5 : // Â
+			case 0xE0 : // √†
+			case 0xE1 : // √°
+			case 0xE2 : // √¢
+			case 0xE3 : // √£
+			case 0xE4 : // √§
+			case 0xE5 : // √•
 				output.appendChar('a');
 				break;
-			case 0xE6 : // Ê
+			case 0xE6 : // √¶
 				output.append(_T("ae"));
 				break;
-			case 0xE7 : // Á
+			case 0xE7 : // √ß
 				output.appendChar('c');
 				break;
-			case 0xE8 : // Ë
-			case 0xE9 : // È
-			case 0xEA : // Í
-			case 0xEB : // Î
+			case 0xE8 : // √®
+			case 0xE9 : // √©
+			case 0xEA : // √™
+			case 0xEB : // √´
 				output.appendChar('e');
 				break;
-			case 0xEC : // Ï
-			case 0xED : // Ì
-			case 0xEE : // Ó
-			case 0xEF : // Ô
+			case 0xEC : // √¨
+			case 0xED : // √≠
+			case 0xEE : // √Æ
+			case 0xEF : // √Ø
 				output.appendChar('i');
 				break;
-			case 0xF0 : // 
+			case 0xF0 : // √∞
 				output.appendChar('d');
 				break;
-			case 0xF1 : // Ò
+			case 0xF1 : // √±
 				output.appendChar('n');
 				break;
-			case 0xF2 : // Ú
-			case 0xF3 : // Û
-			case 0xF4 : // Ù
-			case 0xF5 : // ı
-			case 0xF6 : // ˆ
-			case 0xF8 : // ¯
+			case 0xF2 : // √≤
+			case 0xF3 : // √≥
+			case 0xF4 : // √¥
+			case 0xF5 : // √µ
+			case 0xF6 : // √∂
+			case 0xF8 : // √∏
 				output.appendChar('o');
 				break;
-			case 0xDF : // ﬂ
+			case 0xDF : // √ü
 				output.append(_T("ss"));
 				break;
-			case 0xFE : // ˛
+			case 0xFE : // √æ
 				output.append(_T("th"));
 				break;
-			case 0xF9 : // ˘
-			case 0xFA : // ˙
-			case 0xFB : // ˚
-			case 0xFC : // ¸
+			case 0xF9 : // √π
+			case 0xFA : // √∫
+			case 0xFB : // √ª
+			case 0xFC : // √º
 				output.appendChar('u');
 				break;
-			case 0xFD : // ˝
-			case 0xFF : // ˇ
+			case 0xFD : // √Ω
+			case 0xFF : // √ø
 				output.appendChar('y');
 				break;
 //#ifdef _UCS2
-			case 0x152 : // å
+			case 0x152 : // ¬å
 				output.append(_T("OE"));
 				break;
-			case 0x153 : // ú
+			case 0x153 : // ¬ú
 				output.append(_T("oe"));
 				break;
-			case 0x178 : // ü
+			case 0x178 : // ¬ü
 				output.appendChar('Y');
 				break;
 //#endif

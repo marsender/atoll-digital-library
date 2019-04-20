@@ -12,7 +12,7 @@ XmlExecParser.cpp
 #include "../../Portability.hpp"
 #include "XmlExecParser.hpp"
 #include "XmlExecHandler.hpp"
-//#include "../../common/UnicodeUtil.hpp" // For UTrace
+#include "../../common/UnicodeUtil.hpp" // For UTrace
 #include "../../common/XercesString.hpp"
 #include <xercesc/util/OutOfMemoryException.hpp>
 #include <xercesc/framework/MemBufInputSource.hpp>
@@ -81,7 +81,7 @@ bool XmlExecParser::XercesParse(const std::string &inFileName)
 	bool isOk = true;
 	unsigned long duration = 0;
 
-	mLog.log(eTypLogAction, "Act > XmlExec parse: %s", inFileName.c_str());
+	mLog.log(eTypLogDebug, "Deb > XmlExec parse file: %s", inFileName.c_str());
 
 	// Initialize the handler
 	if (!XercesInitHandler())
@@ -95,35 +95,39 @@ bool XmlExecParser::XercesParse(const std::string &inFileName)
 		duration = endMillis - startMillis;
 	}
 	catch (const AppException &e) {
-		mLog.log(eTypLogError, "Err > Application exception during parsing - %s", e.what());
+		mLog.log(eTypLogError, "Err > XmlExec Application exception during parse file - %s", e.what());
 		isOk = false;
 	}
 	catch (const OutOfMemoryException &) {
-		mLog.log(eTypLogError, "Err > Xerces out of memory exception during parsing");
+		mLog.log(eTypLogError, "Err > XmlExec Xerces out of memory exception during parse file");
 		isOk = false;
 	}
 	catch (const XMLException &e) {
 		XercesString message(e.getMessage());
-		mLog.log(eTypLogError, "Err > Xerces exception during parsing: %s", message.localForm());
+		mLog.log(eTypLogError, "Err > XmlExec Xerces exception during parse file - %s", message.localForm());
 		isOk = false;
 	}
 	catch (std::exception &e) {
-		mLog.log(eTypLogError, "Err > Unknown exception during parsing - %s", e.what());
+		mLog.log(eTypLogError, "Err > XmlExec Unknown exception during parse file - %s", e.what());
 		isOk = false;
 	}
 
 	// Close the document
 	mHandler->EndDocument(!isOk);
 
-	// Check if there are errors in this file
-	unsigned long nbErrFile = mHandler->GetNbError();
-	if (nbErrFile)
-		isOk = false;
-
-	if (isOk)
-		mLog.log(eTypLogAction, "Act > XmlExec parse: %s in %lu ms (%.2f h)", inFileName.c_str(), duration, (double)duration / 3600000.0);
+	if (isOk) {
+		// Check handler errors
+		unsigned long nbErr = mHandler->GetNbError();
+		if (nbErr) {
+			mLog.log(eTypLogError, "Err > XmlExec parse file handler got %lu error(s)", nbErr);
+			isOk = false;
+		}
+		else {
+			mLog.log(eTypLogDebug, "Deb > XmlExec parse file: %s in %lu ms (%.2f h)", inFileName.c_str(), duration, (double)duration / 3600000.0);
+		}
+	}
 	else
-		mLog.log(eTypLogError, "Err > XmlExec parse error: %s", inFileName.c_str());
+		mLog.log(eTypLogError, "Err > XmlExec parse file error: %s", inFileName.c_str());
 
 	return isOk;
 }
@@ -134,10 +138,18 @@ bool XmlExecParser::XercesParse(const UChar *inStr, int32_t inLength /*= -1*/)
 	AppAssert(sizeof(XMLCh) == sizeof(UChar));
 
 	bool isOk = true;
+	bool testFileParsing = false;
 	unsigned long duration = 0;
 
+	if (testFileParsing) {
+		std::string fileName;
+		fileName = "/tmp/XercesParseFile.xml";
+		if (UnicodeString2File(inStr, fileName.c_str()))
+			return XercesParse(fileName);
+	}
+	
 	//UTrace("XercesParse buffer", inStr);
-	mLog.log(eTypLogAction, "Act > XmlExec parse string");
+	mLog.log(eTypLogDebug, "Deb > XmlExec parse string");
 
 	// Initialize the handler
 	if (!XercesInitHandler())
@@ -158,20 +170,20 @@ bool XmlExecParser::XercesParse(const UChar *inStr, int32_t inLength /*= -1*/)
 		duration = endMillis - startMillis;
 	}
 	catch (const AppException &e) {
-		mLog.log(eTypLogError, "Err > Application exception during parsing - %s", e.what());
+		mLog.log(eTypLogError, "Err > XmlExec Application exception during parse string - %s", e.what());
 		isOk = false;
 	}
 	catch (const OutOfMemoryException &) {
-		mLog.log(eTypLogError, "Err > Xerces out of memory exception during parsing");
+		mLog.log(eTypLogError, "Err > XmlExec Xerces out of memory exception during parse string");
 		isOk = false;
 	}
 	catch (const XMLException &e) {
 		XercesString message(e.getMessage());
-		mLog.log(eTypLogError, "Err > Xerces exception during parsing: %s", message.localForm());
+		mLog.log(eTypLogError, "Err > XmlExec Xerces exception during parse string - %s", message.localForm());
 		isOk = false;
 	}
 	catch (std::exception &e) {
-		mLog.log(eTypLogError, "Err > Unknown exception during parsing - %s", e.what());
+		mLog.log(eTypLogError, "Err > XmlExec Unknown exception during parse string - %s", e.what());
 		isOk = false;
 	}
 
@@ -180,15 +192,19 @@ bool XmlExecParser::XercesParse(const UChar *inStr, int32_t inLength /*= -1*/)
 	// Close the document
 	mHandler->EndDocument(!isOk);
 
-	// Check if there are parsing errors
-	unsigned long nbErrFile = mHandler->GetNbError();
-	if (nbErrFile)
-		isOk = false;
-
-	if (isOk)
-		mLog.log(eTypLogAction, "Act > XmlExec parse string in %lu ms (%.2f h)", duration, (double)duration / 3600000.0);
+	if (isOk) {
+		// Check handler errors
+		unsigned long nbErr = mHandler->GetNbError();
+		if (nbErr) {
+			mLog.log(eTypLogError, "Err > XmlExec parse string handler got %lu error(s)", nbErr);
+			isOk = false;
+		}
+		else {
+			mLog.log(eTypLogDebug, "Deb > XmlExec parse string in %lu ms (%.2f h)", duration, (double)duration / 3600000.0);
+		}
+	}
 	else
-		mLog.log(eTypLogAction, "Act > XmlExec parse error");
+		mLog.log(eTypLogError, "Err > XmlExec parse string error");
 
 	return isOk;
 }

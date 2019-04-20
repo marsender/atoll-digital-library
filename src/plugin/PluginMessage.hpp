@@ -15,6 +15,7 @@ PluginMessage.hpp
 
 #include "../common/LibExport.hpp"
 #include "unicode/unistr.h"
+using icu::UnicodeString;
 //------------------------------------------------------------------------------
 
 namespace AtollPlugin

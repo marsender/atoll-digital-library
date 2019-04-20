@@ -105,7 +105,7 @@ void AdornerHandler::EndDocument(bool inIsException)
 	mAdorner->EndDocument(inIsException);
 
 	// Add adorner errors
-	mNbError += mAdorner->GetNbError();
+	AddNbError(mAdorner->GetNbError());
 
 	// Call the parent
 	XercesBaseHandler::EndDocument(inIsException);

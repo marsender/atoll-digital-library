@@ -16,6 +16,7 @@ UnicodeUtil.hpp
 #include "LibExport.hpp"
 #include "unicode/unistr.h"
 #include <string>
+using icu::UnicodeString;
 //------------------------------------------------------------------------------
 
 namespace Common

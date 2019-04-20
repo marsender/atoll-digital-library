@@ -17,6 +17,7 @@ WordEntry.hpp
 #include "unicode/unistr.h"
 #include <vector>
 #include <string>
+using icu::UnicodeString;
 //------------------------------------------------------------------------------
 
 namespace Atoll

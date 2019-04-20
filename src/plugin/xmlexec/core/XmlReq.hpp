@@ -16,6 +16,7 @@ XmlReq.hpp
 #include "../XmlExecCmd.hpp"
 #include "unicode/unistr.h"
 #include <memory> // for std::unique_ptr
+using icu::UnicodeString;
 //------------------------------------------------------------------------------
 
 namespace Atoll

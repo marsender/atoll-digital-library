@@ -79,7 +79,7 @@ Logger.cpp
 using namespace Common;
 //------------------------------------------------------------------------------
 
-Logger::Logger(std::ostream &o /*= std::cout*/)
+Logger::Logger(std::ostream &o /*= std::cerr*/)
 {
 	//pthread_mutex_init(&mutex_stream, NULL);
 	mNbLogError = mNbLogWarning = 0;

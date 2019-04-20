@@ -65,7 +65,7 @@ void RecordBreakerConfigHandler::EndDocument(bool inIsException)
 	mRecordBreakerConfig->EndDocument(inIsException);
 
 	// Add record breaker errors
-	mNbError += mRecordBreakerConfig->GetNbError();
+	AddNbError(mRecordBreakerConfig->GetNbError());
 
 	// Call the parent
 	XercesBaseHandler::EndDocument(inIsException);

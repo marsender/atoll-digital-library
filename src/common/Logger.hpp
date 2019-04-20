@@ -174,9 +174,9 @@ public:
 	/**
 		The output stream, the minimal and maximal log level can all be specified.
 		The timer in this class is also restarted.
-		@param os outputstream (file or cout) to which information is printed (default cout)
+		@param os outputstream (file, cout or cerr) to which information is printed (default cerr)
 	*/
-	Logger(std::ostream &os = std::cout);
+	Logger(std::ostream &os = std::cerr);
 	
 	//! Logger destructor
 	~Logger();

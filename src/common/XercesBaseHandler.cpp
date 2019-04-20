@@ -184,24 +184,24 @@ void XercesBaseHandler::OutputError(const SAXParseException &e, eTypParseError i
 	case eTypParseErrorFatal:
 		mNbError++;
 		strcpy(strLog, "Fat");
-		typError = "Fatal error";
+		typError = "Xerces handler fatal error";
 		typLog = eTypLogFatal;
 		break;
 	case eTypParseErrorError:
 		mNbError++;
 		strcpy(strLog, "Err");
-		typError = "Error";
+		typError = "Xerces handler error";
 		typLog = eTypLogError;
 		break;
 	case eTypParseErrorWarning:
 		strcpy(strLog, "Inf");
-		typError = "Warning";
+		typError = "Xerces handler warning";
 		typLog = eTypLogWarning;
 		break;
 	default:
 		mNbError++;
 		strcpy(strLog, "Err");
-		typError = "Undefined error";
+		typError = "Xerces handler undefined error";
 		typLog = eTypLogError;
 		break;
 	}

@@ -88,7 +88,7 @@ void DEF_Export AtollLoadLib()
 #endif
 {
 	// Called after loading the library
-	gLog.setVerbose(1);
+	gLog.setVerbose(1); // Show only errors
 	std::string logFileName;
 	GetEngineLogFileName(logFileName);
 	OpenLogFile(logFileName);

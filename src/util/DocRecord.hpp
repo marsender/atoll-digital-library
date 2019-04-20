@@ -16,6 +16,7 @@ DocRecord.hpp
 #include "unicode/unistr.h"
 #include <string>
 #include <vector>
+using icu::UnicodeString;
 //------------------------------------------------------------------------------
 
 namespace Common

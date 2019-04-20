@@ -18,6 +18,7 @@ Containers.hpp
 #include <vector>
 #include <string>
 #include "unicode/unistr.h"
+using icu::UnicodeString;
 //------------------------------------------------------------------------------
 
 namespace Common

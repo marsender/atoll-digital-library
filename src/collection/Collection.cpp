@@ -37,6 +37,7 @@ Collection.cpp
 #define DEF_Log(x) { gLog.log(eTypLogError, "Err > Collection: %s", x); }
 //------------------------------------------------------------------------------
 
+class AddDocument;
 using namespace Atoll;
 using namespace Common;
 
@@ -60,13 +61,13 @@ Collection::Collection(const DbEnv *inEnv, const UnicodeString &inColId)
 	mIndexerParser = NULL;
 	mIndexerHandler = NULL;
 
-	OpenCollection();
+	Open();
 }
 //------------------------------------------------------------------------------
 
 Collection::~Collection()
 {
-	CloseCollection();
+	Close();
 
 	if (mIndexerParser) {
 		gLog.log(eTypLogWarning, "Wrn > Indexer not closed");
@@ -87,7 +88,7 @@ const UnicodeString &Collection::GetColId() const
 }
 //------------------------------------------------------------------------------
 
-bool Collection::OpenCollection()
+bool Collection::Open()
 {
 	bool isOk = true;
 	std::string mapName;
@@ -101,14 +102,19 @@ bool Collection::OpenCollection()
 	if (!mDbDocMap->LoadMapFromDb(*mDocMap))
 		isOk = false;
 
+	//gLog.log(eTypLogError, "Err > DebugTest Collection::Open: DocMap count=%lu", (unsigned long)mDocMap->size());
+
 	// Create the doc reverse map: number to doc
 	UnicodeStringToIntMap::const_iterator it = mDocMap->begin();
 	UnicodeStringToIntMap::const_iterator itEnd = mDocMap->end();
+	//gLog.log(eTypLogError, "Err > DebugTest Collection::Open: DocMap [Begin]");
 	for (; it != itEnd; ++it) {
 		const UnicodeString &str = it->first;
 		const unsigned int &value = it->second;
 		(*mIntToDocMap)[value] = str;
+		//gLog.log(eTypLogError, "Err > DebugTest Collection::Open: DocNum=%u", value);
 	}
+	//gLog.log(eTypLogError, "Err > DebugTest Collection::Open: DocMap [End]");
 
 	// Get the document metadata database
 	UnicodeString dbName(DEF_DocMetaDbName);
@@ -137,7 +143,7 @@ bool Collection::OpenCollection()
 }
 //------------------------------------------------------------------------------
 
-void Collection::CloseCollection()
+void Collection::Close()
 {
 	// Save the doc map to database
 	mDbDocMap->SaveMapToDb(*mDocMap);
@@ -297,7 +303,8 @@ bool Collection::AddDocument(unsigned int &outDocNum, const DocMeta &inDocMeta, 
 	ConvertString2UnicodeString(fileName, inDocMeta.mFileName);
 	UnicodeStringToIntMap::const_iterator it1 = mDocMap->find(fileName);
 	if (it1 != mDocMap->end()) {
-		gLog.log(eTypLogError, "Err > AddDocument: Try to add an already existing doc: %s", inDocMeta.mFileName.c_str());
+		const unsigned int &value = it1->second;
+		gLog.log(eTypLogError, "Err > AddDocument: Try to add an already existing doc (docnum=%u): %s", value, inDocMeta.mFileName.c_str());
 		return false;
 	}
 
@@ -310,6 +317,8 @@ bool Collection::AddDocument(unsigned int &outDocNum, const DocMeta &inDocMeta, 
 		if (value >= docNum)
 			docNum = value + 1;
 	}
+
+	//gLog.log(eTypLogError, "Err > DebugTest AddDocument: Uuid=%s DocNum=%u in DocMap count=%lu", inDocMeta.mFileName.c_str(), docNum, (unsigned long)mDocMap->size());
 
 	// Add the document metadata record in the database
 	DocMeta docMeta;
@@ -347,6 +356,8 @@ bool Collection::AddDocument(unsigned int &outDocNum, const DocMeta &inDocMeta, 
 	if (inWantIndex) {
 		isOk &= IndexDocument(docNum);
 	}
+
+	//gLog.log(eTypLogError, "Err > DebugTest AddDocument: Uuid=%s DocNum=%u in DocMap count=%lu", inDocMeta.mFileName.c_str(), docNum, (unsigned long)mDocMap->size());
 
 	return isOk;
 }
