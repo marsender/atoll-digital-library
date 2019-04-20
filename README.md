@@ -10,4 +10,4 @@ Read the LICENSE file for more about the license.
 
 Read the INSTALL file for prerequisites and installation instructions.
 
-Project home page: [Atoll Digital Library](http://atoll-digital-library.org/en).
+Project home page: [Atoll Digital Library](https://atoll-digital-library.org/en).
